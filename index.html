@@ -1,35 +1,19 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FreshPack BD | Aluminum Foil Storage Bag — ফ্রিজে মাছ-মাংস থাকবে টাটকা</title>
-  <meta name="description" content="প্রিমিয়াম Aluminum Foil Storage Bag — ফ্রিজে মাছ, মাংস ও সবজি সংরক্ষণ করুন একদম টাটকা। ক্যাশ অন ডেলিভারি, সারাদেশে ডেলিভারি। ১০ পিস মাত্র ৳৩৯০।" />
-  <meta name="theme-color" content="#064e3b" />
-
-  <!-- Meta Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1507252884365898');
-    fbq('track', 'PageView');
-  </script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshPack BD - Admin Dashboard</title>
+  
   <!-- Google Font: Hind Siliguri -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-
-  <!-- Tailwind CSS (CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -37,1477 +21,183 @@
         extend: {
           fontFamily: { bangla: ['"Hind Siliguri"', 'sans-serif'] },
           colors: {
-            brand: {
-              50: '#ecfdf5', 100: '#d1fae5', 200: '#a7f3d0', 300: '#6ee7b7', 400: '#34d399',
-              500: '#10b981', 600: '#059669', 700: '#047857', 800: '#065f46', 900: '#064e3b', 950: '#022c22'
-            },
-            gold: { 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
-          },
-          boxShadow: {
-            soft: '0 10px 40px -12px rgba(6, 78, 59, 0.22)',
-            card: '0 4px 24px -6px rgba(6, 78, 59, 0.14)',
-            glow: '0 0 45px rgba(251, 191, 36, 0.45)'
+            brand: { 50: '#ecfdf5', 100: '#d1fae5', 600: '#059669', 800: '#065f46', 900: '#064e3b' },
+            gold: { 400: '#fbbf24', 500: '#f59e0b' }
           }
         }
       }
     }
   </script>
-
   <style>
-    /* ============ Base ============ */
-    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
-    body { font-family: 'Hind Siliguri', sans-serif; -webkit-font-smoothing: antialiased; }
-    ::selection { background: #fbbf24; color: #022c22; }
-
-    /* ============ Backgrounds ============ */
-    .hero-bg {
-      background:
-        radial-gradient(1200px 600px at 85% -10%, rgba(251, 191, 36, 0.18), transparent 60%),
-        radial-gradient(900px 500px at -10% 110%, rgba(52, 211, 153, 0.22), transparent 60%),
-        linear-gradient(135deg, #022c22 0%, #064e3b 55%, #065f46 100%);
-    }
-    .grid-pattern {
-      background-image:
-        linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-      -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-    }
-    .dark-section {
-      background:
-        radial-gradient(800px 400px at 100% 0%, rgba(251,191,36,0.14), transparent 60%),
-        linear-gradient(160deg, #064e3b 0%, #022c22 100%);
-    }
-    .soft-section { background: linear-gradient(180deg, #f6fbf8 0%, #ffffff 100%); }
-    .dots-pattern {
-      background-image: radial-gradient(rgba(6,95,70,0.10) 1px, transparent 1px);
-      background-size: 22px 22px;
-    }
-
-    /* ============ Scroll Reveal ============ */
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .75s cubic-bezier(.2,.7,.2,1), transform .75s cubic-bezier(.2,.7,.2,1); }
-    .reveal.in-view { opacity: 1; transform: none; }
-    .reveal-left { transform: translateX(-30px); }
-    .reveal-right { transform: translateX(30px); }
-    .d1 { transition-delay: .08s } .d2 { transition-delay: .16s } .d3 { transition-delay: .24s }
-    .d4 { transition-delay: .32s } .d5 { transition-delay: .40s } .d6 { transition-delay: .48s } .d7 { transition-delay: .56s }
-
-    /* ============ Animations ============ */
-    @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-14px) } }
-    @keyframes floatSlow { 0%,100% { transform: translateY(0) rotate(-2deg) } 50% { transform: translateY(-10px) rotate(-2deg) } }
-    @keyframes floatSlow2 { 0%,100% { transform: translateY(0) rotate(2deg) } 50% { transform: translateY(-8px) rotate(2deg) } }
-    .animate-float { animation: float 4.5s ease-in-out infinite; }
-    .animate-float-slow { animation: floatSlow 5s ease-in-out infinite; }
-    .animate-float-slow2 { animation: floatSlow2 6s ease-in-out infinite 0.6s; }
-
-    @keyframes ctaPulse {
-      0% { box-shadow: 0 0 0 0 rgba(251,191,36,.65), 0 10px 30px -8px rgba(245,158,11,.6) }
-      70% { box-shadow: 0 0 0 18px rgba(251,191,36,0), 0 10px 30px -8px rgba(245,158,11,.6) }
-      100% { box-shadow: 0 0 0 0 rgba(251,191,36,0), 0 10px 30px -8px rgba(245,158,11,.6) }
-    }
-    .cta-pulse { animation: ctaPulse 2.2s infinite; }
-
-    @keyframes waPulse { 0% { transform: scale(1); opacity: .75 } 100% { transform: scale(1.8); opacity: 0 } }
-    @keyframes waBounce { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-7px) } }
-    .wa-btn { animation: waBounce 2.4s ease-in-out infinite; }
-    .wa-ring::before, .wa-ring::after {
-      content: ''; position: absolute; inset: 0; border-radius: 9999px;
-      background: rgba(37, 211, 102, .55); animation: waPulse 2s ease-out infinite; z-index: -1;
-    }
-    .wa-ring::after { animation-delay: 1s; }
-
-    @keyframes shimmer { 0% { background-position: -200% 0 } 100% { background-position: 200% 0 } }
-    .shimmer-text {
-      background: linear-gradient(90deg, #fcd34d 0%, #fff7d6 40%, #fbbf24 60%, #f59e0b 100%);
-      background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
-      animation: shimmer 4s linear infinite;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg) } }
-    .spinner { width: 20px; height: 20px; border: 3px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite; }
-
-    @keyframes popIn { 0% { transform: scale(.4); opacity: 0 } 60% { transform: scale(1.12); opacity: 1 } 100% { transform: scale(1) } }
-    .pop-in { animation: popIn .6s cubic-bezier(.2,.8,.2,1) both; }
-    @keyframes drawCheck { to { stroke-dashoffset: 0 } }
-    .check-path { stroke-dasharray: 60; stroke-dashoffset: 60; animation: drawCheck .5s ease .35s forwards; }
-
-    /* ============ Header ============ */
-    #header { transition: box-shadow .3s ease, background-color .3s ease, border-color .3s ease; }
-    #header.scrolled { box-shadow: 0 12px 32px -18px rgba(6,78,59,.5); background-color: rgba(255,255,255,.96); }
-    .header-inner { min-height: 68px; }
-    .brand-logo { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease; }
-    .brand-link:hover .brand-logo { transform: rotate(-5deg) scale(1.06); box-shadow: 0 12px 24px -10px rgba(6,78,59,.45); }
-    .desktop-nav { box-shadow: 0 8px 24px -18px rgba(6,78,59,.55); }
-    .nav-link { position: relative; border: 1px solid transparent; border-radius: 999px; padding: 8px 13px; transition: color .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease; }
-    .nav-link::after { content: ''; position: absolute; left: 14px; bottom: 4px; width: 0; height: 2px; background: #f59e0b; transition: width .3s ease; border-radius: 2px; }
-    .nav-link:hover, .nav-link.active { color: #047857; background: #ecfdf5; border-color: #d1fae5; transform: translateY(-1px); }
-    .nav-link:hover::after, .nav-link.active::after { width: calc(100% - 28px); }
-    .header-order-btn { position: relative; isolation: isolate; overflow: hidden; animation: headerOrderGlow 2.8s ease-in-out infinite; }
-    .header-order-btn::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,.5) 48%, transparent 70%); transform: translateX(-120%); animation: orderShine 4.5s ease-in-out infinite; }
-    @keyframes headerOrderGlow { 0%, 100% { box-shadow: 0 8px 22px -10px rgba(245,158,11,.65); } 50% { box-shadow: 0 10px 30px -8px rgba(245,158,11,.9), 0 0 0 5px rgba(251,191,36,.12); } }
-    @keyframes orderShine { 0%, 55% { transform: translateX(-120%); } 75%, 100% { transform: translateX(120%); } }
-    .header-order-btn:hover { animation-play-state: paused; }
-    .header-trust { border-left: 1px solid #d1fae5; padding-left: 14px; }
-    #mobileMenu { max-height: 0; opacity: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.2,.8,.2,1), opacity .25s ease; }
-    #mobileMenu.open { max-height: 420px; }
-    #mobileMenu.open { opacity: 1; }
-    .mobile-link { transition: transform .25s ease, background-color .25s ease, color .25s ease; }
-    .mobile-link:hover { transform: translateX(4px); color: #047857; }
-    .burger span { display: block; width: 24px; height: 2.5px; background: #064e3b; border-radius: 3px; transition: transform .3s, opacity .3s; }
-    .burger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
-    .burger.open span:nth-child(2) { opacity: 0; }
-    .burger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
-
-    /* ============ Cards ============ */
-    .feature-card { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .35s; }
-    .feature-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 22px 45px -18px rgba(6,78,59,.35); border-color: #a7f3d0; }
-    .feature-card .icon-wrap { transition: transform .35s, background .35s, color .35s; }
-    .feature-card:hover .icon-wrap { transform: rotate(-8deg) scale(1.1); background: #064e3b; color: #fbbf24; }
-
-    .tilt-card { transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s; }
-    .tilt-card:hover { transform: translateY(-6px) rotate(-1.2deg) scale(1.02); box-shadow: 0 25px 50px -20px rgba(6,78,59,.45); }
-    .tilt-card img { transition: transform .7s cubic-bezier(.2,.8,.2,1); }
-    .tilt-card:hover img { transform: scale(1.12); }
-
-    .price-card { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s; }
-    .price-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 30px 60px -22px rgba(6,78,59,.45); }
-    .price-card.popular { border: 1px solid rgba(251,191,36,.75); box-shadow: 0 24px 60px -18px rgba(245,158,11,.42), inset 0 1px 0 rgba(255,255,255,.16); overflow: visible; }
-    .price-card.popular::before { content: ''; position: absolute; inset: 0; border-radius: 1.5rem; background: radial-gradient(circle at 50% 0%, rgba(251,191,36,.18), transparent 42%); pointer-events: none; }
-    .price-card.popular > * { position: relative; z-index: 1; }
-    .price-card.popular:hover { box-shadow: 0 30px 60px -18px rgba(245,158,11,.45); }
-
-    .step-line { background-image: linear-gradient(90deg, #a7f3d0 50%, transparent 50%); background-size: 16px 2px; background-repeat: repeat-x; }
-
-    .btn { transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s, background-color .25s, color .25s; }
-    .btn:hover { transform: translateY(-2px) scale(1.03); }
-    .btn:active { transform: translateY(0) scale(.98); }
-
-    /* ============ FAQ ============ */
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.2,.8,.2,1), padding .3s; }
-    .faq-item.open .faq-answer { max-height: 320px; }
-    .faq-icon { transition: transform .35s cubic-bezier(.2,.8,.2,1), background .3s, color .3s; }
-    .faq-item.open .faq-icon { transform: rotate(180deg); background: #064e3b; color: #fbbf24; }
-    .faq-item.open .faq-q { color: #065f46; }
-
-    /* ============ Modal ============ */
-    .modal { opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s; }
-    .modal.open { opacity: 1; visibility: visible; }
-    .modal-card { transform: scale(.9) translateY(30px); opacity: 0; transition: transform .4s cubic-bezier(.2,.8,.2,1), opacity .35s; }
-    .modal.open .modal-card { transform: none; opacity: 1; }
-    .modal-scroll { scrollbar-width: thin; scrollbar-color: #a7f3d0 transparent; }
-    .modal-scroll::-webkit-scrollbar { width: 6px; }
-    .modal-scroll::-webkit-scrollbar-thumb { background: #a7f3d0; border-radius: 6px; }
-
-    .field { width: 100%; border: 1.5px solid #d1fae5; background: #f8fbf9; border-radius: 12px; padding: 12px 14px; font-size: 15px; transition: border-color .25s, box-shadow .25s, background .25s; outline: none; color: #052e26; }
-    .field:focus { border-color: #059669; background: #fff; box-shadow: 0 0 0 4px rgba(16,185,129,.15); }
-    .quantity-select { appearance: none; min-height: 52px; border: 2px solid #6ee7b7; background: linear-gradient(135deg, #ecfdf5 0%, #ffffff 72%); box-shadow: 0 8px 20px -14px rgba(6,78,59,.65); color: #064e3b; font-weight: 700; letter-spacing: .01em; }
-    .quantity-select:hover { border-color: #10b981; box-shadow: 0 10px 24px -14px rgba(6,78,59,.8); }
-    .quantity-select:focus { border-color: #047857; background: #ffffff; box-shadow: 0 0 0 4px rgba(16,185,129,.18), 0 10px 24px -14px rgba(6,78,59,.8); }
-    .quantity-menu { position: absolute; z-index: 5; top: calc(100% + 8px); left: 0; right: 0; padding: 6px; border: 1px solid #a7f3d0; border-radius: 14px; background: #fff; box-shadow: 0 18px 35px -16px rgba(6,78,59,.55); }
-    .quantity-menu button { width: 100%; border: 0; border-radius: 9px; background: transparent; color: #064e3b; cursor: pointer; padding: 11px 12px; text-align: left; font: inherit; font-size: 15px; transition: background .2s, color .2s, transform .2s; }
-    .quantity-menu button:hover, .quantity-menu button[aria-selected="true"] { background: #064e3b; color: #fff; }
-    .quantity-menu button:hover { transform: translateX(2px); }
-    .field.error { border-color: #ef4444; background: #fff5f5; }
-    .field-error { display: none; color: #dc2626; font-size: 13px; margin-top: 6px; }
-    .field-error.show { display: flex; align-items: center; gap: 6px; }
-    .payment-logo { width: 42px; height: 24px; object-fit: contain; }
-    .payment-logo-card { min-width: 72px; height: 42px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; padding: 7px 10px; }
-
-    .radio-pill input { position: absolute; opacity: 0; pointer-events: none; }
-    .radio-pill .pill { border: 1.5px solid #d1fae5; background: #f8fbf9; border-radius: 12px; padding: 10px 12px; cursor: pointer; transition: all .25s; display: flex; align-items: center; gap: 8px; justify-content: center; font-weight: 500; color: #065f46; }
-    .delivery-pill { gap: 5px !important; padding-left: 8px !important; padding-right: 8px !important; white-space: nowrap; font-size: 13px; }
-    .delivery-charge { opacity: 1 !important; font-weight: 700; white-space: nowrap; }
-    @media (min-width: 640px) { .delivery-pill { gap: 8px !important; padding-left: 12px !important; padding-right: 12px !important; font-size: 15px; } }
-    .radio-pill .pill:hover { border-color: #6ee7b7; background: #fff; }
-    .radio-pill input:checked + .pill { border-color: #059669; background: #064e3b; color: #fff; box-shadow: 0 8px 20px -10px rgba(6,78,59,.6); }
-    .radio-pill input:focus-visible + .pill { box-shadow: 0 0 0 4px rgba(16,185,129,.25); }
-
-    #trxWrap { max-height: 0; overflow: hidden; opacity: 0; transition: max-height .4s cubic-bezier(.2,.8,.2,1), opacity .3s, margin .3s; margin-top: 0; }
-    #trxWrap.show { max-height: 260px; opacity: 1; margin-top: 16px; }
-
-    /* ============ Marquee trust bar ============ */
-    @keyframes marquee { 0% { transform: translateX(0) } 100% { transform: translateX(-50%) } }
-    .marquee { animation: marquee 28s linear infinite; }
-    .marquee:hover { animation-play-state: paused; }
-
-    .no-scroll { overflow: hidden; }
-
-    @media (max-width: 639px) {
-      .modal-card { max-height: 96vh; }
-      .modal-card .modal-scroll { min-width: 0; }
-      .radio-pill .pill { min-height: 48px; }
-      .delivery-pill { justify-content: flex-start; font-size: 12px; }
-      .modal-card form { padding-left: 1rem; padding-right: 1rem; }
-    }
-
-    @media (max-width: 380px) {
-      .delivery-pill { gap: 4px !important; padding-left: 7px !important; padding-right: 7px !important; }
-      .radio-pill .pill { font-size: 12px; }
-      .radio-pill .pill.flex-col { font-size: 12px; }
-      .modal-card .grid-cols-3 { grid-template-columns: 1fr; }
-      .modal-card .grid-cols-2 { grid-template-columns: 1fr; }
-      .wa-btn { right: 0.75rem; bottom: 1rem; }
-      #liveSalesPopup { left: 0.75rem; right: 4.75rem; max-width: none; }
-    }
+    body { font-family: 'Hind Siliguri', sans-serif; }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    ::-webkit-scrollbar-track { background: transparent; }
   </style>
 </head>
+<body class="bg-slate-50 h-screen flex flex-col md:flex-row overflow-hidden font-bangla text-slate-800">
 
-<body class="font-bangla text-slate-800 bg-white antialiased">
-  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1507252884365898&ev=PageView&noscript=1" alt="" /></noscript>
+  <!-- ================= SIDEBAR (Order List) ================= -->
+  <aside class="w-full md:w-1/3 lg:w-1/4 bg-white border-r border-slate-200 flex flex-col h-[40vh] md:h-screen shrink-0">
+    <!-- Sidebar Header -->
+    <div class="p-4 border-b border-slate-200 bg-brand-900 text-white flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-white/10 text-gold-400 flex items-center justify-center"><i class="fa-solid fa-snowflake"></i></div>
+        <h1 class="font-bold text-lg tracking-wide">FreshPack BD</h1>
+      </div>
+      <button class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20"><i class="fa-solid fa-bell text-sm"></i></button>
+    </div>
 
-  <!-- ============================================================
-       1. HEADER / NAVBAR (Sticky)
-  ============================================================ -->
-  <header id="header" class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-brand-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-[68px] md:h-[76px]">
-        <!-- Logo -->
-        <a href="#home" class="brand-link flex items-center gap-2.5 group">
-          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTtRQ31ALi6ErNn_y6Gs49ExbA9YQSe_R9Q0HARh_-ge5aXXCd4e_jOa_49l7tQiKrAu5yreZJGXHs9CPGd2fC2qCQ3768KawX3DVpJIKIZvFYB8RKeAPIeG0TPmyowtkKH69WQakODyhPDfgIoIysBh2hylrKdsKhdKAFzdI4mbBwI8YcJYWVrwUOMxo/w640-h640/805731951_122107436595464960_7379429479524552197_n.jpg" alt="FreshPackBD logo" class="brand-logo w-10 h-10 md:w-11 md:h-11 rounded-xl object-cover shadow-soft" />
-          <span class="leading-tight">
-            <span class="block text-xl md:text-2xl font-bold text-brand-900 tracking-tight">FreshPack<span class="text-gold-500">BD</span></span>
-            <span class="hidden sm:block text-[11px] md:text-xs text-brand-700 -mt-0.5 font-medium">খাবার থাকবে টাটকা, সবসময়</span>
-          </span>
-        </a>
-
-        <!-- Desktop Nav -->
-        <nav class="desktop-nav hidden lg:flex items-center gap-1 rounded-full border border-brand-100 bg-white/75 p-1 font-medium text-[15px] text-brand-900">
-          <a href="#home" class="nav-link hover:text-brand-600 transition-colors">হোম</a>
-          <a href="#features" class="nav-link hover:text-brand-600 transition-colors">ফিচার</a>
-          <a href="#pricing" class="nav-link hover:text-brand-600 transition-colors">প্রাইসিং</a>
-          <a href="#order" class="nav-link hover:text-brand-600 transition-colors">অর্ডার</a>
-          <a href="#contact" class="nav-link hover:text-brand-600 transition-colors">যোগাযোগ</a>
-        </nav>
-
-        <!-- CTA + Burger -->
-        <div class="flex items-center gap-3">
-          <span class="header-trust hidden xl:flex items-center gap-2 text-xs font-semibold text-brand-700"><i class="fa-solid fa-truck-fast text-brand-500"></i> সারাদেশে ডেলিভারি</span>
-          <button data-open-order class="header-order-btn btn hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-gold-500 to-gold-400 text-brand-950 font-bold px-5 py-2.5 rounded-full shadow-soft hover:shadow-glow">
-            <i class="fa-solid fa-cart-shopping"></i> অর্ডার করুন
-          </button>
-          <button id="burgerBtn" class="burger lg:hidden flex flex-col justify-center gap-[5px] w-11 h-11 rounded-xl bg-brand-50 border border-brand-100 items-center" aria-label="মেনু" aria-expanded="false">
-            <span></span><span></span><span></span>
-          </button>
-        </div>
+    <!-- Search & Tabs -->
+    <div class="p-4 border-b border-slate-200">
+      <div class="relative">
+        <i class="fa-solid fa-search absolute left-3 top-3.5 text-slate-400 text-sm"></i>
+        <input type="text" placeholder="কাস্টমার খুঁজুন..." class="w-full bg-slate-100 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-sm focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600">
+      </div>
+      <div class="flex gap-2 mt-4">
+        <button class="flex-1 bg-brand-50 text-brand-800 border border-brand-200 font-bold py-2 rounded-lg text-sm"><i class="fa-solid fa-circle-dot text-xs text-amber-500 mr-1"></i> Pending (3)</button>
+        <button class="flex-1 bg-white text-slate-500 border border-slate-200 font-semibold py-2 rounded-lg text-sm hover:bg-slate-50">Shipped (45)</button>
       </div>
     </div>
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="lg:hidden bg-white border-t border-brand-100">
-      <nav class="px-4 py-4 flex flex-col gap-1 font-medium text-brand-900">
-        <a href="#home" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-brand-50"><i class="fa-solid fa-house text-brand-600 w-5"></i> হোম <i class="fa-solid fa-arrow-right ml-auto text-xs text-brand-300"></i></a>
-        <a href="#features" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-brand-50"><i class="fa-solid fa-star text-brand-600 w-5"></i> ফিচার <i class="fa-solid fa-arrow-right ml-auto text-xs text-brand-300"></i></a>
-        <a href="#pricing" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-brand-50"><i class="fa-solid fa-tags text-brand-600 w-5"></i> প্রাইসিং <i class="fa-solid fa-arrow-right ml-auto text-xs text-brand-300"></i></a>
-        <a href="#order" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-brand-50"><i class="fa-solid fa-bag-shopping text-brand-600 w-5"></i> অর্ডার <i class="fa-solid fa-arrow-right ml-auto text-xs text-brand-300"></i></a>
-        <a href="#contact" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-brand-50"><i class="fa-solid fa-phone text-brand-600 w-5"></i> যোগাযোগ <i class="fa-solid fa-arrow-right ml-auto text-xs text-brand-300"></i></a>
-        <button data-open-order class="btn mt-2 inline-flex justify-center items-center gap-2 bg-gradient-to-r from-gold-500 to-gold-400 text-brand-950 font-bold px-5 py-3 rounded-xl shadow-soft">
-          <i class="fa-solid fa-cart-shopping"></i> এখনই অর্ডার করুন
-        </button>
-      </nav>
+    <!-- Order List -->
+    <div class="flex-1 overflow-y-auto p-2 space-y-1">
+      <!-- Active Order Card -->
+      <div class="cursor-pointer bg-brand-50 border-l-4 border-brand-600 rounded-r-lg p-3 shadow-sm">
+        <div class="flex justify-between items-start mb-1">
+          <h3 class="font-bold text-brand-900">মোঃ রফিকুল ইসলাম</h3>
+          <span class="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded">Pending</span>
+        </div>
+        <div class="text-sm text-slate-600 flex justify-between">
+          <span>৳৭২০ • ২০ পিস</span>
+          <span class="text-xs text-slate-400">মিরপুর-১০, ঢাকা</span>
+        </div>
+      </div>
+
+      <!-- Inactive Order Card -->
+      <div class="cursor-pointer bg-white hover:bg-slate-50 border-l-4 border-transparent rounded-r-lg p-3 transition-colors">
+        <div class="flex justify-between items-start mb-1">
+          <h3 class="font-bold text-slate-700">তানজিম চৌধুরী</h3>
+          <span class="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded">Pending</span>
+        </div>
+        <div class="text-sm text-slate-500 flex justify-between">
+          <span>৳৯৬০ • ৩০ পিস</span>
+          <span class="text-xs text-slate-400">জিইসি, চট্টগ্রাম</span>
+        </div>
+      </div>
+      
+      <!-- Inactive Order Card -->
+      <div class="cursor-pointer bg-white hover:bg-slate-50 border-l-4 border-transparent rounded-r-lg p-3 transition-colors">
+        <div class="flex justify-between items-start mb-1">
+          <h3 class="font-bold text-slate-700">ফারহানা মিম</h3>
+          <span class="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded">Pending</span>
+        </div>
+        <div class="text-sm text-slate-500 flex justify-between">
+          <span>৳৬৫০ • ২০ পিস</span>
+          <span class="text-xs text-slate-400">উত্তরা, ঢাকা</span>
+        </div>
+      </div>
     </div>
-  </header>
+  </aside>
 
-  <main>
-    <!-- ============================================================
-         2. HERO SECTION
-    ============================================================ -->
-    <section id="home" class="hero-bg relative overflow-hidden text-white">
-      <div class="absolute inset-0 grid-pattern"></div>
-      <div class="absolute -top-24 -right-24 w-80 h-80 bg-gold-400/20 rounded-full blur-3xl"></div>
-      <div class="absolute -bottom-32 -left-20 w-96 h-96 bg-brand-400/20 rounded-full blur-3xl"></div>
-
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 md:pt-20 md:pb-24 lg:pt-24 lg:pb-28">
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-10 items-center">
-          <!-- Copy -->
-          <div class="text-center lg:text-left order-2 lg:order-1">
-            <div class="reveal inline-flex items-center gap-2 bg-white/10 border border-white/15 backdrop-blur px-4 py-1.5 rounded-full text-sm font-medium text-brand-100 mb-6">
-              <span class="w-2 h-2 rounded-full bg-gold-400 animate-pulse"></span>
-              বাংলাদেশে সবচেয়ে বিক্রিত কিচেন স্টোরেজ ব্যাগ
-            </div>
-            <h1 class="reveal d1 text-4xl sm:text-5xl lg:text-[3.4rem] xl:text-6xl font-bold leading-[1.15] tracking-tight">
-              ফ্রিজে মাছ-মাংস থাকবে<br class="hidden sm:block" />
-              <span class="shimmer-text">একদম টাটকা!</span> ❄️
-            </h1>
-            <p class="reveal d2 mt-5 md:mt-6 text-base sm:text-lg text-brand-100/90 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              প্রিমিয়াম <span class="text-white font-semibold">Aluminum Foil Storage Bag</span>-এ মাছ, মাংস ও অন্যান্য খাবার গুছিয়ে সংরক্ষণ করুন। ফ্রিজে রাখার পরও খাবার থাকবে টাটকা ও সতেজ — স্বাদ ও গন্ধ থাকবে অক্ষুণ্ণ।
-            </p>
-
-            <div class="reveal d3 mt-6 flex items-center justify-center lg:justify-start gap-3 flex-wrap">
-              <div class="flex items-baseline gap-1.5">
-                <span class="text-brand-200 text-sm">শুরু মাত্র</span>
-                <span class="text-3xl font-bold text-gold-400">৳৩৯০</span>
-                <span class="text-brand-200 text-sm">থেকে</span>
-              </div>
-              <span class="hidden sm:inline-block w-px h-6 bg-white/20"></span>
-              <div class="flex items-center gap-1 text-gold-400 text-sm">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-                <span class="text-brand-100 ml-1">৪.৯ (২,৩০০+ রিভিউ)</span>
-              </div>
-            </div>
-
-            <div class="reveal d4 mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <button data-open-order class="btn cta-pulse w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 text-brand-950 font-bold text-lg px-8 py-4 rounded-full">
-                <i class="fa-solid fa-bolt"></i> এখনই অর্ডার করুন
-                <i class="fa-solid fa-arrow-right text-base"></i>
-              </button>
-              <a href="#pricing" class="btn w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-semibold px-7 py-4 rounded-full backdrop-blur">
-                <i class="fa-solid fa-tags"></i> প্রাইস দেখুন
-              </a>
-            </div>
-
-            <!-- Trust badges -->
-            <div class="reveal d5 mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 text-sm font-medium text-brand-50">
-              <span class="inline-flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-300"></i> ক্যাশ অন ডেলিভারি</span>
-              <span class="inline-flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-300"></i> সারাদেশে ডেলিভারি</span>
-              <span class="inline-flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-300"></i> ১০০% অরিজিনাল</span>
-            </div>
-          </div>
-
-          <!-- Product Image -->
-          <div class="reveal reveal-right relative order-1 lg:order-2 max-w-md mx-auto w-full">
-            <div class="absolute inset-4 bg-gradient-to-tr from-gold-400/40 via-brand-300/20 to-transparent blur-3xl rounded-full"></div>
-            <div class="relative animate-float">
-              <div class="relative rounded-[2rem] p-2 bg-white/10 border border-white/20 backdrop-blur-sm shadow-2xl">
-                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgtWnCBMiLuxEEHCjtk1abvkSR4XcTjxhSVb48rtQO2T6PYJoBMjmdoQiUy83HxrSYojo7qkQe-E0UOrvgT2RVpKrR8QaTYyb8eumnGScAK3iMCNbLwQlrZ_kIwT6a0Hegtoq_0QjIFbGgvhYLw5vEjjuPj39eE6KEtjYDvbUinxtngtIt1_QOSUSYvV1M=w480-h640" alt="Premium Aluminum Foil Storage Bag — মাছ ও মাংসের সাথে" class="w-full rounded-[1.6rem] object-cover aspect-[4/5]" width="820" height="1024" />
-              </div>
-              <!-- Floating chips -->
-              <div class="animate-float-slow absolute -left-3 sm:-left-8 top-8 bg-white text-brand-900 rounded-2xl px-4 py-2.5 shadow-soft flex items-center gap-3">
-                <span class="w-9 h-9 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center"><i class="fa-solid fa-weight-hanging"></i></span>
-                <div class="leading-tight">
-                  <div class="text-xs text-slate-500">ধারণক্ষমতা</div>
-                  <div class="font-bold text-sm">২–২.৫ কেজি / ব্যাগ</div>
-                </div>
-              </div>
-              <div class="animate-float-slow2 absolute -right-3 sm:-right-8 bottom-10 bg-white text-brand-900 rounded-2xl px-4 py-2.5 shadow-soft flex items-center gap-3">
-                <span class="w-9 h-9 rounded-xl bg-gold-200 text-gold-600 flex items-center justify-center"><i class="fa-solid fa-box-open"></i></span>
-                <div class="leading-tight">
-                  <div class="text-xs text-slate-500">প্রতি প্যাকে</div>
-                  <div class="font-bold text-sm">১০টি ব্যাগ</div>
-                </div>
-              </div>
-              <div class="absolute -top-3 right-6 bg-gradient-to-r from-gold-500 to-gold-400 text-brand-950 font-bold text-xs px-3 py-1.5 rounded-full shadow-lg rotate-3">
-                <i class="fa-solid fa-fire"></i> বেস্ট সেলার
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- ================= MAIN CONTENT (Order Details) ================= -->
+  <main class="flex-1 flex flex-col h-[60vh] md:h-screen overflow-hidden bg-slate-50">
+    
+    <!-- Top Bar -->
+    <header class="bg-white border-b border-slate-200 p-4 md:p-6 flex justify-between items-center shrink-0 shadow-sm">
+      <div>
+        <h2 class="text-xl font-bold text-slate-800">অর্ডার ডিটেইলস</h2>
+        <p class="text-sm text-slate-500">ইনভয়েস: <span class="font-semibold text-brand-600">FP-00245</span> • আজ দুপুর ১২:৪০</p>
       </div>
+      <span class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-100 text-amber-700 text-sm font-bold border border-amber-200">
+        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Pending
+      </span>
+    </header>
 
-      <!-- Trust marquee -->
-      <div class="relative border-t border-white/10 bg-black/10 backdrop-blur-sm py-3 overflow-hidden">
-        <div class="marquee flex w-max gap-10 text-sm font-medium text-brand-100 whitespace-nowrap">
-          <span class="flex gap-10">
-            <span><i class="fa-solid fa-truck-fast text-gold-400 mr-2"></i>ঢাকায় ১–২ দিনে ডেলিভারি</span>
-            <span><i class="fa-solid fa-hand-holding-dollar text-gold-400 mr-2"></i>পণ্য হাতে পেয়ে টাকা দিন</span>
-            <span><i class="fa-solid fa-shield-halved text-gold-400 mr-2"></i>১০০% অরিজিনাল প্রোডাক্ট</span>
-            <span><i class="fa-solid fa-recycle text-gold-400 mr-2"></i>পুনঃব্যবহারযোগ্য ও টেকসই</span>
-            <span><i class="fa-solid fa-snowflake text-gold-400 mr-2"></i>ফ্রিজ ও ফ্রিজার সেফ</span>
-            <span><i class="fa-solid fa-headset text-gold-400 mr-2"></i>WhatsApp-এ ২৪/৭ সাপোর্ট</span>
-          </span>
-          <span class="flex gap-10" aria-hidden="true">
-            <span><i class="fa-solid fa-truck-fast text-gold-400 mr-2"></i>ঢাকায় ১–২ দিনে ডেলিভারি</span>
-            <span><i class="fa-solid fa-hand-holding-dollar text-gold-400 mr-2"></i>পণ্য হাতে পেয়ে টাকা দিন</span>
-            <span><i class="fa-solid fa-shield-halved text-gold-400 mr-2"></i>১০০% অরিজিনাল প্রোডাক্ট</span>
-            <span><i class="fa-solid fa-recycle text-gold-400 mr-2"></i>পুনঃব্যবহারযোগ্য ও টেকসই</span>
-            <span><i class="fa-solid fa-snowflake text-gold-400 mr-2"></i>ফ্রিজ ও ফ্রিজার সেফ</span>
-            <span><i class="fa-solid fa-headset text-gold-400 mr-2"></i>WhatsApp-এ ২৪/৭ সাপোর্ট</span>
-          </span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         3. FEATURES / BENEFITS
-    ============================================================ -->
-    <section id="features" class="soft-section relative py-16 md:py-24">
-      <div class="absolute inset-0 dots-pattern opacity-60 pointer-events-none"></div>
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto">
-          <span class="reveal inline-flex items-center gap-2 text-sm font-semibold text-brand-700 bg-brand-100 px-4 py-1.5 rounded-full"><i class="fa-solid fa-sparkles"></i> কেন এই ব্যাগ?</span>
-          <h2 class="reveal d1 mt-4 text-3xl sm:text-4xl font-bold text-brand-950 leading-tight">প্রোডাক্টের বিশেষ সুবিধাগুলো</h2>
-          <p class="reveal d2 mt-4 text-slate-600 leading-relaxed">সাধারণ পলিথিন ব্যাগ নয় — প্রিমিয়াম Aluminum Foil ম্যাটেরিয়ালে তৈরি, যা আপনার খাবারকে সর্বোচ্চ সুরক্ষা দেয়।</p>
-        </div>
-
-        <div class="mt-12 md:mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-          <div class="feature-card reveal d1 bg-white border border-brand-100 rounded-2xl p-6 shadow-card">
-            <div class="icon-wrap w-14 h-14 rounded-2xl bg-brand-100 text-brand-700 flex items-center justify-center text-2xl"><i class="fa-solid fa-weight-hanging"></i></div>
-            <h3 class="mt-5 text-lg font-bold text-brand-950">২–২.৫ কেজি ধারণক্ষমতা</h3>
-            <p class="mt-2 text-slate-600 text-[15px] leading-relaxed">প্রতি ব্যাগে ২ থেকে ২.৫ কেজি পর্যন্ত মাছ বা মাংস সহজেই রাখা যায় — বড় পরিবারের জন্য পারফেক্ট।</p>
-          </div>
-          <div class="feature-card reveal d2 bg-white border border-brand-100 rounded-2xl p-6 shadow-card">
-            <div class="icon-wrap w-14 h-14 rounded-2xl bg-brand-100 text-brand-700 flex items-center justify-center text-2xl"><i class="fa-solid fa-fish"></i></div>
-            <h3 class="mt-5 text-lg font-bold text-brand-950">সব ধরনের খাবারের জন্য</h3>
-            <p class="mt-2 text-slate-600 text-[15px] leading-relaxed">মাছ, মাংস, হাঁস, মুরগি ও সবজি — সব ধরনের কাঁচা খাবার সংরক্ষণে সমানভাবে উপযোগী।</p>
-          </div>
-          <div class="feature-card reveal d3 bg-white border border-brand-100 rounded-2xl p-6 shadow-card">
-            <div class="icon-wrap w-14 h-14 rounded-2xl bg-brand-100 text-brand-700 flex items-center justify-center text-2xl"><i class="fa-solid fa-snowflake"></i></div>
-            <h3 class="mt-5 text-lg font-bold text-brand-950">ফ্রিজ ও ফ্রিজার সেফ</h3>
-            <p class="mt-2 text-slate-600 text-[15px] leading-relaxed">নরমাল ফ্রিজ ও ডিপ ফ্রিজার — দুই জায়গাতেই নিশ্চিন্তে ব্যবহার করুন। শীতে শক্ত হয়ে ফেটে যায় না।</p>
-          </div>
-          <div class="feature-card reveal d4 bg-white border border-brand-100 rounded-2xl p-6 shadow-card">
-            <div class="icon-wrap w-14 h-14 rounded-2xl bg-brand-100 text-brand-700 flex items-center justify-center text-2xl"><i class="fa-solid fa-utensils"></i></div>
-            <h3 class="mt-5 text-lg font-bold text-brand-950">স্বাদ ও গন্ধ অক্ষুণ্ণ</h3>
-            <p class="mt-2 text-slate-600 text-[15px] leading-relaxed">খাবারের আসল স্বাদ ও গন্ধ ধরে রাখতে সহায়ক। ফ্রিজের অন্য খাবারের গন্ধ মাছ-মাংসে মেশে না।</p>
-          </div>
-          <div class="feature-card reveal d5 bg-white border border-brand-100 rounded-2xl p-6 shadow-card">
-            <div class="icon-wrap w-14 h-14 rounded-2xl bg-brand-100 text-brand-700 flex items-center justify-center text-2xl"><i class="fa-solid fa-lock"></i></div>
-            <h3 class="mt-5 text-lg font-bold text-brand-950">এয়ার-টাইট সিল</h3>
-            <p class="mt-2 text-slate-600 text-[15px] leading-relaxed">শক্তিশালী জিপ সিল আর্দ্রতা, বাতাস ও আলো প্রবেশ ঠেকিয়ে খাবার দীর্ঘদিন সতেজ রাখে — ফ্রিজার বার্ন হয় না।</p>
-          </div>
-          <div class="feature-card reveal d6 bg-white border border-brand-100 rounded-2xl p-6 shadow-card">
-            <div class="icon-wrap w-14 h-14 rounded-2xl bg-brand-100 text-brand-700 flex items-center justify-center text-2xl"><i class="fa-solid fa-recycle"></i></div>
-            <h3 class="mt-5 text-lg font-bold text-brand-950">পুনঃব্যবহারযোগ্য ও টেকসই</h3>
-            <p class="mt-2 text-slate-600 text-[15px] leading-relaxed">ধুয়ে বারবার ব্যবহার করা যায়। মোটা ও মজবুত ম্যাটেরিয়াল — সহজে ছিঁড়ে যায় না, লিক করে না।</p>
-          </div>
-          <div class="feature-card reveal d7 sm:col-span-2 lg:col-span-3 bg-gradient-to-r from-brand-900 to-brand-800 border border-brand-700 rounded-2xl p-6 md:p-8 shadow-card text-white flex flex-col md:flex-row md:items-center gap-6">
-            <div class="icon-wrap w-16 h-16 shrink-0 rounded-2xl bg-white/10 text-gold-400 flex items-center justify-center text-3xl"><i class="fa-solid fa-box-open"></i></div>
-            <div class="flex-1">
-              <h3 class="text-xl font-bold">প্রতি প্যাকে ১০টি ব্যাগ</h3>
-              <p class="mt-1.5 text-brand-100 text-[15px] leading-relaxed">এক প্যাকেই সপ্তাহের বাজার গুছিয়ে রাখার সম্পূর্ণ সমাধান। প্রতিটি ব্যাগ আলাদাভাবে লেবেল করে রাখুন — কোনটিতে কী আছে সহজেই বুঝবেন।</p>
-            </div>
-            <button data-open-order class="btn shrink-0 inline-flex items-center justify-center gap-2 bg-gold-400 hover:bg-gold-300 text-brand-950 font-bold px-6 py-3 rounded-full">
-              অর্ডার করুন <i class="fa-solid fa-arrow-right"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         4. PRODUCT GALLERY
-    ============================================================ -->
-    <section id="gallery" class="py-16 md:py-24 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-          <div class="max-w-xl">
-            <span class="reveal inline-flex items-center gap-2 text-sm font-semibold text-gold-600 bg-gold-200/60 px-4 py-1.5 rounded-full"><i class="fa-solid fa-images"></i> গ্যালারি</span>
-            <h2 class="reveal d1 mt-4 text-3xl sm:text-4xl font-bold text-brand-950 leading-tight">প্রোডাক্টটি কাছ থেকে দেখুন</h2>
-          </div>
-          <p class="reveal d2 text-slate-600 md:max-w-sm md:text-right">বাস্তব ব্যবহারের দৃশ্য — ফ্রিজারে সাজানো থেকে এয়ার-টাইট সিল পর্যন্ত।</p>
-        </div>
-
-        <div class="mt-10 md:mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <figure class="tilt-card reveal d1 group relative rounded-2xl overflow-hidden shadow-card bg-brand-50">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgjJChinXe2y4vBC4VRi2X0Y_rXSo00YISPgcJv3vGJxMYSUM-Tz4EhYEKzzQm7zF0cOPPpnPp-gpHmpP1gvH3_gzuFj3rQ0YsHCVzRyJ63wpjA487rgiGzHZdPvmF9Pf_JMJlfFb4ppb5-iAlDP6uG05UdL_2e0RLN3fJMlPfokEISHQFCzTjvQYuGikc=w640-h640" alt="ফ্রিজারে সাজানো Aluminum Foil ব্যাগ" class="w-full aspect-[4/3] lg:aspect-[3/4] object-cover" loading="lazy" width="800" height="600" />
-            <figcaption class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-brand-950/90 via-brand-950/50 to-transparent text-white">
-              <span class="inline-flex items-center gap-2 text-xs font-semibold text-gold-400 mb-1"><i class="fa-solid fa-snowflake"></i> ফ্রিজার</span>
-              <p class="font-bold leading-tight">ফ্রিজারে সুন্দরভাবে সাজিয়ে রাখুন</p>
-            </figcaption>
-          </figure>
-          <figure class="tilt-card reveal d2 group relative rounded-2xl overflow-hidden shadow-card bg-brand-50">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEiPLMYm3k8sUP3aRZ2Bv0OEowtdrpNLUe2tRUiRIpc1q5ZJRA4o2hjHttl0BlBAsXJOaXzKB97AxNIgfzbYsmRC3wu-mhsjoZWDI9x9TQgVstHjWa3Xc0FxcgANkM6GAMtfoCvO8uaBfWCL_ojbfp6wPx1OTqdBZC7KcdZx2aQSfpz48rZs38gR82-fLsM=w640-h640" alt="ব্যাগে মাংস সংরক্ষণ" class="w-full aspect-[4/3] lg:aspect-[3/4] object-cover" loading="lazy" width="800" height="600" />
-            <figcaption class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-brand-950/90 via-brand-950/50 to-transparent text-white">
-              <span class="inline-flex items-center gap-2 text-xs font-semibold text-gold-400 mb-1"><i class="fa-solid fa-drumstick-bite"></i> ব্যবহার</span>
-              <p class="font-bold leading-tight">মাছ-মাংস ভাগ করে সংরক্ষণ</p>
-            </figcaption>
-          </figure>
-          <figure class="tilt-card reveal d3 group relative rounded-2xl overflow-hidden shadow-card bg-brand-50">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjd3ism3CA1PCtbyXFE4JXbaq54wmllSWjluMC3yeE0OTAHuEAs0rU1h8mUoEMD8-11g_wDvh3gTWgqFKZc_bjiyvoCHfqSRBMd7BPaOyxzLSj11kTkyZczSNh9gCsHGwI7iMAYVC4WdtREHTZCu-Aq4gUrHFnrb_S7FZ4pmWDyKTni07Pjnvpxq8Wfo5s=w640-h640" alt="এয়ার-টাইট জিপ সিল" class="w-full aspect-[4/3] lg:aspect-[3/4] object-cover" loading="lazy" width="800" height="600" onerror="this.onerror=null;this.src='https://blogger.googleusercontent.com/img/a/AVvXsEgtWnCBMiLuxEEHCjtk1abvkSR4XcTjxhSVb48rtQO2T6PYJoBMjmdoQiUy83HxrSYojo7qkQe-E0UOrvgT2RVpKrR8QaTYyb8eumnGScAK3iMCNbLwQlrZ_kIwT6a0Hegtoq_0QjIFbGgvhYLw5vEjjuPj39eE6KEtjYDvbUinxtngtIt1_QOSUSYvV1M=w480-h640'" />
-            <figcaption class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-brand-950/90 via-brand-950/50 to-transparent text-white">
-              <span class="inline-flex items-center gap-2 text-xs font-semibold text-gold-400 mb-1"><i class="fa-solid fa-lock"></i> সিল</span>
-              <p class="font-bold leading-tight">শক্তিশালী এয়ার-টাইট জিপ লক</p>
-            </figcaption>
-          </figure>
-          <figure class="tilt-card reveal d4 group relative rounded-2xl overflow-hidden shadow-card bg-brand-50">
-            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEglabzBRPgNmah5DgB4uHe_eLWEh7-C2xvsypsQTFqUCzf3P6z07DQySPGdbSgCaD3Os7Q5t03osvG7pMlGIa8SPMaBUh-X6PxSen2sRZAc4vZEd3ISisrY2KE94nTjB28EDjglq7sRPRFf3cTnnfFKUDQgLVfe4WdFNEjkbfeyEQP0uO0qhdYLkKDX4-A" alt="১০ পিসের প্যাক" class="w-full aspect-[4/3] lg:aspect-[3/4] object-cover" loading="lazy" width="800" height="600" />
-            <figcaption class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-brand-950/90 via-brand-950/50 to-transparent text-white">
-              <span class="inline-flex items-center gap-2 text-xs font-semibold text-gold-400 mb-1"><i class="fa-solid fa-box"></i> প্যাকেজ</span>
-              <p class="font-bold leading-tight">প্রতি প্যাকে ১০টি প্রিমিয়াম ব্যাগ</p>
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         5. PRICING
-    ============================================================ -->
-    <section id="pricing" class="soft-section relative py-16 md:py-24 overflow-hidden">
-      <div class="absolute inset-0 dots-pattern opacity-60 pointer-events-none"></div>
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto">
-          <span class="reveal inline-flex items-center gap-2 text-sm font-semibold text-brand-700 bg-brand-100 px-4 py-1.5 rounded-full"><i class="fa-solid fa-tags"></i> প্রাইসিং</span>
-          <h2 class="reveal d1 mt-4 text-3xl sm:text-4xl font-bold text-brand-950 leading-tight">আপনার পছন্দের প্যাকেজ বেছে নিন</h2>
-          <p class="reveal d2 mt-4 text-slate-600">যত বেশি নিবেন, প্রতি পিসে সেভ করবেন তত বেশি। সব প্যাকেজেই ক্যাশ অন ডেলিভারি সুবিধা।</p>
-        </div>
-
-        <div class="mt-12 md:mt-16 grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-          <!-- 10 pcs -->
-          <div class="price-card reveal d1 bg-white border border-brand-100 rounded-3xl p-7 shadow-card flex flex-col">
-            <div class="flex items-center justify-between">
-              <span class="text-sm font-semibold text-brand-700 bg-brand-50 border border-brand-100 px-3 py-1 rounded-full">স্টার্টার</span>
-              <span class="w-11 h-11 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-xl"><i class="fa-solid fa-box"></i></span>
-            </div>
-            <h3 class="mt-5 text-2xl font-bold text-brand-950">১০ পিস</h3>
-            <p class="text-slate-500 text-sm">১ প্যাক — ছোট পরিবারের জন্য</p>
-            <div class="mt-5 flex items-end gap-2">
-              <span class="text-5xl font-bold text-brand-900 leading-none">৳৩৯০</span>
-            </div>
-            <p class="mt-1.5 text-sm text-slate-500">প্রতি পিস ৳৩৯</p>
-            <ul class="mt-6 space-y-3 text-[15px] text-slate-700 flex-1">
-              <li class="flex gap-3"><i class="fa-solid fa-circle-check text-brand-500 mt-1"></i> ১০টি প্রিমিয়াম ফয়েল ব্যাগ</li>
-              <li class="flex gap-3"><i class="fa-solid fa-circle-check text-brand-500 mt-1"></i> ২–২.৫ কেজি ধারণক্ষমতা</li>
-              <li class="flex gap-3"><i class="fa-solid fa-circle-check text-brand-500 mt-1"></i> ক্যাশ অন ডেলিভারি</li>
-            </ul>
-            <button data-open-order data-package="10" class="btn mt-7 w-full inline-flex items-center justify-center gap-2 bg-brand-900 hover:bg-brand-800 text-white font-bold px-6 py-3.5 rounded-xl">
-              <i class="fa-solid fa-cart-shopping"></i> অর্ডার করুন
-            </button>
-          </div>
-
-          <!-- 20 pcs (most popular) -->
-          <div class="price-card popular reveal d2 relative bg-gradient-to-br from-brand-800 via-brand-900 to-brand-950 text-white rounded-3xl p-7 shadow-soft flex flex-col md:-mt-4 md:mb-[-16px] ring-2 ring-gold-400/70">
-            <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gold-400 via-gold-500 to-gold-400 text-brand-950 text-sm font-bold px-6 py-2 rounded-full shadow-glow whitespace-nowrap ring-4 ring-gold-300/20">
-              <i class="fa-solid fa-crown"></i> Most Popular — সবচেয়ে জনপ্রিয়
-            </div>
-            <div class="flex items-center justify-between mt-2">
-              <span class="text-sm font-semibold text-gold-400 bg-white/10 border border-white/15 px-3 py-1 rounded-full">ফ্যামিলি প্যাক</span>
-              <span class="w-11 h-11 rounded-xl bg-white/10 text-gold-400 flex items-center justify-center text-xl"><i class="fa-solid fa-boxes-stacked"></i></span>
-            </div>
-            <h3 class="mt-5 text-2xl font-bold">২০ পিস</h3>
-            <p class="text-brand-200 text-sm">২ প্যাক — মাসের বাজারের জন্য আদর্শ</p>
-            <div class="mt-5 flex items-end gap-3">
-              <span class="text-5xl font-bold text-gold-400 leading-none">৳৬৫০</span>
-              <span class="text-brand-300 line-through text-lg mb-1">৳৭৮০</span>
-            </div>
-            <p class="mt-1.5 text-sm text-brand-200">প্রতি পিস ৳৩২.৫ &nbsp;·&nbsp; <span class="text-gold-300 font-semibold">৳১৩০ সেভ</span></p>
-            <ul class="mt-6 space-y-3 text-[15px] text-brand-50 flex-1">
-              <li class="flex gap-3"><i class="fa-solid fa-circle-check text-gold-400 mt-1"></i> ২০টি প্রিমিয়াম ফয়েল ব্যাগ</li>
-              <li class="flex gap-3"><i class="fa-solid fa-circle-check text-gold-400 mt-1"></i> ২–২.৫ কেজি ধারণক্ষমতা</li>
-              <li class="flex gap-3"><i class="fa-solid fa-circle-check text-gold-400 mt-1"></i> ক্যাশ অন ডেলিভারি</li>
-              <li class="flex gap-3"><i class="fa-solid fa-circle-check text-gold-400 mt-1"></i> প্রতি পিসে ৳৬.৫ সাশ্রয়</li>
-            </ul>
-            <button data-open-order data-package="20" class="btn cta-pulse mt-7 w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 text-brand-950 font-bold px-6 py-3.5 rounded-xl">
-              <i class="fa-solid fa-cart-shopping"></i> অর্ডার করুন
-            </button>
-          </div>
-
-          <!-- 30 pcs -->
-          <div class="price-card reveal d3 bg-white border border-brand-100 rounded-3xl p-7 shadow-card flex flex-col">
-            <div class="flex items-center justify-between">
-              <span class="text-sm font-semibold text-brand-700 bg-brand-50 border border-brand-100 px-3 py-1 rounded-full">সেভার প্যাক</span>
-              <span class="w-11 h-11 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-xl"><i class="fa-solid fa-warehouse"></i></span>
-            </div>
-            <h3 class="mt-5 text-2xl font-bold text-brand-950">৩০ পিস</h3>
-            <p class="text-slate-500 text-sm">৩ প্যাক — বড় পরিবার এর জন্য</p>
-            <div class="mt-5 flex items-end gap-3">
-              <span class="text-5xl font-bold text-brand-900 leading-none">৳৮৫০</span>
-              <span class="text-slate-400 line-through text-lg mb-1">৳১,১৭০</span>
-            </div>
-            <p class="mt-1.5 text-sm text-slate-500">প্রতি পিস ৳২৮.৩ &nbsp;·&nbsp; <span class="text-brand-700 font-semibold">৳৩২০ সেভ</span></p>
-            <ul class="mt-6 space-y-3 text-[15px] text-slate-700 flex-1">
-              <li class="flex gap-3"><i class="fa-solid fa-circle-check text-brand-500 mt-1"></i> ৩০টি প্রিমিয়াম ফয়েল ব্যাগ</li>
-              <li class="flex gap-3"><i class="fa-solid fa-circle-check text-brand-500 mt-1"></i> ২–২.৫ কেজি ধারণক্ষমতা</li>
-              <li class="flex gap-3"><i class="fa-solid fa-circle-check text-brand-500 mt-1"></i> ক্যাশ অন ডেলিভারি</li>
-              <li class="flex gap-3"><i class="fa-solid fa-circle-check text-brand-500 mt-1"></i> সর্বোচ্চ সাশ্রয়</li>
-            </ul>
-            <button data-open-order data-package="30" class="btn mt-7 w-full inline-flex items-center justify-center gap-2 bg-brand-900 hover:bg-brand-800 text-white font-bold px-6 py-3.5 rounded-xl">
-              <i class="fa-solid fa-cart-shopping"></i> অর্ডার করুন
-            </button>
-          </div>
-        </div>
-
-        <!-- Delivery charge -->
-        <div class="reveal d4 mt-10 md:mt-14 max-w-3xl mx-auto bg-white border border-brand-100 rounded-2xl p-5 md:p-6 shadow-card">
-          <div class="flex flex-col sm:flex-row items-center gap-5 sm:gap-8">
-            <div class="flex items-center gap-3 shrink-0">
-              <span class="w-12 h-12 rounded-xl bg-gold-200 text-gold-600 flex items-center justify-center text-xl"><i class="fa-solid fa-truck-fast"></i></span>
+    <!-- Content Details -->
+    <div class="flex-1 overflow-y-auto p-4 md:p-8">
+      <div class="max-w-3xl mx-auto space-y-6">
+        
+        <!-- Customer Info Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          
+          <!-- Card 1: Customer Profile -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-20 h-20 bg-brand-50 rounded-bl-full -z-10"></div>
+            <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4"><i class="fa-solid fa-user mr-1"></i> কাস্টমার ইনফো</h3>
+            
+            <div class="space-y-4">
               <div>
-                <div class="font-bold text-brand-950">ডেলিভারি চার্জ</div>
-                <div class="text-xs text-slate-500">প্যাকেজ মূল্যের সাথে আলাদাভাবে যুক্ত হবে</div>
+                <p class="text-xs text-slate-500 mb-0.5">নাম</p>
+                <p class="font-bold text-lg text-slate-800">মোঃ রফিকুল ইসলাম</p>
+              </div>
+              <div>
+                <p class="text-xs text-slate-500 mb-0.5">মোবাইল নাম্বার</p>
+                <div class="flex items-center justify-between bg-slate-50 border border-slate-100 rounded-lg px-3 py-2">
+                  <span class="font-bold text-slate-800 text-lg tracking-wide">01712-XXXXXX</span>
+                  <!-- Call Button -->
+                  <a href="tel:01712000000" class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-colors">
+                    <i class="fa-solid fa-phone"></i>
+                  </a>
+                </div>
+              </div>
+              <div>
+                <p class="text-xs text-slate-500 mb-0.5">সম্পূর্ণ ঠিকানা</p>
+                <p class="font-medium text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-100">মিরপুর-১০, সেনপাড়া পর্বতা, ঢাকা</p>
               </div>
             </div>
-            <div class="flex-1 grid grid-cols-2 gap-3 w-full">
-              <div class="flex items-center justify-between bg-brand-50 border border-brand-100 rounded-xl px-4 py-3">
-                <span class="text-sm font-medium text-brand-900"><i class="fa-solid fa-city text-brand-600 mr-1.5"></i> ঢাকার ভিতরে</span>
-                <span class="font-bold text-brand-900">৳৭০</span>
+          </div>
+
+          <!-- Card 2: Order Summary -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-20 h-20 bg-gold-50 rounded-bl-full -z-10"></div>
+            <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4"><i class="fa-solid fa-box-open mr-1"></i> অর্ডার সামারি</h3>
+            
+            <div class="space-y-3">
+              <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+                <span class="text-slate-600">প্রোডাক্ট প্যাকেজ</span>
+                <span class="font-bold text-slate-800 bg-brand-50 px-2 py-1 rounded text-sm">২০ পিস Storage Bag</span>
               </div>
-              <div class="flex items-center justify-between bg-brand-50 border border-brand-100 rounded-xl px-4 py-3">
-                <span class="text-sm font-medium text-brand-900"><i class="fa-solid fa-map-location-dot text-brand-600 mr-1.5"></i> ঢাকার বাইরে</span>
-                <span class="font-bold text-brand-900">৳১১০</span>
+              <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+                <span class="text-slate-600">পেমেন্ট মেথড</span>
+                <span class="font-semibold text-slate-700 flex items-center gap-1.5"><i class="fa-solid fa-hand-holding-dollar text-brand-600"></i> ক্যাশ অন ডেলিভারি</span>
+              </div>
+              <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+                <span class="text-slate-600">ডেলিভারি চার্জ</span>
+                <span class="font-medium text-slate-700">৳৭০ (ঢাকার ভিতরে)</span>
+              </div>
+              <div class="flex justify-between items-center pt-2">
+                <span class="text-slate-500 font-bold text-lg">সর্বমোট বিল</span>
+                <span class="font-bold text-2xl text-brand-800">৳৭২০</span>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Action Buttons Bar -->
+        <div class="bg-white rounded-2xl p-4 md:p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+          <div class="text-sm text-slate-500 flex items-center gap-2">
+            <i class="fa-solid fa-circle-info text-brand-600"></i> কাস্টমারকে কল করে কনফার্ম করার পর SteadFast-এ পাঠান।
+          </div>
+          <div class="flex w-full md:w-auto gap-3">
+            <button class="flex-1 md:flex-none px-5 py-3 rounded-xl font-bold text-slate-600 bg-slate-100 hover:bg-red-50 hover:text-red-600 transition-colors">
+              <i class="fa-solid fa-xmark mr-1"></i> Cancel
+            </button>
+            <button class="flex-1 md:flex-none px-6 py-3 rounded-xl font-bold text-brand-950 bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-500 hover:to-gold-600 shadow-md shadow-gold-500/30 transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-truck-fast"></i> Send to SteadFast
+            </button>
+          </div>
+        </div>
+
+        <!-- Courier Status Section (Empty state) -->
+        <div class="bg-slate-100 rounded-xl p-4 border border-slate-200 flex items-center gap-3 text-slate-500 text-sm">
+          <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm"><i class="fa-solid fa-clock-rotate-left"></i></div>
+          <div>কুরিয়ার স্ট্যাটাস: পার্সেল এখনো বুকিং করা হয়নি।</div>
+        </div>
+
       </div>
-    </section>
-
-    <!-- ============================================================
-         6. HOW TO ORDER
-    ============================================================ -->
-    <section id="order" class="py-16 md:py-24 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto">
-          <span class="reveal inline-flex items-center gap-2 text-sm font-semibold text-gold-600 bg-gold-200/60 px-4 py-1.5 rounded-full"><i class="fa-solid fa-list-check"></i> সহজ প্রক্রিয়া</span>
-          <h2 class="reveal d1 mt-4 text-3xl sm:text-4xl font-bold text-brand-950 leading-tight">কিভাবে অর্ডার করবেন?</h2>
-          <p class="reveal d2 mt-4 text-slate-600">মাত্র ৪টি সহজ ধাপে অর্ডার সম্পন্ন করুন — কোনো অ্যাকাউন্ট খুলতে হবে না।</p>
-        </div>
-
-        <div class="mt-12 md:mt-16 relative">
-          <div class="step-line hidden lg:block absolute top-10 left-[12%] right-[12%] h-0.5"></div>
-          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
-            <div class="reveal d1 text-center relative">
-              <div class="relative mx-auto w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-700 to-brand-900 text-gold-400 flex items-center justify-center text-3xl shadow-soft">
-                <i class="fa-solid fa-hand-pointer"></i>
-                <span class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gold-400 text-brand-950 text-sm font-bold flex items-center justify-center border-4 border-white">১</span>
-              </div>
-              <h3 class="mt-5 text-lg font-bold text-brand-950">প্যাকেজ বাছাই করুন</h3>
-              <p class="mt-2 text-slate-600 text-[15px] leading-relaxed">১০ / ২০ / ৩০ পিস — আপনার প্রয়োজন অনুযায়ী প্যাকেজ বেছে "অর্ডার করুন" বাটনে ক্লিক করুন।</p>
-            </div>
-            <div class="reveal d2 text-center relative">
-              <div class="relative mx-auto w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-700 to-brand-900 text-gold-400 flex items-center justify-center text-3xl shadow-soft">
-                <i class="fa-solid fa-file-pen"></i>
-                <span class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gold-400 text-brand-950 text-sm font-bold flex items-center justify-center border-4 border-white">২</span>
-              </div>
-              <h3 class="mt-5 text-lg font-bold text-brand-950">ফর্ম পূরণ করুন</h3>
-              <p class="mt-2 text-slate-600 text-[15px] leading-relaxed">আপনার নাম, মোবাইল নাম্বার ও সম্পূর্ণ ঠিকানা দিন। মাত্র ১ মিনিট লাগবে।</p>
-            </div>
-            <div class="reveal d3 text-center relative">
-              <div class="relative mx-auto w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-700 to-brand-900 text-gold-400 flex items-center justify-center text-3xl shadow-soft">
-                <i class="fa-solid fa-money-bill-wave"></i>
-                <span class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gold-400 text-brand-950 text-sm font-bold flex items-center justify-center border-4 border-white">৩</span>
-              </div>
-              <h3 class="mt-5 text-lg font-bold text-brand-950">পেমেন্ট নিশ্চিত করুন</h3>
-              <p class="mt-2 text-slate-600 text-[15px] leading-relaxed">ক্যাশ অন ডেলিভারি, বিকাশ বা নগদ — যেটা সুবিধা। আমাদের প্রতিনিধি কল করে কনফার্ম করবেন।</p>
-            </div>
-            <div class="reveal d4 text-center relative">
-              <div class="relative mx-auto w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-700 to-brand-900 text-gold-400 flex items-center justify-center text-3xl shadow-soft">
-                <i class="fa-solid fa-house-circle-check"></i>
-                <span class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gold-400 text-brand-950 text-sm font-bold flex items-center justify-center border-4 border-white">৪</span>
-              </div>
-              <h3 class="mt-5 text-lg font-bold text-brand-950">বাসায় পৌঁছে যাবে</h3>
-              <p class="mt-2 text-slate-600 text-[15px] leading-relaxed">ঢাকায় ১–২ দিন, ঢাকার বাইরে ২–৪ দিনের মধ্যে প্রোডাক্ট আপনার দরজায় পৌঁছে যাবে।</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="reveal d5 mt-12 text-center">
-          <button data-open-order class="btn cta-pulse inline-flex items-center justify-center gap-3 bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 text-brand-950 font-bold text-lg px-9 py-4 rounded-full">
-            <i class="fa-solid fa-bag-shopping"></i> এখনই অর্ডার করুন
-          </button>
-          <p class="mt-3 text-sm text-slate-500"><i class="fa-solid fa-shield-halved text-brand-600"></i> পণ্য হাতে পেয়ে চেক করে টাকা দিন</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         7. TRUST / WHY CHOOSE US (Stats)
-    ============================================================ -->
-    <section id="trust" class="dark-section relative py-16 md:py-24 text-white overflow-hidden">
-      <div class="absolute inset-0 grid-pattern"></div>
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div>
-            <span class="reveal inline-flex items-center gap-2 text-sm font-semibold text-gold-400 bg-white/10 border border-white/15 px-4 py-1.5 rounded-full"><i class="fa-solid fa-handshake"></i> আস্থার জায়গা</span>
-            <h2 class="reveal d1 mt-4 text-3xl sm:text-4xl font-bold leading-tight">কেন হাজারো গ্রাহক আমাদের বিশ্বাস করেন?</h2>
-            <p class="reveal d2 mt-4 text-brand-100 leading-relaxed">আমরা শুধু প্রোডাক্ট বিক্রি করি না — আপনার রান্নাঘরের জন্য নির্ভরযোগ্য সমাধান দিই। প্রতিদিন শত শত অর্ডার ডেলিভারি করছি সারা বাংলাদেশে।</p>
-
-            <ul class="mt-8 space-y-4">
-              <li class="reveal d3 flex gap-4">
-                <span class="w-11 h-11 shrink-0 rounded-xl bg-white/10 text-gold-400 flex items-center justify-center text-lg"><i class="fa-solid fa-gem"></i></span>
-                <div><h4 class="font-bold">মানসম্মত প্রিমিয়াম ম্যাটেরিয়াল</h4><p class="text-brand-100 text-[15px]">ফুড-গ্রেড অ্যালুমিনিয়াম ফয়েল — নিরাপদ, মজবুত ও দীর্ঘস্থায়ী।</p></div>
-              </li>
-              <li class="reveal d4 flex gap-4">
-                <span class="w-11 h-11 shrink-0 rounded-xl bg-white/10 text-gold-400 flex items-center justify-center text-lg"><i class="fa-solid fa-truck-fast"></i></span>
-                <div><h4 class="font-bold">দ্রুত ডেলিভারি</h4><p class="text-brand-100 text-[15px]">ঢাকায় ১–২ দিন, সারাদেশে ২–৪ দিনে নিশ্চিত ডেলিভারি।</p></div>
-              </li>
-              <li class="reveal d5 flex gap-4">
-                <span class="w-11 h-11 shrink-0 rounded-xl bg-white/10 text-gold-400 flex items-center justify-center text-lg"><i class="fa-solid fa-hand-holding-dollar"></i></span>
-                <div><h4 class="font-bold">ক্যাশ অন ডেলিভারি সুবিধা</h4><p class="text-brand-100 text-[15px]">প্রোডাক্ট হাতে পেয়ে, চেক করে তারপর টাকা দিন — সম্পূর্ণ ঝুঁকিমুক্ত।</p></div>
-              </li>
-              <li class="reveal d6 flex gap-4">
-                <span class="w-11 h-11 shrink-0 rounded-xl bg-white/10 text-gold-400 flex items-center justify-center text-lg"><i class="fa-solid fa-headset"></i></span>
-                <div><h4 class="font-bold">আন্তরিক কাস্টমার সাপোর্ট</h4><p class="text-brand-100 text-[15px]">অর্ডারের আগে-পরে যেকোনো প্রশ্নে WhatsApp-এ সাথে সাথে উত্তর।</p></div>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Stats -->
-          <div class="grid grid-cols-2 gap-4 md:gap-5">
-            <div class="reveal d1 bg-white/10 border border-white/15 backdrop-blur rounded-2xl p-6 text-center hover:bg-white/15 transition-colors">
-              <div class="w-12 h-12 mx-auto rounded-xl bg-gold-400/20 text-gold-400 flex items-center justify-center text-xl"><i class="fa-solid fa-users"></i></div>
-              <div class="mt-4 text-4xl md:text-5xl font-bold text-gold-400"><span class="counter" data-target="10000" data-suffix="+">০</span></div>
-              <div class="mt-1 text-brand-100 text-sm font-medium">সন্তুষ্ট গ্রাহক</div>
-            </div>
-            <div class="reveal d2 bg-white/10 border border-white/15 backdrop-blur rounded-2xl p-6 text-center hover:bg-white/15 transition-colors">
-              <div class="w-12 h-12 mx-auto rounded-xl bg-gold-400/20 text-gold-400 flex items-center justify-center text-xl"><i class="fa-solid fa-map-location-dot"></i></div>
-              <div class="mt-4 text-4xl md:text-5xl font-bold text-gold-400"><span class="counter" data-target="64">০</span></div>
-              <div class="mt-1 text-brand-100 text-sm font-medium">জেলায় ডেলিভারি</div>
-            </div>
-            <div class="reveal d3 bg-white/10 border border-white/15 backdrop-blur rounded-2xl p-6 text-center hover:bg-white/15 transition-colors">
-              <div class="w-12 h-12 mx-auto rounded-xl bg-gold-400/20 text-gold-400 flex items-center justify-center text-xl"><i class="fa-solid fa-boxes-packing"></i></div>
-              <div class="mt-4 text-4xl md:text-5xl font-bold text-gold-400"><span class="counter" data-target="300" data-suffix="+">০</span></div>
-              <div class="mt-1 text-brand-100 text-sm font-medium">প্রতিদিন অর্ডার</div>
-            </div>
-            <div class="reveal d4 bg-white/10 border border-white/15 backdrop-blur rounded-2xl p-6 text-center hover:bg-white/15 transition-colors">
-              <div class="w-12 h-12 mx-auto rounded-xl bg-gold-400/20 text-gold-400 flex items-center justify-center text-xl"><i class="fa-solid fa-star"></i></div>
-              <div class="mt-4 text-4xl md:text-5xl font-bold text-gold-400"><span class="counter" data-target="4.9" data-decimals="1">০</span></div>
-              <div class="mt-1 text-brand-100 text-sm font-medium">গড় রেটিং (৫-এ)</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         8. FAQ
-    ============================================================ -->
-    <section id="faq" class="soft-section py-16 md:py-24">
-      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <span class="reveal inline-flex items-center gap-2 text-sm font-semibold text-brand-700 bg-brand-100 px-4 py-1.5 rounded-full"><i class="fa-solid fa-circle-question"></i> সাধারণ জিজ্ঞাসা</span>
-          <h2 class="reveal d1 mt-4 text-3xl sm:text-4xl font-bold text-brand-950 leading-tight">আপনার প্রশ্নের উত্তর</h2>
-          <p class="reveal d2 mt-4 text-slate-600">অর্ডার করার আগে যে প্রশ্নগুলো সবাই করেন।</p>
-        </div>
-
-        <div class="mt-10 md:mt-12 space-y-3" id="faqList">
-          <div class="faq-item reveal d1 bg-white border border-brand-100 rounded-2xl shadow-card overflow-hidden">
-            <button class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 md:px-6 py-5" aria-expanded="false">
-              <span class="faq-q font-bold text-brand-950 text-[16px] md:text-lg"><i class="fa-solid fa-truck text-brand-600 mr-2"></i> ডেলিভারি কতদিনে পাবো?</span>
-              <span class="faq-icon w-9 h-9 shrink-0 rounded-full bg-brand-50 text-brand-700 flex items-center justify-center"><i class="fa-solid fa-chevron-down"></i></span>
-            </button>
-            <div class="faq-answer"><p class="px-5 md:px-6 pb-5 text-slate-600 leading-relaxed">ঢাকার ভিতরে সাধারণত <strong>১–২ কর্মদিবসে</strong> এবং ঢাকার বাইরে <strong>২–৪ কর্মদিবসে</strong> ডেলিভারি পৌঁছে যায়। অর্ডার কনফার্মের পর আমাদের প্রতিনিধি আপনাকে কল করে ডেলিভারির সময় জানিয়ে দেবেন।</p></div>
-          </div>
-          <div class="faq-item reveal d2 bg-white border border-brand-100 rounded-2xl shadow-card overflow-hidden">
-            <button class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 md:px-6 py-5" aria-expanded="false">
-              <span class="faq-q font-bold text-brand-950 text-[16px] md:text-lg"><i class="fa-solid fa-wallet text-brand-600 mr-2"></i> পেমেন্ট কিভাবে করবো?</span>
-              <span class="faq-icon w-9 h-9 shrink-0 rounded-full bg-brand-50 text-brand-700 flex items-center justify-center"><i class="fa-solid fa-chevron-down"></i></span>
-            </button>
-            <div class="faq-answer"><p class="px-5 md:px-6 pb-5 text-slate-600 leading-relaxed">আপনি <strong>ক্যাশ অন ডেলিভারি</strong> (পণ্য হাতে পেয়ে টাকা), <strong>বিকাশ</strong> অথবা <strong>নগদ</strong> — যেকোনো মাধ্যমে পেমেন্ট করতে পারবেন। বিকাশ/নগদে অগ্রিম পেমেন্ট করলে ফর্মে Transaction ID দিলেই হবে।</p></div>
-          </div>
-          <div class="faq-item reveal d3 bg-white border border-brand-100 rounded-2xl shadow-card overflow-hidden">
-            <button class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 md:px-6 py-5" aria-expanded="false">
-              <span class="faq-q font-bold text-brand-950 text-[16px] md:text-lg"><i class="fa-solid fa-recycle text-brand-600 mr-2"></i> ব্যাগ কতবার ব্যবহার করা যায়?</span>
-              <span class="faq-icon w-9 h-9 shrink-0 rounded-full bg-brand-50 text-brand-700 flex items-center justify-center"><i class="fa-solid fa-chevron-down"></i></span>
-            </button>
-            <div class="faq-answer"><p class="px-5 md:px-6 pb-5 text-slate-600 leading-relaxed">ব্যাগগুলো <strong>পুনঃব্যবহারযোগ্য</strong>। ব্যবহারের পর হালকা সাবান পানিতে ধুয়ে শুকিয়ে আবার ব্যবহার করতে পারবেন। সাধারণ যত্নে একটি ব্যাগ অনেকবার ব্যবহার করা যায় — জিপ সিল অক্ষত থাকলে ব্যাগ ব্যবহারযোগ্য।</p></div>
-          </div>
-          <div class="faq-item reveal d4 bg-white border border-brand-100 rounded-2xl shadow-card overflow-hidden">
-            <button class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 md:px-6 py-5" aria-expanded="false">
-              <span class="faq-q font-bold text-brand-950 text-[16px] md:text-lg"><i class="fa-solid fa-motorcycle text-brand-600 mr-2"></i> ডেলিভারি চার্জ কত?</span>
-              <span class="faq-icon w-9 h-9 shrink-0 rounded-full bg-brand-50 text-brand-700 flex items-center justify-center"><i class="fa-solid fa-chevron-down"></i></span>
-            </button>
-            <div class="faq-answer"><p class="px-5 md:px-6 pb-5 text-slate-600 leading-relaxed">ঢাকার ভিতরে <strong>৳৭০</strong> এবং ঢাকার বাইরে <strong>৳১১০</strong>। এক অর্ডারে যত প্যাকেজই নিন, ডেলিভারি চার্জ একবারই দিতে হবে।</p></div>
-          </div>
-          <div class="faq-item reveal d5 bg-white border border-brand-100 rounded-2xl shadow-card overflow-hidden">
-            <button class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 md:px-6 py-5" aria-expanded="false">
-              <span class="faq-q font-bold text-brand-950 text-[16px] md:text-lg"><i class="fa-solid fa-rotate-left text-brand-600 mr-2"></i> প্রোডাক্টে সমস্যা থাকলে কী করবো?</span>
-              <span class="faq-icon w-9 h-9 shrink-0 rounded-full bg-brand-50 text-brand-700 flex items-center justify-center"><i class="fa-solid fa-chevron-down"></i></span>
-            </button>
-            <div class="faq-answer"><p class="px-5 md:px-6 pb-5 text-slate-600 leading-relaxed">ডেলিভারি ম্যানের সামনেই প্যাকেট খুলে প্রোডাক্ট চেক করে নিন। কোনো ত্রুটি (ছেঁড়া, সিল নষ্ট, পিস কম) থাকলে সাথে সাথে আমাদের WhatsApp-এ জানান — আমরা <strong>বিনামূল্যে রিপ্লেস</strong> করে দেবো।</p></div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
   </main>
-
-  <!-- ============================================================
-       9. FOOTER
-  ============================================================ -->
-  <footer id="contact" class="bg-brand-950 text-brand-100 relative overflow-hidden">
-    <div class="absolute inset-0 grid-pattern opacity-60"></div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 md:pt-16 pb-8">
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
-        <!-- Brand -->
-        <div class="lg:col-span-1">
-          <a href="#home" class="inline-flex items-center gap-2.5">
-            <span class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-600 to-brand-800 text-gold-400 flex items-center justify-center shadow-soft"><i class="fa-solid fa-snowflake text-xl"></i></span>
-            <span class="text-2xl font-bold text-white">FreshPack<span class="text-gold-400">BD</span></span>
-          </a>
-          <p class="mt-4 text-[15px] leading-relaxed text-brand-200">প্রিমিয়াম Aluminum Foil Storage Bag-এর বিশ্বস্ত অনলাইন শপ। আপনার রান্নাঘরের খাবার রাখুন টাটকা, গুছানো ও নিরাপদ।</p>
-          <div class="mt-5 flex items-center gap-3">
-            <a href="https://www.facebook.com/share/1H1P45XQk6/" aria-label="Facebook" class="w-10 h-10 rounded-full bg-white/10 hover:bg-[#1877F2] text-white flex items-center justify-center transition-all hover:-translate-y-1"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full bg-white/10 hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] text-white flex items-center justify-center transition-all hover:-translate-y-1"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" aria-label="YouTube" class="w-10 h-10 rounded-full bg-white/10 hover:bg-[#FF0000] text-white flex items-center justify-center transition-all hover:-translate-y-1"><i class="fa-brands fa-youtube"></i></a>
-            <a href="#" data-wa-link aria-label="WhatsApp" class="w-10 h-10 rounded-full bg-white/10 hover:bg-[#25D366] text-white flex items-center justify-center transition-all hover:-translate-y-1"><i class="fa-brands fa-whatsapp"></i></a>
-          </div>
-        </div>
-
-        <!-- Quick links -->
-        <div>
-          <h4 class="text-white font-bold text-lg">কুইক লিংক</h4>
-          <ul class="mt-4 space-y-2.5 text-[15px]">
-            <li><a href="#home" class="hover:text-gold-400 transition-colors inline-flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-gold-400"></i> হোম</a></li>
-            <li><a href="#features" class="hover:text-gold-400 transition-colors inline-flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-gold-400"></i> ফিচার</a></li>
-            <li><a href="#gallery" class="hover:text-gold-400 transition-colors inline-flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-gold-400"></i> গ্যালারি</a></li>
-            <li><a href="#pricing" class="hover:text-gold-400 transition-colors inline-flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-gold-400"></i> প্রাইসিং</a></li>
-            <li><a href="#order" class="hover:text-gold-400 transition-colors inline-flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-gold-400"></i> কিভাবে অর্ডার করবেন</a></li>
-            <li><a href="#faq" class="hover:text-gold-400 transition-colors inline-flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-gold-400"></i> সাধারণ জিজ্ঞাসা</a></li>
-          </ul>
-        </div>
-
-        <!-- Contact -->
-        <div>
-          <h4 class="text-white font-bold text-lg">যোগাযোগ</h4>
-          <ul class="mt-4 space-y-3.5 text-[15px]">
-            <li class="flex gap-3"><span class="w-9 h-9 shrink-0 rounded-lg bg-white/10 text-gold-400 flex items-center justify-center"><i class="fa-solid fa-phone"></i></span><div><div class="text-xs text-brand-300">হটলাইন (সকাল ৯টা – রাত ১০টা)</div><a href="tel:+8801794821159" class="font-semibold text-white hover:text-gold-400">01794821159</a></div></li>
-            <li class="flex gap-3"><span class="w-9 h-9 shrink-0 rounded-lg bg-white/10 text-gold-400 flex items-center justify-center"><i class="fa-brands fa-whatsapp"></i></span><div><div class="text-xs text-brand-300">WhatsApp</div><a href="#" data-wa-link class="font-semibold text-white hover:text-gold-400">01794821159</a></div></li>
-            <li class="flex gap-3"><span class="w-9 h-9 shrink-0 rounded-lg bg-white/10 text-gold-400 flex items-center justify-center"><i class="fa-solid fa-envelope"></i></span><div><div class="text-xs text-brand-300">ইমেইল</div><a href="mailto:freshpackbdsupport@gmail.com" class="font-semibold text-white hover:text-gold-400">freshpackbdsupport@gmail.com</a></div></li>
-            <li class="flex gap-3"><span class="w-9 h-9 shrink-0 rounded-lg bg-white/10 text-gold-400 flex items-center justify-center"><i class="fa-solid fa-location-dot"></i></span><div><div class="text-xs text-brand-300">ঠিকানা</div><div class="font-semibold text-white"> ঢাকা, যাত্রাবাড়ী, বাংলাদেশ, ১২০৮</div></div></li>
-          </ul>
-        </div>
-
-        <!-- CTA card -->
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h4 class="text-white font-bold text-lg"><i class="fa-solid fa-bolt text-gold-400 mr-1"></i> আজই অর্ডার করুন</h4>
-          <p class="mt-2 text-sm text-brand-200 leading-relaxed">স্টক সীমিত। অর্ডার কনফার্ম করলে আজই প্যাকেজিং শুরু হবে।</p>
-          <button data-open-order class="btn mt-4 w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-gold-500 to-gold-400 text-brand-950 font-bold px-5 py-3 rounded-xl"><i class="fa-solid fa-cart-shopping"></i> অর্ডার করুন</button>
-        </div>
-      </div>
-
-      <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-brand-300">
-        <p>© <span id="year">2026</span> FreshPack BD. সর্বস্বত্ব সংরক্ষিত।</p>
-        <p class="flex items-center gap-1.5"><i class="fa-solid fa-heart text-gold-400"></i> বাংলাদেশে তৈরি ভালোবাসায়</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ============================================================
-       10. FLOATING WHATSAPP BUTTON
-  ============================================================ -->
-  <a href="#" data-wa-link target="_blank" rel="noopener" aria-label="WhatsApp-এ চ্যাট করুন"
-     class="wa-btn fixed bottom-5 right-5 md:bottom-7 md:right-7 z-40 group flex items-center gap-3">
-    <span class="hidden md:block bg-white text-brand-950 text-sm font-semibold px-4 py-2 rounded-full shadow-soft opacity-0 translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all">WhatsApp-এ মেসেজ করুন</span>
-    <span class="wa-ring relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#25D366] text-white flex items-center justify-center text-3xl md:text-[2.1rem] shadow-[0_10px_30px_-8px_rgba(37,211,102,.8)] hover:scale-110 transition-transform">
-      <i class="fa-brands fa-whatsapp"></i>
-    </span>
-  </a>
-
-  <!-- ============================================================
-       ORDER POPUP FORM (Modal)
-  ============================================================ -->
-  <div id="orderModal" class="modal fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-4" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div id="modalBackdrop" class="absolute inset-0 bg-brand-950/70 backdrop-blur-sm"></div>
-
-    <div class="modal-card relative w-full sm:max-w-lg bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden max-h-[94vh] flex flex-col">
-      <!-- Modal header -->
-      <div class="relative bg-gradient-to-r from-brand-900 to-brand-800 text-white px-6 py-5 flex items-center justify-between shrink-0">
-        <div class="flex items-center gap-3">
-          <span class="w-11 h-11 rounded-xl bg-white/10 text-gold-400 flex items-center justify-center text-xl"><i class="fa-solid fa-bag-shopping"></i></span>
-          <div>
-            <h3 id="modalTitle" class="text-lg font-bold leading-tight">অর্ডার ফর্ম</h3>
-            <p class="text-xs text-brand-200">নিচের তথ্যগুলো পূরণ করুন — মাত্র ১ মিনিট</p>
-          </div>
-        </div>
-        <button id="modalClose" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 hover:rotate-90 transition-all flex items-center justify-center" aria-label="বন্ধ করুন">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-
-      <div class="modal-scroll overflow-y-auto">
-        <!-- ===== FORM VIEW ===== -->
-        <form id="orderForm" class="px-6 py-6" novalidate>
-          <!-- Product -->
-          <div>
-            <label class="block text-sm font-semibold text-brand-950 mb-1.5"><i class="fa-solid fa-box text-brand-600 mr-1"></i> প্রোডাক্টের নাম</label>
-            <input type="text" name="product" id="productName" value="Aluminum Foil Storage Bag" readonly class="field bg-brand-50/70 font-medium cursor-default" />
-          </div>
-
-          <!-- Quantity -->
-          <div class="mt-4">
-            <label for="quantity" class="block text-sm font-semibold text-brand-950 mb-1.5"><i class="fa-solid fa-layer-group text-brand-600 mr-1"></i> কোয়ান্টিটি / সাইজ</label>
-            <div class="quantity-picker relative">
-              <select id="quantity" name="quantity" class="sr-only">
-                <option value="10">১০ পিস — ৳৩৯০</option>
-                <option value="20" selected>২০ পিস — ৳৬৫০ (Most Popular)</option>
-                <option value="30">৩০ পিস — ৳৮৫০</option>
-              </select>
-              <button type="button" id="quantityTrigger" class="quantity-select w-full flex items-center justify-between px-4 text-left" aria-haspopup="listbox" aria-expanded="false">
-                <span id="quantityLabel">২০ পিস — ৳৬৫০ (Most Popular)</span>
-                <i class="fa-solid fa-chevron-down text-brand-600 transition-transform"></i>
-              </button>
-              <div id="quantityMenu" class="quantity-menu hidden" role="listbox" aria-label="কোয়ান্টিটি বাছাই করুন">
-                <button type="button" role="option" data-value="10" aria-selected="false">১০ পিস — ৳৩৯০</button>
-                <button type="button" role="option" data-value="20" aria-selected="true">২০ পিস — ৳৬৫০ <span class="text-gold-600 font-bold">(Most Popular)</span></button>
-                <button type="button" role="option" data-value="30" aria-selected="false">৩০ পিস — ৳৮৫০</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Name -->
-          <div class="mt-4">
-            <label for="customerName" class="block text-sm font-semibold text-brand-950 mb-1.5"><i class="fa-solid fa-user text-brand-600 mr-1"></i> আপনার নাম <span class="text-red-500">*</span></label>
-            <input type="text" id="customerName" name="name" placeholder="যেমন: মোঃ রফিকুল ইসলাম" class="field" autocomplete="name" required />
-            <p class="field-error" data-error-for="customerName"><i class="fa-solid fa-circle-exclamation"></i> অনুগ্রহ করে আপনার নাম লিখুন</p>
-          </div>
-
-          <!-- Phone -->
-          <div class="mt-4">
-            <label for="phone" class="block text-sm font-semibold text-brand-950 mb-1.5"><i class="fa-solid fa-mobile-screen text-brand-600 mr-1"></i> মোবাইল নাম্বার <span class="text-red-500">*</span></label>
-            <input type="tel" id="phone" name="phone" placeholder="01xxxxxxxxx (১১ ডিজিট)" class="field" inputmode="numeric" maxlength="14" autocomplete="tel" required />
-            <p class="field-error" data-error-for="phone"><i class="fa-solid fa-circle-exclamation"></i> সঠিক ১১ ডিজিটের মোবাইল নাম্বার দিন (01 দিয়ে শুরু)</p>
-          </div>
-
-          <!-- Address -->
-          <div class="mt-4">
-            <label for="address" class="block text-sm font-semibold text-brand-950 mb-1.5"><i class="fa-solid fa-location-dot text-brand-600 mr-1"></i> সম্পূর্ণ ঠিকানা <span class="text-red-500">*</span></label>
-            <textarea id="address" name="address" rows="3" placeholder="বাসা/ফ্ল্যাট নং, রোড, এলাকা, থানা, জেলা" class="field resize-none" autocomplete="street-address" required></textarea>
-            <p class="field-error" data-error-for="address"><i class="fa-solid fa-circle-exclamation"></i> অনুগ্রহ করে সম্পূর্ণ ঠিকানা লিখুন (কমপক্ষে ১০ অক্ষর)</p>
-          </div>
-
-          <!-- Delivery area -->
-          <div class="mt-4">
-            <label class="block text-sm font-semibold text-brand-950 mb-1.5"><i class="fa-solid fa-truck text-brand-600 mr-1"></i> ডেলিভারি এলাকা</label>
-            <div class="grid grid-cols-2 gap-3">
-              <label class="radio-pill relative">
-                <input type="radio" name="deliveryArea" value="inside" checked />
-                <span class="pill delivery-pill"><i class="fa-solid fa-city"></i> ঢাকার ভিতরে <span class="delivery-charge">(৳৭০)</span></span>
-              </label>
-              <label class="radio-pill relative">
-                <input type="radio" name="deliveryArea" value="outside" />
-                <span class="pill delivery-pill"><i class="fa-solid fa-map-location-dot"></i> ঢাকার বাইরে <span class="delivery-charge">(৳১১০)</span></span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Payment -->
-          <div class="mt-4">
-            <label class="block text-sm font-semibold text-brand-950 mb-1.5"><i class="fa-solid fa-credit-card text-brand-600 mr-1"></i> পেমেন্ট মেথড</label>
-            <div class="grid grid-cols-3 gap-3">
-              <label class="radio-pill relative">
-                <input type="radio" name="payment" value="Cash on Delivery" checked />
-                <span class="pill text-sm flex-col !gap-1 py-3"><i class="fa-solid fa-hand-holding-dollar text-lg"></i> ক্যাশ অন ডেলিভারি</span>
-              </label>
-              <label class="radio-pill relative">
-                <input type="radio" name="payment" value="বিকাশ" />
-                <span class="pill text-sm flex-col !gap-1 py-3"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEiQWQuDEPlNpVobLBWuw6diAErN7R7JKl3aKduSF2vROwgAGNtwynGURxr47w0GcMFWQywwiv7kAJ-tW7-zdBWncHY19uWCCEz-HPr_hz8FLQNAG6SNOGj_s6l48PmKPun_jIgSC0T1rVwsLVCCemJ2dgTBvWSvYmMr3WM4ozlmUZi9BNiCqlacVNPwLgk" alt="bKash" class="w-8 h-8 object-contain" /> বিকাশ</span>
-              </label>
-              <label class="radio-pill relative">
-                <input type="radio" name="payment" value="নগদ" />
-                <span class="pill text-sm flex-col !gap-1 py-3"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhwM08ATgdu4g-N4mlPundOQJvEsM-Viwhh0cfgltIlbCuX32whQHtb5jZJxEmqy2S98Hmxv_E3Gfs7WIr_VPMKpOhnqYDwNWXh-oRmVkzJziQbzRZEGw7EzNfmn_4vtVCQScZFBx_v2vUksYWPf9rkfsP5db6-6RTz-9K8qwYfr0wkU3zC48so47tt2NI" alt="Nagad" class="w-8 h-8 object-contain" /> নগদ</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Transaction ID (dynamic) -->
-          <div id="trxWrap">
-            <div class="bg-gold-200/40 border border-gold-300 rounded-xl p-4">
-              <p class="text-sm text-brand-950 leading-relaxed">
-                <i class="fa-solid fa-circle-info text-gold-600"></i>
-                <span id="payInstruction">মোট <strong id="payAmount">৳৭২০</strong> টাকা <strong id="payNumber">01794821159</strong> (Personal) নাম্বারে <strong>Send Money</strong> করে নিচে Transaction ID দিন।</span>
-              </p>
-              <label for="trxId" class="block text-sm font-semibold text-brand-950 mt-3 mb-1.5">Transaction ID <span class="text-red-500">*</span></label>
-              <input type="text" id="trxId" name="trxId" placeholder="যেমন: 8N7A5B2C1D" class="field bg-white uppercase" autocomplete="off" />
-              <p class="field-error" data-error-for="trxId"><i class="fa-solid fa-circle-exclamation"></i> অনুগ্রহ করে Transaction ID দিন</p>
-            </div>
-          </div>
-
-          <!-- Order summary -->
-          <div class="mt-5 bg-brand-50 border border-brand-100 rounded-2xl p-4 text-[15px]">
-            <div class="flex justify-between text-slate-700"><span>প্যাকেজ (<span id="sumPkg">২০ পিস</span>)</span><span id="sumPrice" class="font-semibold">৳৬৫০</span></div>
-            <div class="flex justify-between text-slate-700 mt-1.5"><span>ডেলিভারি চার্জ</span><span id="sumDelivery" class="font-semibold">৳৭০</span></div>
-            <div class="border-t border-dashed border-brand-200 my-3"></div>
-            <div class="flex justify-between items-center"><span class="font-bold text-brand-950">সর্বমোট</span><span id="sumTotal" class="text-2xl font-bold text-brand-900">৳৭২০</span></div>
-          </div>
-
-          <!-- Submit -->
-          <button type="submit" id="submitBtn" class="btn mt-5 w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 disabled:opacity-80 disabled:cursor-not-allowed text-brand-950 font-bold text-lg px-6 py-4 rounded-xl shadow-soft">
-            <span class="btn-text inline-flex items-center gap-2"><i class="fa-solid fa-circle-check"></i> অর্ডার কনফার্ম করুন</span>
-            <span class="btn-loading hidden items-center gap-2"><span class="spinner"></span> প্রসেসিং হচ্ছে...</span>
-          </button>
-          <p class="mt-3 text-center text-xs text-slate-500"><i class="fa-solid fa-lock text-brand-600"></i> আপনার তথ্য সম্পূর্ণ সুরক্ষিত। অর্ডার কনফার্মের জন্য আমাদের প্রতিনিধি কল করবেন।</p>
-        </form>
-
-        <!-- ===== SUCCESS VIEW ===== -->
-        <div id="successView" class="hidden px-6 py-10 text-center">
-          <div class="pop-in mx-auto w-24 h-24 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center shadow-soft">
-            <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><path class="check-path" d="M12 27 L22 37 L40 17" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3 class="mt-6 text-2xl font-bold text-brand-950">ধন্যবাদ! অর্ডার সফল হয়েছে 🎉</h3>
-          <p class="mt-2 text-slate-600 leading-relaxed">আপনার অর্ডারটি আমরা পেয়েছি। আমাদের প্রতিনিধি <strong>শীঘ্রই কল করে</strong> অর্ডার কনফার্ম করবেন। ফোনটি কাছে রাখুন।</p>
-
-          <div id="successSummary" class="mt-6 bg-brand-50 border border-brand-100 rounded-2xl p-4 text-left text-[15px] space-y-2"></div>
-
-          <div class="mt-6 flex flex-col sm:flex-row gap-3">
-            <a href="#" data-wa-link target="_blank" rel="noopener" class="btn flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1fbd5a] text-white font-bold px-5 py-3.5 rounded-xl"><i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp-এ জানান</a>
-            <button id="successClose" class="btn flex-1 inline-flex items-center justify-center gap-2 bg-brand-900 hover:bg-brand-800 text-white font-bold px-5 py-3.5 rounded-xl"><i class="fa-solid fa-house"></i> হোমে ফিরুন</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- LIVE SALES NOTIFICATION POPUP -->
-  <div id="liveSalesPopup" class="fixed bottom-24 left-4 sm:bottom-6 sm:left-6 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-2xl border border-brand-200 z-40 transform -translate-x-[150%] transition-transform duration-500 flex items-center gap-3 max-w-xs">
-    <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center text-lg flex-shrink-0">
-      <i class="fa-solid fa-box text-brand-600"></i>
-    </div>
-    <div>
-      <p id="salesPerson" class="text-xs font-bold text-slate-900">তানজিম ভাই (উত্তরা)</p>
-      <p id="salesProduct" class="text-[11px] text-brand-600 font-semibold">Storage Bag অর্ডার করেছেন (২ মিনিট আগে)</p>
-    </div>
-  </div>
-
-  <!-- ============================================================
-       JAVASCRIPT
-  ============================================================ -->
-  <script>
-  /* =====================================================================
-     ⚙️  CONFIG — এখানে আপনার নিজের তথ্য বসান (নিচের সব মান placeholder,
-     আপনার নিজস্ব একাউন্ট/নাম্বার/আইডি দিয়ে replace করুন)
-     ---------------------------------------------------------------------
-     1) Google Form:
-        - একটি Google Form বানান (Short answer ফিল্ডগুলো: প্রোডাক্ট, কোয়ান্টিটি,
-          নাম, মোবাইল, ঠিকানা, ডেলিভারি এলাকা, পেমেন্ট, Trx ID, মোট)
-        - Form-এর URL থেকে ID নিন:  https://docs.google.com/forms/d/e/<FORM_ID>/viewform
-        - "Get pre-filled link" থেকে প্রতিটি ফিল্ডের entry.XXXXXXX আইডি বের করুন
-     2) Cloudflare Worker:
-        - এটি আপনার Telegram Bot, SteadFast Order Create, এবং BDCourier
-          Fraud Check সব কিছু নিরাপদে Server-side এ হ্যান্ডেল করে।
-        - নিচের WORKER_URL এ আপনার নিজের Cloudflare Worker এর URL বসান।
-        - বিস্তারিত: SETUP_GUIDE.md ফাইল দেখুন।
-     3) WhatsApp / বিকাশ / নগদ নাম্বার বসান (কান্ট্রি কোডসহ WhatsApp: 8801XXXXXXXXX)
-     ===================================================================== */
-  const CONFIG = {
-    GOOGLE_FORM_ID: '1FAIpQLSfTfFfILgCr-DzBEJkVsgAEjPFz4gZSfXyiHutmzAN2ARrP2A',
-    GOOGLE_FORM_ENTRIES: {
-      product:      'entry.927172336',
-      quantity:     'entry.1586431457',
-      name:         'entry.2060886199',
-      phone:        'entry.1309326555',
-      address:      'entry.1057165578',
-      deliveryArea: 'entry.591324698',
-      payment:      'entry.1111558089',
-      trxId:        'entry.626119397',
-      total:        'entry.494204778'
-    },
-
-    // ⬇️ আপনার Cloudflare Worker URL (Telegram, SteadFast ও BDCourier Fraud
-    //    Check এখন এই Worker-এর মাধ্যমে সম্পূর্ণ সার্ভার-সাইডে হ্যান্ডেল হয়,
-    //    তাই কোনো Bot Token বা API Key আর ব্রাউজারে থাকে না — এটাই নিরাপদ।)
-    WORKER_URL: 'https://steep-rain-e346.azwadahshafhossain.workers.dev',
-
-    WHATSAPP_NUMBER:    '8801794821159',
-    BKASH_NUMBER:       '01794821159',
-    NAGAD_NUMBER:       '01794821159',
-    BRAND_NAME:         'FreshPack BD',
-
-    // ⬇️ Worker v1.1.0 প্রতিটা অর্ডারে store_name ও store_code বাধ্যতামূলক
-    //    হিসেবে চায় (per-store সিরিয়াল অর্ডার নাম্বার তৈরির জন্য, যেমন
-    //    FP-000001)। STORE_CODE শুধু A-Z/0-9, ২-১০ ক্যারেক্টার হতে হবে।
-    STORE_NAME: 'FreshPack BD',
-    STORE_CODE: 'FP'
-  };
-
-  const PACKAGES = {
-    '10': { label: '১০ পিস', price: 390 },
-    '20': { label: '২০ পিস', price: 650 },
-    '30': { label: '৩০ পিস', price: 850 }
-  };
-  const DELIVERY = {
-    inside:  { label: 'ঢাকার ভিতরে', charge: 70 },
-    outside: { label: 'ঢাকার বাইরে', charge: 110 }
-  };
-
-  /* ---------- Helpers ---------- */
-  const $  = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-  const BN_DIGITS = '০১২৩৪৫৬৭৮৯';
-  const toBn  = (n) => String(n).replace(/\d/g, d => BN_DIGITS[d]);
-  const toEn  = (s) => String(s).replace(/[০-৯]/g, d => BN_DIGITS.indexOf(d));
-  const money = (n) => '৳' + toBn(Number(n).toLocaleString('en-US'));
-  const sleep = (ms) => new Promise(r => setTimeout(r, ms));
-  const isPlaceholder = (v) => !v || /YOUR_|XXXX/i.test(v);
-
-  /* ---------- Footer year ---------- */
-  $('#year').textContent = new Date().getFullYear();
-
-  /* ---------- WhatsApp links ---------- */
-  (function setupWhatsApp() {
-    const msg = encodeURIComponent('আসসালামু আলাইকুম, আমি Aluminum Foil Storage Bag অর্ডার করতে আগ্রহী। বিস্তারিত জানাবেন প্লিজ।');
-    const url = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${msg}`;
-    $$('[data-wa-link]').forEach(a => { a.href = url; a.target = '_blank'; a.rel = 'noopener'; });
-  })();
-
-  /* ---------- Header: shadow on scroll + active link ---------- */
-  (function setupHeader() {
-    const header = $('#header');
-    const links = $$('.nav-link');
-    const sections = ['home', 'features', 'pricing', 'order', 'contact'].map(id => document.getElementById(id));
-    const onScroll = () => {
-      header.classList.toggle('scrolled', window.scrollY > 12);
-      let current = 'home';
-      sections.forEach(sec => { if (sec && window.scrollY >= sec.offsetTop - 140) current = sec.id; });
-      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  })();
-
-  /* ---------- Mobile menu ---------- */
-  (function setupMobileMenu() {
-    const btn = $('#burgerBtn'), menu = $('#mobileMenu');
-    const close = () => { menu.classList.remove('open'); btn.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); };
-    btn.addEventListener('click', () => {
-      const open = menu.classList.toggle('open');
-      btn.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', String(open));
-    });
-    $$('.mobile-link', menu).forEach(l => l.addEventListener('click', close));
-    $$('[data-open-order]', menu).forEach(b => b.addEventListener('click', close));
-  })();
-
-  /* ---------- Scroll reveal (Intersection Observer) ---------- */
-  (function setupReveal() {
-    const els = $$('.reveal');
-    if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in-view')); return; }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in-view'); io.unobserve(en.target); } });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    els.forEach(e => io.observe(e));
-  })();
-
-  /* ---------- Count-up counters ---------- */
-  (function setupCounters() {
-    const counters = $$('.counter');
-    const animate = (el) => {
-      const target = parseFloat(el.dataset.target);
-      const decimals = parseInt(el.dataset.decimals || '0', 10);
-      const suffix = el.dataset.suffix || '';
-      const duration = 1800, start = performance.now();
-      const step = (now) => {
-        const p = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        const val = target * eased;
-        el.textContent = toBn(val.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })) + (p === 1 ? suffix : '');
-        if (p < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    };
-    if (!('IntersectionObserver' in window)) { counters.forEach(animate); return; }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(en => { if (en.isIntersecting) { animate(en.target); io.unobserve(en.target); } });
-    }, { threshold: 0.4 });
-    counters.forEach(c => io.observe(c));
-  })();
-
-  /* ---------- FAQ accordion ---------- */
-  (function setupFaq() {
-    const items = $$('.faq-item');
-    items.forEach(item => {
-      const btn = $('.faq-toggle', item);
-      btn.addEventListener('click', () => {
-        const isOpen = item.classList.contains('open');
-        items.forEach(i => { i.classList.remove('open'); $('.faq-toggle', i).setAttribute('aria-expanded', 'false'); });
-        if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
-      });
-    });
-    if (items[0]) { items[0].classList.add('open'); $('.faq-toggle', items[0]).setAttribute('aria-expanded', 'true'); }
-  })();
-
-  /* =====================================================================
-     ORDER MODAL
-     ===================================================================== */
-  const modal      = $('#orderModal');
-  const form       = $('#orderForm');
-  const successView= $('#successView');
-  const submitBtn  = $('#submitBtn');
-  const trxWrap    = $('#trxWrap');
-  const trxInput   = $('#trxId');
-  let lastFocused  = null;
-  let submitted    = false;
-
-  function getSelection() {
-    const qty = $('#quantity').value;
-    const area = form.deliveryArea.value;
-    const pkg = PACKAGES[qty], del = DELIVERY[area];
-    return { qty, pkg, area, del, total: pkg.price + del.charge };
-  }
-
-  const quantitySelect = $('#quantity');
-  const quantityTrigger = $('#quantityTrigger');
-  const quantityMenu = $('#quantityMenu');
-  const quantityLabel = $('#quantityLabel');
-
-  function syncQuantityPicker() {
-    const selected = quantitySelect.options[quantitySelect.selectedIndex];
-    quantityLabel.textContent = selected.textContent;
-    $$('[role="option"]', quantityMenu).forEach(option => {
-      option.setAttribute('aria-selected', String(option.dataset.value === quantitySelect.value));
-    });
-  }
-
-  function closeQuantityMenu() {
-    quantityMenu.classList.add('hidden');
-    quantityTrigger.setAttribute('aria-expanded', 'false');
-    $('i', quantityTrigger).classList.remove('rotate-180');
-  }
-
-  quantityTrigger.addEventListener('click', () => {
-    const open = quantityMenu.classList.toggle('hidden');
-    quantityTrigger.setAttribute('aria-expanded', String(!open));
-    $('i', quantityTrigger).classList.toggle('rotate-180', !open);
-  });
-  $$('[role="option"]', quantityMenu).forEach(option => option.addEventListener('click', () => {
-    quantitySelect.value = option.dataset.value;
-    quantitySelect.dispatchEvent(new Event('change', { bubbles: true }));
-    closeQuantityMenu();
-  }));
-  document.addEventListener('click', (event) => {
-    if (!event.target.closest('.quantity-picker')) closeQuantityMenu();
-  });
-
-  function updateSummary() {
-    syncQuantityPicker();
-    const { pkg, del, total } = getSelection();
-    $('#sumPkg').textContent = pkg.label;
-    $('#sumPrice').textContent = money(pkg.price);
-    $('#sumDelivery').textContent = money(del.charge);
-    $('#sumTotal').textContent = money(total);
-    $('#payAmount').textContent = money(total);
-    const pay = form.payment.value;
-    $('#payNumber').textContent = pay === 'বিকাশ' ? CONFIG.BKASH_NUMBER : CONFIG.NAGAD_NUMBER;
-  }
-
-  function updateTrxVisibility() {
-    const pay = form.payment.value;
-    const needsTrx = pay === 'বিকাশ' || pay === 'নগদ';
-    trxWrap.classList.toggle('show', needsTrx);
-    trxInput.required = needsTrx;
-    if (!needsTrx) {
-      trxInput.value = '';
-      clearError(trxInput);
-    }
-  }
-
-  function openModal(pkgKey) {
-    lastFocused = document.activeElement;
-    if (submitted) resetForm();
-    if (pkgKey && PACKAGES[pkgKey]) $('#quantity').value = pkgKey;
-    updateSummary();
-    modal.classList.add('open');
-    document.body.classList.add('no-scroll');
-    setTimeout(() => $('#customerName').focus({ preventScroll: true }), 350);
-  }
-
-  function closeModal() {
-    modal.classList.remove('open');
-    document.body.classList.remove('no-scroll');
-    if (lastFocused && lastFocused.focus) lastFocused.focus({ preventScroll: true });
-  }
-
-  function resetForm() {
-    form.reset();
-    $('#quantity').value = '20';
-    $$('.field', form).forEach(clearError);
-    updateTrxVisibility();
-    updateSummary();
-    form.classList.remove('hidden');
-    successView.classList.add('hidden');
-    setLoading(false);
-    submitted = false;
-  }
-
-  /* Open triggers */
-  $$('[data-open-order]').forEach(btn => btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    openModal(btn.dataset.package);
-  }));
-  $('#modalClose').addEventListener('click', closeModal);
-  $('#modalBackdrop').addEventListener('click', closeModal);
-  $('#successClose').addEventListener('click', () => { closeModal(); setTimeout(resetForm, 400); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
-
-  /* Field listeners */
-  quantitySelect.addEventListener('change', updateSummary);
-  $$('input[name="deliveryArea"]', form).forEach(r => r.addEventListener('change', updateSummary));
-  $$('input[name="payment"]', form).forEach(r => r.addEventListener('change', () => { updateTrxVisibility(); updateSummary(); }));
-
-  /* Phone: allow only digits (convert Bengali digits), cap 11 */
-  $('#phone').addEventListener('input', (e) => {
-    let v = toEn(e.target.value).replace(/\D/g, '');
-    if (v.startsWith('880')) v = '0' + v.slice(3);
-    e.target.value = v.slice(0, 11);
-    if (v.length === 11) clearError(e.target);
-  });
-  $$('.field', form).forEach(f => f.addEventListener('input', () => { if (f.value.trim()) clearError(f); }));
-
-  /* ---------- Validation ---------- */
-  function showError(el) {
-    el.classList.add('error');
-    const msg = $(`[data-error-for="${el.id}"]`);
-    if (msg) msg.classList.add('show');
-  }
-  function clearError(el) {
-    el.classList.remove('error');
-    const msg = $(`[data-error-for="${el.id}"]`);
-    if (msg) msg.classList.remove('show');
-  }
-  function validate() {
-    let ok = true, first = null;
-    const name = $('#customerName'), phone = $('#phone'), address = $('#address');
-    const mark = (el) => { showError(el); ok = false; first = first || el; };
-
-    if (name.value.trim().length < 2) mark(name);
-    if (!/^01[3-9]\d{8}$/.test(phone.value.trim())) mark(phone);
-    if (address.value.trim().length < 10) mark(address);
-    if (trxInput.required && trxInput.value.trim().length < 4) mark(trxInput);
-
-    if (first) { first.focus({ preventScroll: false }); first.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-    return ok;
-  }
-
-  function setLoading(on) {
-    submitBtn.disabled = on;
-    $('.btn-text', submitBtn).classList.toggle('hidden', on);
-    $('.btn-loading', submitBtn).classList.toggle('hidden', !on);
-    $('.btn-loading', submitBtn).classList.toggle('inline-flex', on);
-  }
-
-  /* ---------- Collect order data ---------- */
-  function collectOrder() {
-    const { pkg, del, total } = getSelection();
-    const payment = form.payment.value;
-    return {
-      store_name: CONFIG.STORE_NAME,
-      store_code: CONFIG.STORE_CODE,
-      product: $('#productName').value,
-      quantity: `${pkg.label} (৳${toBn(pkg.price)})`,
-      name: $('#customerName').value.trim(),
-      phone: $('#phone').value.trim(),
-      address: $('#address').value.trim(),
-      deliveryArea: `${del.label} (৳${toBn(del.charge)})`,
-      payment,
-      trxId: (payment === 'Cash on Delivery') ? '' : trxInput.value.trim().toUpperCase(),
-      total: `৳${toBn(total)}`,
-      time: new Date().toLocaleString('bn-BD', { dateStyle: 'medium', timeStyle: 'short' })
-    };
-  }
-
-  /* ---------- 1) Google Form submission ---------- */
-  async function sendToGoogleForm(order) {
-    if (isPlaceholder(CONFIG.GOOGLE_FORM_ID)) { console.warn('[FreshPack] Google Form ID সেট করা হয়নি — স্কিপ করা হলো।'); return; }
-    const E = CONFIG.GOOGLE_FORM_ENTRIES;
-    const url = `https://docs.google.com/forms/d/e/${CONFIG.GOOGLE_FORM_ID}/formResponse`;
-    const body = new URLSearchParams();
-    body.append(E.product, order.product);
-    body.append(E.quantity, order.quantity);
-    body.append(E.name, order.name);
-    body.append(E.phone, order.phone);
-    body.append(E.address, order.address);
-    body.append(E.deliveryArea, order.deliveryArea);
-    body.append(E.payment, order.payment);
-    body.append(E.trxId, order.trxId || 'N/A');
-    body.append(E.total, order.total);
-    // Google Forms CORS সাপোর্ট করে না → no-cors (response opaque হবে, কিন্তু ডেটা সাবমিট হবে)
-    await fetch(url, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() });
-  }
-
-  /* ---------- 2) Cloudflare Worker submission ----------
-     এটি Worker-কে অর্ডার পাঠায়। Worker নিজে BDCourier Fraud Check চালায়,
-     Telegram-এ Inline Keyboard সহ নোটিফিকেশন পাঠায়, এবং Admin বাটনে ক্লিক
-     করলে SteadFast-এ অর্ডার তৈরি করে। কোনো Secret/Token এখানে থাকে না। */
-  async function sendToWorker(order) {
-    if (isPlaceholder(CONFIG.WORKER_URL) || !CONFIG.WORKER_URL) {
-      console.warn('[FreshPack] WORKER_URL সেট করা হয়নি — স্কিপ করা হলো।');
-      return null;
-    }
-    const res = await fetch(`${CONFIG.WORKER_URL}/order`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(order)
-    });
-    if (!res.ok) {
-      throw new Error('Worker API error: ' + res.status);
-    }
-    return await res.json();
-  }
-
-  /* ---------- Success view ---------- */
-  function renderSuccess(order) {
-    const row = (icon, label, val) => `<div class="flex gap-3"><span class="w-6 text-brand-600"><i class="fa-solid ${icon}"></i></span><span class="text-slate-500 w-24 shrink-0">${label}</span><span class="font-semibold text-brand-950 break-words">${escapeHtml(val)}</span></div>`;
-    $('#successSummary').innerHTML =
-      row('fa-box', 'প্রোডাক্ট', order.product) +
-      row('fa-layer-group', 'কোয়ান্টিটি', order.quantity) +
-      row('fa-user', 'নাম', order.name) +
-      row('fa-mobile-screen', 'মোবাইল', order.phone) +
-      row('fa-location-dot', 'ঠিকানা', order.address) +
-      row('fa-credit-card', 'পেমেন্ট', order.payment + (order.trxId ? ` (Trx: ${order.trxId})` : '')) +
-      row('fa-coins', 'সর্বমোট', order.total);
-    const orderMessage = encodeURIComponent([
-      `আসসালামু আলাইকুম, ${CONFIG.BRAND_NAME}-এ আমার অর্ডারটি কনফার্ম করতে চাই।`,
-      `নাম: ${order.name}`,
-      `মোবাইল: ${order.phone}`,
-      `প্যাকেজ: ${order.quantity}`,
-      `ঠিকানা: ${order.address}`,
-      `পেমেন্ট: ${order.payment}`,
-      `সর্বমোট: ${order.total}`
-    ].join('\n'));
-    const successWhatsAppUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${orderMessage}`;
-    $$('[data-wa-link]', successView).forEach(link => { link.href = successWhatsAppUrl; });
-    const hasRemoteEndpoint = !isPlaceholder(CONFIG.GOOGLE_FORM_ID) || !isPlaceholder(CONFIG.WORKER_URL);
-    const successHeading = $('#successView h3');
-    const successMessage = $('#successView > p');
-    if (hasRemoteEndpoint) {
-      successHeading.textContent = 'ধন্যবাদ! অর্ডার সফল হয়েছে 🎉';
-      successMessage.innerHTML = 'আপনার অর্ডারটি আমরা পেয়েছি। আমাদের প্রতিনিধি <strong>শীঘ্রই কল করে</strong> অর্ডার কনফার্ম করবেন। ফোনটি কাছে রাখুন।';
-    } else {
-      successHeading.textContent = 'অর্ডারের তথ্য প্রস্তুত হয়েছে';
-      successMessage.innerHTML = 'আপনার অর্ডারের তথ্য প্রস্তুত। নিচের WhatsApp বাটনে ক্লিক করে আমাদের পাঠিয়ে দিন, তাহলেই অর্ডারটি নিশ্চিত হবে।';
-    }
-    form.classList.add('hidden');
-    successView.classList.remove('hidden');
-    $('.modal-scroll').scrollTop = 0;
-  }
-  function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
-
-  /* ---------- Submit ---------- */
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (submitBtn.disabled) return;
-    if (!validate()) return;
-
-    setLoading(true);
-    const order = collectOrder();
-
-    try {
-      // Google Form ও Cloudflare Worker-কে একসাথে পাঠানো হচ্ছে; কোনোটি
-      // ব্যর্থ হলেও ইউজার সাকসেস স্ক্রিন দেখবে (order Worker-এর KV/Telegram-এ
-      // ইতিমধ্যে গিয়ে থাকতে পারে)
-      const results = await Promise.allSettled([ sendToGoogleForm(order), sendToWorker(order), sleep(900) ]);
-      results.forEach((r, i) => { if (r.status === 'rejected') console.warn(['Google Form', 'Cloudflare Worker', 'delay'][i] + ' failed:', r.reason); });
-    } catch (err) {
-      console.warn('[FreshPack] Order submit error (handled):', err);
-    } finally {
-      setLoading(false);
-      submitted = true;
-      renderSuccess(order);
-    }
-  });
-
-  /* Init */
-  updateTrxVisibility();
-  updateSummary();
-
-
-        // Live Sales Toast Popups — এই ডেটা এখন উদাহরণ হিসেবে হার্ডকোড করা আছে।
-        // বাস্তব অর্ডার হিস্টোরি দেখাতে চাইলে এটি আপনার ব্যাকএন্ড/শীট থেকে ডাইনামিকভাবে লোড করুন।
-        const fakeBuyers = [
-          { name: "শাকিল হোসেন (মিরপুর, ঢাকা)", pkg: "২০ পিস Storage Bag" },
-          { name: "রাশেদ চৌধুরী (চট্টগ্রাম সদর)", pkg: "১০ পিস Storage Bag" },
-          { name: "আরিফ বিল্লাহ (সিলেট)", pkg: "৩০ পিস Storage Bag" },
-          { name: "ফারহানা মিম (গুলশান, ঢাকা)", pkg: "২০ পিস Storage Bag" },
-          { name: "মাহমুদুল হাসান (রাজশাহী)", pkg: "১০ পিস Storage Bag" }
-        ];
-
-        function showRandomSalesPopup() {
-            const popup = document.getElementById('liveSalesPopup');
-            const randomBuyer = fakeBuyers[Math.floor(Math.random() * fakeBuyers.length)];
-
-            document.getElementById('salesPerson').innerText = randomBuyer.name;
-            document.getElementById('salesProduct').innerText = `${randomBuyer.pkg} অর্ডার করেছেন (২ মিনিট আগে)`;
-            popup.classList.remove('-translate-x-[150%]');
-
-            setTimeout(() => {
-                popup.classList.add('-translate-x-[150%]');
-            }, 4500);
-        }
-
-        // Trigger notification every 14 seconds
-        setInterval(showRandomSalesPopup, 14000);
-        setTimeout(showRandomSalesPopup, 3000);
-
-
-  </script>
 </body>
 </html>
