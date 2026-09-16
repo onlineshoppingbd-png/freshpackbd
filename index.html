@@ -1192,6 +1192,7 @@
       $('.modal-scroll').scrollTop = 0;
     }
 
+    /* ---------- Submit Handler (COD + bKash Gateway) ---------- */
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (submitBtn.disabled) return;
@@ -1199,7 +1200,41 @@
 
       setLoading(true);
       const order = collectOrder();
+      const selectedPayment = form.payment.value;
 
+      // ⬇️ ১. যদি কাস্টমার বিকাশ অনলাইন সিলেক্ট করে
+      if (selectedPayment === 'bKash Gateway') {
+        try {
+          const currentUrl = window.location.href.split('?')[0];
+          const res = await fetch(`${CONFIG.WORKER_URL}/bkash/create-payment`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              order: order,
+              originUrl: currentUrl
+            })
+          });
+
+          const data = await res.json();
+
+          if (data.ok && data.bkashURL) {
+            // সরাসরি অফিসিয়াল বিকাশের পেজে পাঠিয়ে দেওয়া হবে
+            window.location.href = data.bkashURL;
+            return;
+          } else {
+            alert('বিকাশ গেটওয়েতে সমস্যা হচ্ছে: ' + (data.error || 'পরে চেষ্টা করুন'));
+            setLoading(false);
+            return;
+          }
+        } catch (err) {
+          console.error(err);
+          alert('নেটওয়ার্ক সমস্যা! অনুগ্রহ করে ক্যাশ অন ডেলিভারি বেছে নিন।');
+          setLoading(false);
+          return;
+        }
+      }
+
+      // ⬇️ ২. সাধারণ ক্যাশ অন ডেলিভারির ক্ষেত্রে
       try {
         await Promise.allSettled([sendToGoogleForm(order), sendToWorker(order), sleep(800)]);
       } catch (err) {
@@ -1217,6 +1252,30 @@
         renderSuccess(order);
       }
     });
+
+    // ⬇️ ৩. বিকাশ পেমেন্ট সম্পন্ন করে কাস্টমার সাইটে ফেরত আসলে অটো-সাকসেস দেখানো
+    (function handlePaymentRedirect() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const isSuccess = urlParams.get('payment_success');
+      const isFailed = urlParams.get('payment_failed');
+      const orderId = urlParams.get('orderId');
+      const trxID = urlParams.get('trxID');
+
+      if (isSuccess && orderId) {
+        modal.classList.add('open');
+        document.body.classList.add('no-scroll');
+        form.classList.add('hidden');
+        successView.classList.remove('hidden');
+
+        $('#successSummary').innerHTML = `
+          <div class="flex gap-2.5"><span class="w-4 text-brand-600"><i class="fa-solid fa-receipt"></i></span><span class="text-slate-500 w-24 shrink-0 font-medium">অর্ডার আইডি:</span><span class="font-bold text-brand-950">${orderId}</span></div>
+          <div class="flex gap-2.5"><span class="w-4 text-emerald-600"><i class="fa-solid fa-circle-check"></i></span><span class="text-slate-500 w-24 shrink-0 font-medium">পেমেন্ট স্ট্যাটাস:</span><span class="font-bold text-emerald-700">PAID (বিকাশ অনলাইন)</span></div>
+          <div class="flex gap-2.5"><span class="w-4 text-pink-600"><i class="fa-solid fa-money-bill-wave"></i></span><span class="text-slate-500 w-24 shrink-0 font-medium">TrxID:</span><span class="font-bold text-brand-950">${trxID || 'N/A'}</span></div>
+        `;
+      } else if (isFailed) {
+        alert('⚠️ আপনার বিকাশ পেমেন্টটি সম্পন্ন হয়নি বা বাতিল করা হয়েছে। আবার চেষ্টা করুন।');
+      }
+    })();
 
     function showRandomSalesPopup() {
       const popup = $('#liveSalesPopup');
