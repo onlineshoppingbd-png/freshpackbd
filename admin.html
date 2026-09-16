@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="flex items-center gap-2">
-        <button onclick="fetchSheetOrders()" class="inline-flex items-center gap-1.5 bg-brand-50 hover:bg-brand-100 text-brand-900 border border-brand-200 text-xs font-bold px-3 py-1.5 rounded-full transition">
+        <button onclick="fetchSheetOrders()" class="inline-flex items-center gap-1.5 bg-brand-50 hover:bg-brand-100 text-brand-900 border border-brand-200 text-xs font-bold px-3.5 py-1.5 rounded-full transition">
           <i class="fa-solid fa-rotate text-xs" id="reloadIcon"></i> রিফ্রেশ
         </button>
       </div>
@@ -155,19 +155,17 @@
       <p class="text-slate-500 text-sm font-semibold">গুগল শীট থেকে লাইভ অর্ডার লোড হচ্ছে...</p>
     </div>
 
-    <div id="ordersContainer" class="space-y-3.5 hidden">
-      <!-- Live Cards Populated via JavaScript -->
-    </div>
+    <div id="ordersContainer" class="space-y-3.5 hidden"></div>
 
   </main>
 
   <!-- ============================================================
-       5. JAVASCRIPT: 100% BULLETPROOF SHEET FETCHER
+       5. JAVASCRIPT: 100% DIRECT CSV FETCHER (NO AUTH / NO ERROR)
   ============================================================ -->
   <script>
     const CONFIG = {
-      SHEET_ID: '1yQvRsO-iyXWAGJWWhGPv1WeJwoWJT7CSK_abqClKR9Y',
-      GID: '669196927', // আপনার স্ক্রিনশটের আসল GID
+      // ⬇️ আপনার স্ক্রিনশটের আসল পাবলিক পাবলিশ লিংক
+      CSV_URL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRLqFzLVT_WZmJzqZaRpl6ef0woX_DAR-WJ_naXBj5XWZcqtilyp0OOS_jQbqDSalSINT-VHkLOuo68/pub?output=csv',
       WORKER_URL: 'https://steep-rain-e346.azwadahshafhossain.workers.dev',
       STORE_CODE: 'FP',
       PASSWORD: '1234'
@@ -192,46 +190,57 @@
       fetchSheetOrders();
     }
 
-    // ⬇️ সরাসরি GID দিয়ে গুগল শীটের ডাটা লোড করার নিখুঁত পদ্ধতি
+    // CSV পার্স করার নিখুঁত ফাংশন (কমা ও কোটেশন হ্যান্ডেল করে)
+    function parseCSVLine(text) {
+      const p = [];
+      let cur = '';
+      let inQ = false;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        if (c === '"') {
+          if (inQ && text[i+1] === '"') { cur += '"'; i++; }
+          else { inQ = !inQ; }
+        } else if (c === ',' && !inQ) {
+          p.push(cur.trim());
+          cur = '';
+        } else {
+          cur += c;
+        }
+      }
+      p.push(cur.trim());
+      return p;
+    }
+
+    // সরাসরি গুগল পাবলিশ লিংক থেকে ডাটা রিড করা
     async function fetchSheetOrders() {
       const icon = document.getElementById('reloadIcon');
       if (icon) icon.classList.add('fa-spin');
 
-      // CSV & GVIZ দুই পদ্ধতিতেই ব্যাকআপ রিকোয়েস্ট পাঠানো হচ্ছে
-      const url = `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:json&gid=${CONFIG.GID}`;
-
       try {
-        const res = await fetch(url);
-        const text = await res.text();
-        
-        const start = text.indexOf('{');
-        const end = text.lastIndexOf('}');
-        if (start === -1 || end === -1) {
-          throw new Error('গুগল শীটে Publish to web করা হয়নি');
-        }
+        const res = await fetch(CONFIG.CSV_URL);
+        const csvText = await res.text();
 
-        const jsonString = text.substring(start, end + 1);
-        const data = JSON.parse(jsonString);
-
+        const lines = csvText.trim().split(/\r?\n/);
         allOrders = [];
-        const rows = data.table?.rows || [];
 
-        rows.forEach((r, idx) => {
-          const c = r.c || [];
-          const getVal = (i) => (c[i] ? String(c[i].f || c[i].v || '').trim() : '');
+        // ১ম লাইনটি হেডার, তাই ২য় লাইন থেকে লুপ ঘুরবে
+        for (let i = 1; i < lines.length; i++) {
+          if (!lines[i].trim()) continue;
+          const col = parseCSVLine(lines[i]);
 
-          const timestamp = getVal(0);
-          const quantity = getVal(1);
-          const name = getVal(2);
-          const phone = getVal(3);
-          const deliveryArea = getVal(4);
-          const address = getVal(5);
-          const payment = getVal(6);
-          const trxId = getVal(7);
-          const product = getVal(8) || 'Storage Bag';
-          const total = getVal(9);
-          let status = getVal(10) || 'Pending';
+          const timestamp    = col[0] || '';
+          const quantity     = col[1] || '';
+          const name         = col[2] || '';
+          const phone        = col[3] || '';
+          const deliveryArea = col[4] || '';
+          const address      = col[5] || '';
+          const payment      = col[6] || '';
+          const trxId        = col[7] || '';
+          const product      = col[8] || 'Aluminum Foil Storage Bag';
+          const total        = col[9] || '৳০';
+          let status         = col[10] || 'Pending';
 
+          // স্ট্যাটাস ম্যাচিং
           if (status.toLowerCase().includes('cancel')) status = 'Canceled';
           else if (status.toLowerCase().includes('ship') || status.toLowerCase().includes('hub')) status = 'Shipped';
           else if (status.toLowerCase().includes('complete') || status.toLowerCase().includes('deliver')) status = 'Completed';
@@ -239,8 +248,8 @@
 
           if (name || phone) {
             allOrders.push({
-              serial: idx + 1,
-              id: `FP-${String(idx + 1).padStart(5, '0')}`,
+              serial: i,
+              id: `FP-${String(i).padStart(5, '0')}`,
               timestamp,
               quantity,
               name: name || 'নাম নেই',
@@ -250,12 +259,12 @@
               payment,
               trxId,
               product,
-              total: total || '৳০',
+              total,
               status,
               tracking: ''
             });
           }
-        });
+        }
 
         // নতুন অর্ডার সবার উপরে
         allOrders.reverse();
@@ -271,8 +280,8 @@
         document.getElementById('loadingBox').innerHTML = `
           <div class="p-6 text-center text-red-600">
             <i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i>
-            <p class="font-bold text-base">গুগল শীট থেকে ডাটা লোড হয়নি!</p>
-            <p class="text-xs text-slate-600 mt-1">অনুগ্রহ করে গুগল শীটে গিয়ে <b>File ➔ Share ➔ Publish to web ➔ Publish</b> বাটনে ক্লিক করুন।</p>
+            <p class="font-bold text-base">গুগল শীট থেকে ডাটা আসেনি!</p>
+            <p class="text-xs text-slate-600 mt-1">দয়া করে একবার পেজটি রিফ্রেশ করুন।</p>
             <button onclick="fetchSheetOrders()" class="mt-4 px-4 py-2 bg-brand-900 text-white rounded-xl text-xs font-bold">আবার চেষ্টা করুন</button>
           </div>
         `;
@@ -344,6 +353,7 @@
               </div>
             </div>
 
+            <!-- ACTION BUTTONS: 1-CLICK CALL + WHATSAPP + STEADFAST -->
             <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2 flex-wrap">
               <div class="flex items-center gap-2 flex-wrap">
                 <a href="tel:${order.phone}" class="inline-flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-bold px-3 py-2 rounded-xl transition">
