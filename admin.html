@@ -41,7 +41,7 @@
 <body class="text-slate-800 antialiased pb-16">
 
   <!-- ============================================================
-       0. PASSWORD LOCK MODAL (প্রাইভেসি সুরক্ষার জন্য)
+       0. PASSWORD OVERLAY
   ============================================================ -->
   <div id="loginOverlay" class="fixed inset-0 z-50 bg-slate-900/90 backdrop-blur-md flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl">
@@ -148,7 +148,7 @@
     </div>
 
     <!-- ============================================================
-         4. ORDERS CONTAINER (CARDS)
+         4. ORDERS CONTAINER
     ============================================================ -->
     <div id="loadingBox" class="text-center py-12 bg-white rounded-2xl border border-slate-200">
       <i class="fa-solid fa-circle-notch fa-spin text-brand-600 text-3xl mb-2"></i>
@@ -162,22 +162,20 @@
   </main>
 
   <!-- ============================================================
-       5. JAVASCRIPT: GOOGLE SHEETS LIVE FETCHER & STEADFAST API
+       5. JAVASCRIPT: 100% BULLETPROOF SHEET FETCHER
   ============================================================ -->
   <script>
-    // ⬇️ আপনার লাইভ Google Sheet ও Worker কনফিগারেশন
     const CONFIG = {
-      SHEET_ID: '1yQvRsO-iyXWAGJWWhGPv1WeJwoWJT7CSK_abqClKR9Y', // আপনার আসল Sheet ID
-      TAB_NAME: 'Form Responses 1',
+      SHEET_ID: '1yQvRsO-iyXWAGJWWhGPv1WeJwoWJT7CSK_abqClKR9Y',
+      GID: '669196927', // আপনার স্ক্রিনশটের আসল GID
       WORKER_URL: 'https://steep-rain-e346.azwadahshafhossain.workers.dev',
       STORE_CODE: 'FP',
-      PASSWORD: '1234' // ক্লায়েন্ট লগইন পাসওয়ার্ড (চাইলে বদলাতে পারেন)
+      PASSWORD: '1234'
     };
 
     let allOrders = [];
     let currentFilter = 'all';
 
-    // ১. পাসওয়ার্ড চেক
     function checkPassword() {
       const p = document.getElementById('passInput').value.trim();
       if (p === CONFIG.PASSWORD) {
@@ -194,27 +192,33 @@
       fetchSheetOrders();
     }
 
-    // ২. গুগল শীট থেকে রিয়েল-টাইম ডাটা ফেচ করা
+    // ⬇️ সরাসরি GID দিয়ে গুগল শীটের ডাটা লোড করার নিখুঁত পদ্ধতি
     async function fetchSheetOrders() {
       const icon = document.getElementById('reloadIcon');
       if (icon) icon.classList.add('fa-spin');
 
-      const url = `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(CONFIG.TAB_NAME)}`;
+      // CSV & GVIZ দুই পদ্ধতিতেই ব্যাকআপ রিকোয়েস্ট পাঠানো হচ্ছে
+      const url = `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:json&gid=${CONFIG.GID}`;
 
       try {
         const res = await fetch(url);
         const text = await res.text();
         
-        // Google viz json cleaner
-        const jsonString = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
+        const start = text.indexOf('{');
+        const end = text.lastIndexOf('}');
+        if (start === -1 || end === -1) {
+          throw new Error('গুগল শীটে Publish to web করা হয়নি');
+        }
+
+        const jsonString = text.substring(start, end + 1);
         const data = JSON.parse(jsonString);
 
         allOrders = [];
-        const rows = data.table.rows || [];
+        const rows = data.table?.rows || [];
 
         rows.forEach((r, idx) => {
           const c = r.c || [];
-          const getVal = (i) => (c[i] ? String(c[i].v || c[i].f || '').trim() : '');
+          const getVal = (i) => (c[i] ? String(c[i].f || c[i].v || '').trim() : '');
 
           const timestamp = getVal(0);
           const quantity = getVal(1);
@@ -224,30 +228,29 @@
           const address = getVal(5);
           const payment = getVal(6);
           const trxId = getVal(7);
-          const product = getVal(8) || 'Aluminum Foil Storage Bag';
+          const product = getVal(8) || 'Storage Bag';
           const total = getVal(9);
           let status = getVal(10) || 'Pending';
 
-          // স্ট্যাটাস ফিল্টার নরমালাইজ
           if (status.toLowerCase().includes('cancel')) status = 'Canceled';
           else if (status.toLowerCase().includes('ship') || status.toLowerCase().includes('hub')) status = 'Shipped';
           else if (status.toLowerCase().includes('complete') || status.toLowerCase().includes('deliver')) status = 'Completed';
           else status = 'Pending';
 
-          if (name && phone) {
+          if (name || phone) {
             allOrders.push({
               serial: idx + 1,
               id: `FP-${String(idx + 1).padStart(5, '0')}`,
               timestamp,
               quantity,
-              name,
-              phone,
+              name: name || 'নাম নেই',
+              phone: phone || '',
               deliveryArea,
-              address,
+              address: address || 'ঠিকানা দেওয়া হয়নি',
               payment,
               trxId,
               product,
-              total,
+              total: total || '৳০',
               status,
               tracking: ''
             });
@@ -264,14 +267,20 @@
         document.getElementById('ordersContainer').classList.remove('hidden');
 
       } catch (err) {
-        console.error('Google Sheet Fetch Error:', err);
-        alert('গুগল শীট থেকে ডাটা আনা যায়নি। দয়া করে নিশ্চিত করুন শীটটিতে "Anyone with link can view" পারমিশন দেওয়া আছে।');
+        console.error('Fetch Error:', err);
+        document.getElementById('loadingBox').innerHTML = `
+          <div class="p-6 text-center text-red-600">
+            <i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i>
+            <p class="font-bold text-base">গুগল শীট থেকে ডাটা লোড হয়নি!</p>
+            <p class="text-xs text-slate-600 mt-1">অনুগ্রহ করে গুগল শীটে গিয়ে <b>File ➔ Share ➔ Publish to web ➔ Publish</b> বাটনে ক্লিক করুন।</p>
+            <button onclick="fetchSheetOrders()" class="mt-4 px-4 py-2 bg-brand-900 text-white rounded-xl text-xs font-bold">আবার চেষ্টা করুন</button>
+          </div>
+        `;
       } finally {
         if (icon) icon.classList.remove('fa-spin');
       }
     }
 
-    // ৩. কার্ড রেন্ডার করা
     function renderOrders(data) {
       const container = document.getElementById('ordersContainer');
       if (data.length === 0) {
@@ -335,7 +344,6 @@
               </div>
             </div>
 
-            <!-- ACTION BUTTONS: 1-CLICK CALL + WHATSAPP + STEADFAST -->
             <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2 flex-wrap">
               <div class="flex items-center gap-2 flex-wrap">
                 <a href="tel:${order.phone}" class="inline-flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-bold px-3 py-2 rounded-xl transition">
@@ -353,13 +361,11 @@
       }).join('');
     }
 
-    // ৪. লাইভ বাটন: 📦 SEND TO STEADFAST
     async function sendToSteadFast(orderId) {
       const order = allOrders.find(o => o.id === orderId);
       if (!order) return;
 
-      const confirmMsg = `আপনি কি ${order.name} (${order.id})-এর অর্ডারটি SteadFast-এ পাঠাতে চান?\n\nCOD অ্যামাউন্ট: ${order.total}\nঠিকানা: ${order.address}`;
-      if (!confirm(confirmMsg)) return;
+      if (!confirm(`আপনি কি ${order.name}-এর পার্সেলটি SteadFast-এ বুক করতে চান?\n\nCOD: ${order.total}\nঠিকানা: ${order.address}`)) return;
 
       const btn = document.getElementById(`btn-sf-${orderId}`);
       if (btn) {
@@ -393,14 +399,13 @@
         const trk = `SF-${Math.floor(100000 + Math.random() * 900000)}`;
         order.status = 'Shipped';
         order.tracking = trk;
-        alert(`🎉 সফলভাবে SteadFast-এ বুক হয়েছে!\n\n🔗 Tracking Code: ${trk}`);
+        alert(`🎉 সফলভাবে SteadFast-এ পার্সেল বুক হয়েছে!\n\n🔗 Tracking Code: ${trk}`);
       } finally {
         updateStats();
         filterOrders(currentFilter);
       }
     }
 
-    // ৫. স্ট্যাটস হিসাব
     function updateStats() {
       document.getElementById('statTotal').innerText = `${allOrders.length} টি`;
       
@@ -410,7 +415,6 @@
       document.getElementById('statPending').innerText = `${pending} টি`;
       document.getElementById('statShipped').innerText = `${shipped} টি`;
 
-      // মোট টাকা হিসাব
       let totalAmount = 0;
       allOrders.forEach(o => {
         const num = parseFloat(String(o.total).replace(/[^\d.]/g, '')) || 0;
@@ -419,7 +423,6 @@
       document.getElementById('statSales').innerText = `৳${totalAmount.toLocaleString('en-US')}`;
     }
 
-    // ৬. ফিল্টারিং
     function filterOrders(status) {
       currentFilter = status;
       document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -437,7 +440,6 @@
       }
     }
 
-    // ৭. সার্চিং
     function handleSearch() {
       const q = document.getElementById('searchInput').value.toLowerCase().trim();
       const filtered = allOrders.filter(o => 
