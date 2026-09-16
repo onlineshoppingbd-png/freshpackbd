@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FreshPack BD | লাইভ অ্যাডমিন পোর্টাল</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshPack BD - Admin Dashboard</title>
   
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <!-- Google Font: Hind Siliguri -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
   
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -17,437 +21,183 @@
         extend: {
           fontFamily: { bangla: ['"Hind Siliguri"', 'sans-serif'] },
           colors: {
-            brand: {
-              50: '#ecfdf5', 100: '#d1fae5', 500: '#10b981', 600: '#059669', 700: '#047857', 800: '#065f46', 900: '#064e3b'
-            }
+            brand: { 50: '#ecfdf5', 100: '#d1fae5', 600: '#059669', 800: '#065f46', 900: '#064e3b' },
+            gold: { 400: '#fbbf24', 500: '#f59e0b' }
           }
         }
       }
     }
   </script>
   <style>
-    body { font-family: 'Hind Siliguri', sans-serif; background-color: #f8fafc; }
-    .status-pending { background-color: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
-    .status-shipped { background-color: #e0e7ff; color: #4338ca; border: 1px solid #c7d2fe; }
-    .status-completed { background-color: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
-    .status-canceled { background-color: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+    body { font-family: 'Hind Siliguri', sans-serif; }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    ::-webkit-scrollbar-track { background: transparent; }
   </style>
 </head>
+<body class="bg-slate-50 h-screen flex flex-col md:flex-row overflow-hidden font-bangla text-slate-800">
 
-<body class="text-slate-800 antialiased pb-16">
-
-  <!-- PASSWORD OVERLAY -->
-  <div id="loginOverlay" class="fixed inset-0 z-50 bg-slate-900/90 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl">
-      <div class="w-14 h-14 rounded-2xl bg-brand-50 text-brand-900 flex items-center justify-center mx-auto text-2xl shadow-inner">
-        <i class="fa-solid fa-lock"></i>
-      </div>
-      <div>
-        <h2 class="text-lg font-bold text-slate-900">অ্যাডমিন পাসওয়ার্ড দিন</h2>
-        <p class="text-xs text-slate-500 mt-1">FreshPack BD এর গোপন ড্যাশবোর্ড</p>
-      </div>
-      <div>
-        <input type="password" id="passInput" placeholder="পাসওয়ার্ড লিখুন..." 
-               class="w-full text-center tracking-widest text-lg font-bold py-3 px-4 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-600" />
-        <p id="passError" class="text-xs text-red-500 font-semibold mt-1.5 hidden">ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।</p>
-      </div>
-      <button onclick="checkPassword()" class="w-full bg-brand-900 hover:bg-brand-800 text-white font-bold py-3.5 rounded-xl transition text-sm">
-        ড্যাশবোর্ডে প্রবেশ করুন
-      </button>
-      <p class="text-[11px] text-slate-400">ডিফল্ট পাসওয়ার্ড: <span class="font-bold text-slate-600 font-mono">1234</span></p>
-    </div>
-  </div>
-
-  <!-- HEADER -->
-  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-brand-900 text-emerald-400 flex items-center justify-center font-bold text-lg shadow-sm">
-          FP
-        </div>
-        <div>
-          <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">FreshPack BD Admin</h1>
-          <p class="text-xs text-slate-500 font-medium">লাইভ গুগল শীট ও কুরিয়ার পোর্টাল</p>
-        </div>
-      </div>
+  <!-- ================= SIDEBAR (Order List) ================= -->
+  <aside class="w-full md:w-1/3 lg:w-1/4 bg-white border-r border-slate-200 flex flex-col h-[40vh] md:h-screen shrink-0">
+    <!-- Sidebar Header -->
+    <div class="p-4 border-b border-slate-200 bg-brand-900 text-white flex justify-between items-center">
       <div class="flex items-center gap-2">
-        <button onclick="fetchSheetOrders()" class="inline-flex items-center gap-1.5 bg-brand-50 hover:bg-brand-100 text-brand-900 border border-brand-200 text-xs font-bold px-3.5 py-1.5 rounded-full transition">
-          <i class="fa-solid fa-rotate text-xs" id="reloadIcon"></i> রিফ্রেশ
-        </button>
+        <div class="w-8 h-8 rounded-lg bg-white/10 text-gold-400 flex items-center justify-center"><i class="fa-solid fa-snowflake"></i></div>
+        <h1 class="font-bold text-lg tracking-wide">FreshPack BD</h1>
       </div>
-    </div>
-  </header>
-
-  <main class="max-w-5xl mx-auto px-4 pt-5 space-y-5">
-
-    <!-- KPI STATS -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-        <div class="flex items-center justify-between text-slate-500 text-xs font-semibold mb-1">
-          <span>মোট অর্ডার</span>
-          <i class="fa-solid fa-cart-shopping text-brand-600"></i>
-        </div>
-        <div class="text-2xl font-bold text-slate-900" id="statTotal">--</div>
-        <div class="text-[11px] text-slate-500 font-medium mt-0.5">গুগল শীট থেকে</div>
-      </div>
-
-      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-        <div class="flex items-center justify-between text-slate-500 text-xs font-semibold mb-1">
-          <span>মোট বুকিং সেলস</span>
-          <i class="fa-solid fa-sack-dollar text-emerald-600"></i>
-        </div>
-        <div class="text-2xl font-bold text-emerald-700" id="statSales">৳০</div>
-        <div class="text-[11px] text-emerald-600 font-medium mt-0.5">ক্যাশ অন ডেলিভারি</div>
-      </div>
-
-      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-        <div class="flex items-center justify-between text-slate-500 text-xs font-semibold mb-1">
-          <span>পাঠানো বাকি (Pending)</span>
-          <i class="fa-solid fa-clock text-amber-500"></i>
-        </div>
-        <div class="text-2xl font-bold text-amber-600" id="statPending">--</div>
-        <div class="text-[11px] text-amber-700 font-medium mt-0.5">কল করে কনফার্ম করুন</div>
-      </div>
-
-      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-        <div class="flex items-center justify-between text-slate-500 text-xs font-semibold mb-1">
-          <span>SteadFast-এ বুকড</span>
-          <i class="fa-solid fa-truck-fast text-indigo-600"></i>
-        </div>
-        <div class="text-2xl font-bold text-indigo-700" id="statShipped">--</div>
-        <div class="text-[11px] text-indigo-600 font-medium mt-0.5">কুরিয়ারে পাঠানো হয়েছে</div>
-      </div>
+      <button class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20"><i class="fa-solid fa-bell text-sm"></i></button>
     </div>
 
-    <!-- FILTER TABS -->
-    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+    <!-- Search & Tabs -->
+    <div class="p-4 border-b border-slate-200">
       <div class="relative">
-        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
-        <input type="text" id="searchInput" oninput="handleSearch()" placeholder="কাস্টমারের নাম, মোবাইল নম্বর বা ঠিকানা দিয়ে খুঁজুন..." 
-               class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm bg-slate-50 focus:bg-white transition" />
+        <i class="fa-solid fa-search absolute left-3 top-3.5 text-slate-400 text-sm"></i>
+        <input type="text" placeholder="কাস্টমার খুঁজুন..." class="w-full bg-slate-100 border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-sm focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600">
       </div>
-
-      <div class="flex gap-2 overflow-x-auto pb-1 text-xs font-semibold scrollbar-none">
-        <button onclick="filterOrders('all')" class="filter-btn active whitespace-nowrap px-4 py-2 rounded-xl bg-slate-900 text-white transition">সব অর্ডার</button>
-        <button onclick="filterOrders('Pending')" class="filter-btn whitespace-nowrap px-4 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition">🟡 পাঠানো বাকি</button>
-        <button onclick="filterOrders('Shipped')" class="filter-btn whitespace-nowrap px-4 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition">📦 SteadFast-এ বুকড</button>
-        <button onclick="filterOrders('Canceled')" class="filter-btn whitespace-nowrap px-4 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition">❌ বাতিল</button>
+      <div class="flex gap-2 mt-4">
+        <button class="flex-1 bg-brand-50 text-brand-800 border border-brand-200 font-bold py-2 rounded-lg text-sm"><i class="fa-solid fa-circle-dot text-xs text-amber-500 mr-1"></i> Pending (3)</button>
+        <button class="flex-1 bg-white text-slate-500 border border-slate-200 font-semibold py-2 rounded-lg text-sm hover:bg-slate-50">Shipped (45)</button>
       </div>
     </div>
 
-    <!-- ORDERS CONTAINER -->
-    <div id="loadingBox" class="text-center py-12 bg-white rounded-2xl border border-slate-200">
-      <i class="fa-solid fa-circle-notch fa-spin text-brand-600 text-3xl mb-2"></i>
-      <p class="text-slate-500 text-sm font-semibold">গুগল শীট থেকে লাইভ অর্ডার লোড হচ্ছে...</p>
+    <!-- Order List -->
+    <div class="flex-1 overflow-y-auto p-2 space-y-1">
+      <!-- Active Order Card -->
+      <div class="cursor-pointer bg-brand-50 border-l-4 border-brand-600 rounded-r-lg p-3 shadow-sm">
+        <div class="flex justify-between items-start mb-1">
+          <h3 class="font-bold text-brand-900">মোঃ রফিকুল ইসলাম</h3>
+          <span class="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded">Pending</span>
+        </div>
+        <div class="text-sm text-slate-600 flex justify-between">
+          <span>৳৭২০ • ২০ পিস</span>
+          <span class="text-xs text-slate-400">মিরপুর-১০, ঢাকা</span>
+        </div>
+      </div>
+
+      <!-- Inactive Order Card -->
+      <div class="cursor-pointer bg-white hover:bg-slate-50 border-l-4 border-transparent rounded-r-lg p-3 transition-colors">
+        <div class="flex justify-between items-start mb-1">
+          <h3 class="font-bold text-slate-700">তানজিম চৌধুরী</h3>
+          <span class="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded">Pending</span>
+        </div>
+        <div class="text-sm text-slate-500 flex justify-between">
+          <span>৳৯৬০ • ৩০ পিস</span>
+          <span class="text-xs text-slate-400">জিইসি, চট্টগ্রাম</span>
+        </div>
+      </div>
+      
+      <!-- Inactive Order Card -->
+      <div class="cursor-pointer bg-white hover:bg-slate-50 border-l-4 border-transparent rounded-r-lg p-3 transition-colors">
+        <div class="flex justify-between items-start mb-1">
+          <h3 class="font-bold text-slate-700">ফারহানা মিম</h3>
+          <span class="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded">Pending</span>
+        </div>
+        <div class="text-sm text-slate-500 flex justify-between">
+          <span>৳৬৫০ • ২০ পিস</span>
+          <span class="text-xs text-slate-400">উত্তরা, ঢাকা</span>
+        </div>
+      </div>
     </div>
+  </aside>
 
-    <div id="ordersContainer" class="space-y-3.5 hidden"></div>
+  <!-- ================= MAIN CONTENT (Order Details) ================= -->
+  <main class="flex-1 flex flex-col h-[60vh] md:h-screen overflow-hidden bg-slate-50">
+    
+    <!-- Top Bar -->
+    <header class="bg-white border-b border-slate-200 p-4 md:p-6 flex justify-between items-center shrink-0 shadow-sm">
+      <div>
+        <h2 class="text-xl font-bold text-slate-800">অর্ডার ডিটেইলস</h2>
+        <p class="text-sm text-slate-500">ইনভয়েস: <span class="font-semibold text-brand-600">FP-00245</span> • আজ দুপুর ১২:৪০</p>
+      </div>
+      <span class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-100 text-amber-700 text-sm font-bold border border-amber-200">
+        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Pending
+      </span>
+    </header>
 
-  </main>
-
-  <script>
-    const CONFIG = {
-      // ⬇️ সরাসরি Form Responses 1 এর এক্সাক্ট CSV লিংক
-      CSV_URL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRLqFzLVT_WZmJzqZaRpl6ef0woX_DAR-WJ_naXBj5XWZcqtilyp0OOS_jQbqDSalSINT-VHkLOuo68/pub?gid=669196927&single=true&output=csv',
-      WORKER_URL: 'https://steep-rain-e346.azwadahshafhossain.workers.dev',
-      STORE_CODE: 'FP',
-      PASSWORD: '1234'
-    };
-
-    let allOrders = [];
-    let currentFilter = 'all';
-
-    function checkPassword() {
-      const p = document.getElementById('passInput').value.trim();
-      if (p === CONFIG.PASSWORD) {
-        document.getElementById('loginOverlay').classList.add('hidden');
-        sessionStorage.setItem('fp_admin_auth', 'true');
-        fetchSheetOrders();
-      } else {
-        document.getElementById('passError').classList.remove('hidden');
-      }
-    }
-
-    if (sessionStorage.getItem('fp_admin_auth') === 'true') {
-      document.getElementById('loginOverlay').classList.add('hidden');
-      fetchSheetOrders();
-    }
-
-    function parseCSVLine(text) {
-      const p = [];
-      let cur = '';
-      let inQ = false;
-      for (let i = 0; i < text.length; i++) {
-        const c = text[i];
-        if (c === '"') {
-          if (inQ && text[i+1] === '"') { cur += '"'; i++; }
-          else { inQ = !inQ; }
-        } else if (c === ',' && !inQ) {
-          p.push(cur.trim());
-          cur = '';
-        } else {
-          cur += c;
-        }
-      }
-      p.push(cur.trim());
-      return p;
-    }
-
-    async function fetchSheetOrders() {
-      const icon = document.getElementById('reloadIcon');
-      if (icon) icon.classList.add('fa-spin');
-
-      try {
-        const res = await fetch(CONFIG.CSV_URL);
-        const csvText = await res.text();
-
-        // 🛑 সিকিউরিটি চেক: যদি গুগল কোনো কারণে HTML পাঠায় তবে ড্যাশবোর্ড ভাঙবে না
-        if (csvText.includes('<!DOCTYPE') || csvText.includes('<html') || csvText.includes('Google Sheets')) {
-          throw new Error('গুগল শীটে Form Responses 1 কে Comma-separated values (.csv) হিসেবে পাবলিশ করতে হবে');
-        }
-
-        const lines = csvText.trim().split(/\r?\n/);
-        allOrders = [];
-
-        for (let i = 1; i < lines.length; i++) {
-          if (!lines[i].trim()) continue;
-          const col = parseCSVLine(lines[i]);
-
-          const timestamp    = col[0] || '';
-          const quantity     = col[1] || '';
-          const name         = col[2] || '';
-          const phone        = col[3] || '';
-          const deliveryArea = col[4] || '';
-          const address      = col[5] || '';
-          const payment      = col[6] || '';
-          const trxId        = col[7] || '';
-          const product      = col[8] || 'Aluminum Foil Storage Bag';
-          const total        = col[9] || '৳০';
-          let status         = col[10] || 'Pending';
-
-          if (status.toLowerCase().includes('cancel')) status = 'Canceled';
-          else if (status.toLowerCase().includes('ship') || status.toLowerCase().includes('hub')) status = 'Shipped';
-          else if (status.toLowerCase().includes('complete') || status.toLowerCase().includes('deliver')) status = 'Completed';
-          else status = 'Pending';
-
-          // ভ্যালিড কাস্টমার ডাটা ফিল্টার
-          if (name && !name.includes('{') && !name.includes('google')) {
-            allOrders.push({
-              serial: i,
-              id: `FP-${String(i).padStart(5, '0')}`,
-              timestamp,
-              quantity,
-              name,
-              phone: phone || '',
-              deliveryArea,
-              address: address || 'ঠিকানা দেওয়া হয়নি',
-              payment,
-              trxId,
-              product,
-              total,
-              status,
-              tracking: ''
-            });
-          }
-        }
-
-        allOrders.reverse();
-
-        updateStats();
-        renderOrders(allOrders);
-
-        document.getElementById('loadingBox').classList.add('hidden');
-        document.getElementById('ordersContainer').classList.remove('hidden');
-
-      } catch (err) {
-        console.error('Fetch Error:', err);
-        document.getElementById('loadingBox').innerHTML = `
-          <div class="p-6 text-center text-red-600 bg-red-50 rounded-2xl border border-red-200 max-w-md mx-auto">
-            <i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i>
-            <p class="font-bold text-base">গুগল শীটের সেটিং পরিবর্তন করুন!</p>
-            <p class="text-xs text-slate-700 mt-1.5 leading-relaxed">
-              Google Sheet-এ গিয়ে <b>File ➔ Share ➔ Publish to web</b>-এ যান।<br>
-              ১ম ঘরে দিন: <b>Form Responses 1</b><br>
-              ২য় ঘরে দিন: <b>Comma-separated values (.csv)</b><br>
-              তারপর <b>Publish</b> করে দিন।
-            </p>
-            <button onclick="fetchSheetOrders()" class="mt-4 px-5 py-2.5 bg-brand-900 hover:bg-brand-800 text-white rounded-xl text-xs font-bold transition">আবার চেষ্টা করুন</button>
+    <!-- Content Details -->
+    <div class="flex-1 overflow-y-auto p-4 md:p-8">
+      <div class="max-w-3xl mx-auto space-y-6">
+        
+        <!-- Customer Info Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          
+          <!-- Card 1: Customer Profile -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-20 h-20 bg-brand-50 rounded-bl-full -z-10"></div>
+            <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4"><i class="fa-solid fa-user mr-1"></i> কাস্টমার ইনফো</h3>
+            
+            <div class="space-y-4">
+              <div>
+                <p class="text-xs text-slate-500 mb-0.5">নাম</p>
+                <p class="font-bold text-lg text-slate-800">মোঃ রফিকুল ইসলাম</p>
+              </div>
+              <div>
+                <p class="text-xs text-slate-500 mb-0.5">মোবাইল নাম্বার</p>
+                <div class="flex items-center justify-between bg-slate-50 border border-slate-100 rounded-lg px-3 py-2">
+                  <span class="font-bold text-slate-800 text-lg tracking-wide">01712-XXXXXX</span>
+                  <!-- Call Button -->
+                  <a href="tel:01712000000" class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-colors">
+                    <i class="fa-solid fa-phone"></i>
+                  </a>
+                </div>
+              </div>
+              <div>
+                <p class="text-xs text-slate-500 mb-0.5">সম্পূর্ণ ঠিকানা</p>
+                <p class="font-medium text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-100">মিরপুর-১০, সেনপাড়া পর্বতা, ঢাকা</p>
+              </div>
+            </div>
           </div>
-        `;
-      } finally {
-        if (icon) icon.classList.remove('fa-spin');
-      }
-    }
 
-    function renderOrders(data) {
-      const container = document.getElementById('ordersContainer');
-      if (data.length === 0) {
-        container.innerHTML = `
-          <div class="text-center py-12 bg-white rounded-2xl border border-slate-200">
-            <i class="fa-solid fa-box-open text-slate-300 text-4xl mb-2"></i>
-            <p class="text-slate-500 text-sm font-semibold">কোনো অর্ডার পাওয়া যায়নি।</p>
+          <!-- Card 2: Order Summary -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-20 h-20 bg-gold-50 rounded-bl-full -z-10"></div>
+            <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4"><i class="fa-solid fa-box-open mr-1"></i> অর্ডার সামারি</h3>
+            
+            <div class="space-y-3">
+              <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+                <span class="text-slate-600">প্রোডাক্ট প্যাকেজ</span>
+                <span class="font-bold text-slate-800 bg-brand-50 px-2 py-1 rounded text-sm">২০ পিস Storage Bag</span>
+              </div>
+              <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+                <span class="text-slate-600">পেমেন্ট মেথড</span>
+                <span class="font-semibold text-slate-700 flex items-center gap-1.5"><i class="fa-solid fa-hand-holding-dollar text-brand-600"></i> ক্যাশ অন ডেলিভারি</span>
+              </div>
+              <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+                <span class="text-slate-600">ডেলিভারি চার্জ</span>
+                <span class="font-medium text-slate-700">৳৭০ (ঢাকার ভিতরে)</span>
+              </div>
+              <div class="flex justify-between items-center pt-2">
+                <span class="text-slate-500 font-bold text-lg">সর্বমোট বিল</span>
+                <span class="font-bold text-2xl text-brand-800">৳৭২০</span>
+              </div>
+            </div>
           </div>
-        `;
-        return;
-      }
+        </div>
 
-      container.innerHTML = data.map(order => {
-        let statusBadge = '';
-        if (order.status === 'Pending') statusBadge = `<span class="text-xs font-bold px-2.5 py-1 rounded-full status-pending">🟡 পাঠানো বাকি</span>`;
-        if (order.status === 'Shipped') statusBadge = `<span class="text-xs font-bold px-2.5 py-1 rounded-full status-shipped">📦 SteadFast-এ বুকড</span>`;
-        if (order.status === 'Completed') statusBadge = `<span class="text-xs font-bold px-2.5 py-1 rounded-full status-completed">✅ ডেলিভার্ড</span>`;
-        if (order.status === 'Canceled') statusBadge = `<span class="text-xs font-bold px-2.5 py-1 rounded-full status-canceled">❌ বাতিল</span>`;
-
-        let steadfastBtn = '';
-        if (order.status === 'Pending') {
-          steadfastBtn = `
-            <button onclick="sendToSteadFast('${order.id}')" id="btn-sf-${order.id}" class="inline-flex items-center gap-1.5 bg-brand-900 hover:bg-brand-800 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow-sm transition">
-              <i class="fa-solid fa-box"></i> Send to SteadFast
+        <!-- Action Buttons Bar -->
+        <div class="bg-white rounded-2xl p-4 md:p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+          <div class="text-sm text-slate-500 flex items-center gap-2">
+            <i class="fa-solid fa-circle-info text-brand-600"></i> কাস্টমারকে কল করে কনফার্ম করার পর SteadFast-এ পাঠান।
+          </div>
+          <div class="flex w-full md:w-auto gap-3">
+            <button class="flex-1 md:flex-none px-5 py-3 rounded-xl font-bold text-slate-600 bg-slate-100 hover:bg-red-50 hover:text-red-600 transition-colors">
+              <i class="fa-solid fa-xmark mr-1"></i> Cancel
             </button>
-          `;
-        } else if (order.tracking) {
-          steadfastBtn = `
-            <a href="https://steadfast.com.bd/t/${order.tracking}" target="_blank" class="inline-flex items-center gap-1.5 bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold px-3 py-2 rounded-xl transition">
-              <i class="fa-solid fa-link"></i> ট্র্যাকিং: ${order.tracking}
-            </a>
-          `;
-        }
-
-        return `
-          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm hover:border-slate-300 transition space-y-3">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
-              <div class="flex items-center gap-2">
-                <span class="font-bold text-brand-900 text-sm font-mono">${order.id}</span>
-                <span class="text-slate-400 text-xs">• ${order.timestamp}</span>
-              </div>
-              ${statusBadge}
-            </div>
-
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div class="space-y-1">
-                <div class="font-bold text-slate-900 text-base flex items-center gap-2">
-                  <i class="fa-solid fa-user text-slate-400 text-xs"></i> ${order.name}
-                </div>
-                <div class="text-xs text-slate-600 flex items-center gap-1.5">
-                  <i class="fa-solid fa-box text-brand-600"></i> ${order.quantity} (${order.product})
-                </div>
-                <div class="text-xs text-slate-500 flex items-center gap-1.5">
-                  <i class="fa-solid fa-location-dot text-slate-400"></i> ${order.address}
-                </div>
-              </div>
-
-              <div class="text-right sm:border-l sm:border-slate-100 sm:pl-4">
-                <div class="text-xs text-slate-500">সর্বমোট (COD)</div>
-                <div class="text-lg font-bold text-emerald-700">${order.total}</div>
-              </div>
-            </div>
-
-            <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2 flex-wrap">
-              <div class="flex items-center gap-2 flex-wrap">
-                <a href="tel:${order.phone}" class="inline-flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-bold px-3 py-2 rounded-xl transition">
-                  <i class="fa-solid fa-phone"></i> কল করুন
-                </a>
-                <a href="https://wa.me/88${order.phone}?text=${encodeURIComponent('আসসালামু আলাইকুম ' + order.name + ', FreshPack BD থেকে আপনার অর্ডারের বিষয়ে যোগাযোগ করছি।')}" target="_blank" 
-                   class="inline-flex items-center gap-1.5 bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#128C7E] border border-[#25D366]/30 text-xs font-bold px-3 py-2 rounded-xl transition">
-                  <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
-                </a>
-                ${steadfastBtn}
-              </div>
-            </div>
+            <button class="flex-1 md:flex-none px-6 py-3 rounded-xl font-bold text-brand-950 bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-500 hover:to-gold-600 shadow-md shadow-gold-500/30 transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-truck-fast"></i> Send to SteadFast
+            </button>
           </div>
-        `;
-      }).join('');
-    }
+        </div>
 
-    async function sendToSteadFast(orderId) {
-      const order = allOrders.find(o => o.id === orderId);
-      if (!order) return;
+        <!-- Courier Status Section (Empty state) -->
+        <div class="bg-slate-100 rounded-xl p-4 border border-slate-200 flex items-center gap-3 text-slate-500 text-sm">
+          <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm"><i class="fa-solid fa-clock-rotate-left"></i></div>
+          <div>কুরিয়ার স্ট্যাটাস: পার্সেল এখনো বুকিং করা হয়নি।</div>
+        </div>
 
-      if (!confirm(`আপনি কি ${order.name}-এর পার্সেলটি SteadFast-এ বুক করতে চান?\n\nCOD: ${order.total}\nঠিকানা: ${order.address}`)) return;
-
-      const btn = document.getElementById(`btn-sf-${orderId}`);
-      if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> বুকিং হচ্ছে...`;
-      }
-
-      try {
-        const res = await fetch(`${CONFIG.WORKER_URL}/api/courier/steadfast`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            orderId: order.id,
-            name: order.name,
-            phone: order.phone,
-            address: order.address,
-            total: order.total,
-            note: order.quantity,
-            store_code: CONFIG.STORE_CODE
-          })
-        });
-
-        const data = await res.json();
-        const trk = data.tracking_code || `SF-${Math.floor(100000 + Math.random() * 900000)}`;
-
-        order.status = 'Shipped';
-        order.tracking = trk;
-
-        alert(`🎉 সফলভাবে SteadFast-এ পার্সেল বুক হয়েছে!\n\n🔗 Tracking Code: ${trk}`);
-      } catch (err) {
-        const trk = `SF-${Math.floor(100000 + Math.random() * 900000)}`;
-        order.status = 'Shipped';
-        order.tracking = trk;
-        alert(`🎉 সফলভাবে SteadFast-এ পার্সেল বুক হয়েছে!\n\n🔗 Tracking Code: ${trk}`);
-      } finally {
-        updateStats();
-        filterOrders(currentFilter);
-      }
-    }
-
-    function updateStats() {
-      document.getElementById('statTotal').innerText = `${allOrders.length} টি`;
-      
-      const pending = allOrders.filter(o => o.status === 'Pending').length;
-      const shipped = allOrders.filter(o => o.status === 'Shipped').length;
-      
-      document.getElementById('statPending').innerText = `${pending} টি`;
-      document.getElementById('statShipped').innerText = `${shipped} টি`;
-
-      let totalAmount = 0;
-      allOrders.forEach(o => {
-        const num = parseFloat(String(o.total).replace(/[^\d.]/g, '')) || 0;
-        totalAmount += num;
-      });
-      document.getElementById('statSales').innerText = `৳${totalAmount.toLocaleString('en-US')}`;
-    }
-
-    function filterOrders(status) {
-      currentFilter = status;
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('bg-slate-900', 'text-white');
-        btn.classList.add('bg-slate-100', 'text-slate-600');
-      });
-      event.target.classList.add('bg-slate-900', 'text-white');
-      event.target.classList.remove('bg-slate-100', 'text-slate-600');
-
-      if (status === 'all') {
-        renderOrders(allOrders);
-      } else {
-        const filtered = allOrders.filter(o => o.status === status);
-        renderOrders(filtered);
-      }
-    }
-
-    function handleSearch() {
-      const q = document.getElementById('searchInput').value.toLowerCase().trim();
-      const filtered = allOrders.filter(o => 
-        o.name.toLowerCase().includes(q) || 
-        o.phone.includes(q) || 
-        o.address.toLowerCase().includes(q) || 
-        o.id.toLowerCase().includes(q)
-      );
-      renderOrders(filtered);
-    }
-  </script>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
