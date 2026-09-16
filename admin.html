@@ -5,15 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FreshPack BD | লাইভ অ্যাডমিন পোর্টাল</title>
   
-  <!-- Google Font: Hind Siliguri -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -40,9 +36,7 @@
 
 <body class="text-slate-800 antialiased pb-16">
 
-  <!-- ============================================================
-       0. PASSWORD OVERLAY
-  ============================================================ -->
+  <!-- PASSWORD OVERLAY -->
   <div id="loginOverlay" class="fixed inset-0 z-50 bg-slate-900/90 backdrop-blur-md flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl">
       <div class="w-14 h-14 rounded-2xl bg-brand-50 text-brand-900 flex items-center justify-center mx-auto text-2xl shadow-inner">
@@ -64,9 +58,7 @@
     </div>
   </div>
 
-  <!-- ============================================================
-       1. TOP HEADER
-  ============================================================ -->
+  <!-- HEADER -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
     <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -88,9 +80,7 @@
 
   <main class="max-w-5xl mx-auto px-4 pt-5 space-y-5">
 
-    <!-- ============================================================
-         2. LIVE KPI STATS
-    ============================================================ -->
+    <!-- KPI STATS -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
       <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
         <div class="flex items-center justify-between text-slate-500 text-xs font-semibold mb-1">
@@ -129,9 +119,7 @@
       </div>
     </div>
 
-    <!-- ============================================================
-         3. SEARCH & FILTER TABS
-    ============================================================ -->
+    <!-- FILTER TABS -->
     <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
       <div class="relative">
         <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
@@ -147,9 +135,7 @@
       </div>
     </div>
 
-    <!-- ============================================================
-         4. ORDERS CONTAINER
-    ============================================================ -->
+    <!-- ORDERS CONTAINER -->
     <div id="loadingBox" class="text-center py-12 bg-white rounded-2xl border border-slate-200">
       <i class="fa-solid fa-circle-notch fa-spin text-brand-600 text-3xl mb-2"></i>
       <p class="text-slate-500 text-sm font-semibold">গুগল শীট থেকে লাইভ অর্ডার লোড হচ্ছে...</p>
@@ -159,13 +145,10 @@
 
   </main>
 
-  <!-- ============================================================
-       5. JAVASCRIPT: 100% DIRECT CSV FETCHER (NO AUTH / NO ERROR)
-  ============================================================ -->
   <script>
     const CONFIG = {
-      // ⬇️ আপনার স্ক্রিনশটের আসল পাবলিক পাবলিশ লিংক
-      CSV_URL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRLqFzLVT_WZmJzqZaRpl6ef0woX_DAR-WJ_naXBj5XWZcqtilyp0OOS_jQbqDSalSINT-VHkLOuo68/pub?output=csv',
+      // ⬇️ সরাসরি Form Responses 1 এর এক্সাক্ট CSV লিংক
+      CSV_URL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRLqFzLVT_WZmJzqZaRpl6ef0woX_DAR-WJ_naXBj5XWZcqtilyp0OOS_jQbqDSalSINT-VHkLOuo68/pub?gid=669196927&single=true&output=csv',
       WORKER_URL: 'https://steep-rain-e346.azwadahshafhossain.workers.dev',
       STORE_CODE: 'FP',
       PASSWORD: '1234'
@@ -190,7 +173,6 @@
       fetchSheetOrders();
     }
 
-    // CSV পার্স করার নিখুঁত ফাংশন (কমা ও কোটেশন হ্যান্ডেল করে)
     function parseCSVLine(text) {
       const p = [];
       let cur = '';
@@ -211,7 +193,6 @@
       return p;
     }
 
-    // সরাসরি গুগল পাবলিশ লিংক থেকে ডাটা রিড করা
     async function fetchSheetOrders() {
       const icon = document.getElementById('reloadIcon');
       if (icon) icon.classList.add('fa-spin');
@@ -220,10 +201,14 @@
         const res = await fetch(CONFIG.CSV_URL);
         const csvText = await res.text();
 
+        // 🛑 সিকিউরিটি চেক: যদি গুগল কোনো কারণে HTML পাঠায় তবে ড্যাশবোর্ড ভাঙবে না
+        if (csvText.includes('<!DOCTYPE') || csvText.includes('<html') || csvText.includes('Google Sheets')) {
+          throw new Error('গুগল শীটে Form Responses 1 কে Comma-separated values (.csv) হিসেবে পাবলিশ করতে হবে');
+        }
+
         const lines = csvText.trim().split(/\r?\n/);
         allOrders = [];
 
-        // ১ম লাইনটি হেডার, তাই ২য় লাইন থেকে লুপ ঘুরবে
         for (let i = 1; i < lines.length; i++) {
           if (!lines[i].trim()) continue;
           const col = parseCSVLine(lines[i]);
@@ -240,19 +225,19 @@
           const total        = col[9] || '৳০';
           let status         = col[10] || 'Pending';
 
-          // স্ট্যাটাস ম্যাচিং
           if (status.toLowerCase().includes('cancel')) status = 'Canceled';
           else if (status.toLowerCase().includes('ship') || status.toLowerCase().includes('hub')) status = 'Shipped';
           else if (status.toLowerCase().includes('complete') || status.toLowerCase().includes('deliver')) status = 'Completed';
           else status = 'Pending';
 
-          if (name || phone) {
+          // ভ্যালিড কাস্টমার ডাটা ফিল্টার
+          if (name && !name.includes('{') && !name.includes('google')) {
             allOrders.push({
               serial: i,
               id: `FP-${String(i).padStart(5, '0')}`,
               timestamp,
               quantity,
-              name: name || 'নাম নেই',
+              name,
               phone: phone || '',
               deliveryArea,
               address: address || 'ঠিকানা দেওয়া হয়নি',
@@ -266,7 +251,6 @@
           }
         }
 
-        // নতুন অর্ডার সবার উপরে
         allOrders.reverse();
 
         updateStats();
@@ -278,11 +262,16 @@
       } catch (err) {
         console.error('Fetch Error:', err);
         document.getElementById('loadingBox').innerHTML = `
-          <div class="p-6 text-center text-red-600">
+          <div class="p-6 text-center text-red-600 bg-red-50 rounded-2xl border border-red-200 max-w-md mx-auto">
             <i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i>
-            <p class="font-bold text-base">গুগল শীট থেকে ডাটা আসেনি!</p>
-            <p class="text-xs text-slate-600 mt-1">দয়া করে একবার পেজটি রিফ্রেশ করুন।</p>
-            <button onclick="fetchSheetOrders()" class="mt-4 px-4 py-2 bg-brand-900 text-white rounded-xl text-xs font-bold">আবার চেষ্টা করুন</button>
+            <p class="font-bold text-base">গুগল শীটের সেটিং পরিবর্তন করুন!</p>
+            <p class="text-xs text-slate-700 mt-1.5 leading-relaxed">
+              Google Sheet-এ গিয়ে <b>File ➔ Share ➔ Publish to web</b>-এ যান।<br>
+              ১ম ঘরে দিন: <b>Form Responses 1</b><br>
+              ২য় ঘরে দিন: <b>Comma-separated values (.csv)</b><br>
+              তারপর <b>Publish</b> করে দিন।
+            </p>
+            <button onclick="fetchSheetOrders()" class="mt-4 px-5 py-2.5 bg-brand-900 hover:bg-brand-800 text-white rounded-xl text-xs font-bold transition">আবার চেষ্টা করুন</button>
           </div>
         `;
       } finally {
@@ -353,7 +342,6 @@
               </div>
             </div>
 
-            <!-- ACTION BUTTONS: 1-CLICK CALL + WHATSAPP + STEADFAST -->
             <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2 flex-wrap">
               <div class="flex items-center gap-2 flex-wrap">
                 <a href="tel:${order.phone}" class="inline-flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-bold px-3 py-2 rounded-xl transition">
