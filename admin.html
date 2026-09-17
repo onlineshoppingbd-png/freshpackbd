@@ -936,8 +936,7 @@ Html
     }
 
     // ==========================================
-    // 🎨 LIVE VISUAL INLINE EDITOR LOGIC
-    // ==========================================
+    // 🎨 Open Visual Editor (Always Loads Latest Saved Edits)
     function openVisualEditor() {
       document.getElementById('visualEditorOverlay').classList.remove('hidden');
       const iframe = document.getElementById('liveEditorIframe');
@@ -949,7 +948,7 @@ Html
           const mainEl = doc.querySelector('main');
           if (!mainEl) return;
 
-          // ১. ক্লাউডফ্লেয়ার থেকে সেভ করা আগের এডিট থাকলে তা আইফ্রেমে বসানো
+          // ১. ক্লাউডফ্লেয়ার থেকে সেভ করা আগের এডিট টেনে এনে আইফ্রেমে বসানো
           try {
             const res = await fetch(`${WORKER_URL}/page-content?store=FP&_t=` + Date.now(), { cache: 'no-store' });
             const data = await res.json();
@@ -1005,7 +1004,6 @@ Html
         }
       };
     }
-
     // ❌ এডিটর বন্ধ করার ফাংশন (যা আগের কোডে মিসিং ছিল)
     function closeVisualEditor() {
       document.getElementById('visualEditorOverlay').classList.add('hidden');
