@@ -944,19 +944,19 @@
       iframe.onload = async function() {
         try {
           const doc = iframe.contentDocument || iframe.contentWindow.document;
-          const mainEl = doc.querySelector('main');
-          if (!mainEl) return;
 
-          // ১. ক্লাউডফ্লেয়ার থেকে সেভ করা আগের এডিট থাকলে তা আইফ্রেমে বসানো
+          // ১. ক্লাউডফ্লেয়ার থেকে সেভ করা আগের পেজ লোড করা
           try {
             const res = await fetch(`${WORKER_URL}/page-content?store=FP&_t=` + Date.now(), { cache: 'no-store' });
             const data = await res.json();
-            if (data.ok && data.mainHtml && data.mainHtml.trim().length > 50) {
-              mainEl.innerHTML = data.mainHtml;
+            if (data.ok && data.pageData) {
+              if (data.pageData.headerHtml && doc.querySelector('header')) doc.querySelector('header').innerHTML = data.pageData.headerHtml;
+              if (data.pageData.mainHtml && doc.querySelector('main')) doc.querySelector('main').innerHTML = data.pageData.mainHtml;
+              if (data.pageData.footerHtml && doc.querySelector('footer')) doc.querySelector('footer').innerHTML = data.pageData.footerHtml;
             }
           } catch (err) {}
 
-          // ২. এডিটর স্টাইল ইনজেক্ট (সবুজ ড্যাশ বর্ডার)
+          // ২. এডিটর স্টাইল ইনজেক্ট (ড্যাশ বর্ডার ও বোতাম)
           const style = doc.createElement('style');
           style.innerHTML = `
             [contenteditable="true"]:hover {
@@ -975,20 +975,44 @@
               outline: 3px dashed #3b82f6 !important;
               cursor: pointer !important;
             }
+            .faq-answer { max-height: none !important; display: block !important; overflow: visible !important; }
+            .yt-edit-overlay {
+              position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+              z-index: 50; text-align: center; pointer-events: auto;
+            }
+            .yt-edit-btn {
+              background: #dc2626; color: white; font-weight: bold; font-size: 13px;
+              padding: 10px 18px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+              cursor: pointer; border: 2px solid white; display: inline-flex; align-items: center; gap: 8px;
+            }
           `;
           doc.head.appendChild(style);
 
-          // ৩. সব লেখায় এডিটিং সক্রিয় করা
-          doc.querySelectorAll('main h1, main h2, main h3, main h4, main p, main span, main li, main a, main b, main strong').forEach(el => {
-            el.setAttribute('contenteditable', 'true');
-            el.setAttribute('spellcheck', 'false');
-            if (el.tagName === 'A' || el.closest('a')) {
-              el.addEventListener('click', (e) => e.preventDefault());
+          // ৩. হেডার, মেইন, ফুটার, চার্ট টেবিলের সব লেখা এডিটেবল করা
+          const editableTags = 'h1, h2, h3, h4, h5, p, span, li, a, td, th, div, button, b, strong, em, dt, dd';
+          doc.querySelectorAll(`header ${editableTags}, main ${editableTags}, footer ${editableTags}`).forEach(el => {
+            // স্লাইডারের তীর ও ডটস ছাড়া বাকি সব এডিটেবল
+            if (!el.closest('#sliderPrev, #sliderNext, #sliderDots, script, style, svg')) {
+              // যেসব ট্যাগের ভেতর অন্য বড় ট্যাগ নেই সরাসরি এডিট
+              if (!el.children.length || el.tagName === 'H1' || el.tagName === 'H2' || el.tagName === 'H3' || el.tagName === 'H4' || el.tagName === 'P' || el.tagName === 'SPAN' || el.tagName === 'A' || el.tagName === 'LI') {
+                el.setAttribute('contenteditable', 'true');
+                el.setAttribute('spellcheck', 'false');
+              }
+              if (el.tagName === 'A' || el.tagName === 'BUTTON') {
+                el.addEventListener('click', (e) => e.preventDefault());
+              }
             }
           });
 
-          // ৪. ছবিতে ক্লিক করলে ছবি বদলানো
-          doc.querySelectorAll('main img').forEach(img => {
+          // ৪. স্লাইডারের তীরচিহ্ন ও ডটস ফুল সচল রাখা
+          doc.querySelectorAll('#sliderPrev, #sliderNext, #sliderDots button').forEach(btn => {
+            btn.removeAttribute('contenteditable');
+            btn.style.pointerEvents = 'auto';
+            btn.style.zIndex = '45';
+          });
+
+          // ৫. সব ছবিতে ক্লিক করে ইমেজ লিংক বদলানো (স্লাইডার সহ)
+          doc.querySelectorAll('header img, main img, footer img').forEach(img => {
             img.style.cursor = 'pointer';
             img.title = 'ছবি পরিবর্তন করতে ক্লিক করুন';
             img.onclick = (e) => {
@@ -998,13 +1022,38 @@
             };
           });
 
+          // ৬. 🎬 ইউটিউব ভিডিওর ওপর সরাসরি এডিট বাটন বসানো
+          const videoMockup = doc.querySelector('#video-demo .phone-mockup');
+          if (videoMockup && !videoMockup.querySelector('.yt-edit-overlay')) {
+            videoMockup.style.position = 'relative';
+            const overlay = doc.createElement('div');
+            overlay.className = 'yt-edit-overlay';
+            overlay.innerHTML = `<button type="button" class="yt-edit-btn"><i class="fa-brands fa-youtube text-lg"></i> 🎬 ভিডিও লিংক পরিবর্তন করুন</button>`;
+            overlay.onclick = (e) => {
+              e.preventDefault(); e.stopPropagation();
+              const iframe = videoMockup.querySelector('iframe');
+              const current = iframe ? iframe.src : '';
+              const newUrl = prompt('🎬 নতুন ইউটিউব ভিডিওর লিংক দিন (Regular, Shorts বা Embed URL):', current);
+              if (newUrl && newUrl.trim()) {
+                // ইউটিউব লিংক কনভার্ট
+                let vidId = '';
+                if (newUrl.includes('youtu.be/')) vidId = newUrl.split('youtu.be/')[1]?.split('?')[0].split('&')[0];
+                else if (newUrl.includes('youtube.com/shorts/')) vidId = newUrl.split('youtube.com/shorts/')[1]?.split('?')[0].split('&')[0];
+                else if (newUrl.includes('watch?v=')) vidId = newUrl.split('watch?v=')[1]?.split('&')[0];
+                const embedUrl = vidId ? `https://www.youtube.com/embed/${vidId}` : newUrl.trim();
+                if (iframe) iframe.src = embedUrl;
+              }
+            };
+            videoMockup.appendChild(overlay);
+          }
+
         } catch(e) {
           console.warn("Iframe load error", e);
         }
       };
     }
 
-    // ❌ এডিটর বন্ধ করার ফাংশন (যা আগের কোডে মিসিং ছিল)
+    // ❌ Close Visual Editor
     function closeVisualEditor() {
       document.getElementById('visualEditorOverlay').classList.add('hidden');
     }
@@ -1024,7 +1073,7 @@
       }
     }
 
-    // 💾 Save & Publish All Visual Changes Cleanly
+    // 💾 Save & Publish Full Website (Header, Main, Footer)
     async function saveVisualEdits() {
       const btn = document.getElementById('saveVisualBtn');
       btn.disabled = true;
@@ -1033,28 +1082,33 @@
       try {
         const iframe = document.getElementById('liveEditorIframe');
         const doc = iframe.contentDocument || iframe.contentWindow.document;
-        const mainEl = doc.querySelector('main');
 
-        if (!mainEl) throw new Error("Main element not found");
+        // ক্লিন ক্লোন তৈরি
+        const cleanSection = (selector) => {
+          const el = doc.querySelector(selector);
+          if (!el) return '';
+          const clone = el.cloneNode(true);
+          clone.querySelectorAll('[contenteditable]').forEach(c => c.removeAttribute('contenteditable'));
+          clone.querySelectorAll('[spellcheck]').forEach(c => c.removeAttribute('spellcheck'));
+          clone.querySelectorAll('.yt-edit-overlay').forEach(c => c.remove());
+          return clone.innerHTML;
+        };
 
-        // ক্লিন HTML ক্লোন তৈরি
-        const clone = mainEl.cloneNode(true);
-        clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
-        clone.querySelectorAll('[spellcheck]').forEach(el => el.removeAttribute('spellcheck'));
-        // ভিডিও এডিট বাটন মুছে ফেলা
-        clone.querySelectorAll('.video-edit-btn').forEach(el => el.remove());
-
-        const cleanHtml = clone.innerHTML;
+        const pageData = {
+          headerHtml: cleanSection('header'),
+          mainHtml: cleanSection('main'),
+          footerHtml: cleanSection('footer')
+        };
 
         const res = await fetch(`${WORKER_URL}/page-content`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ storeCode: 'FP', mainHtml: cleanHtml })
+          body: JSON.stringify({ storeCode: 'FP', pageData })
         });
         
         const data = await res.json();
         if (data.ok) {
-          showToast("🎉 ওয়েবসাইট সফলভাবে আপডেট ও লাইভ হয়েছে!");
+          showToast("🎉 সম্পূর্ণ ওয়েবসাইট সফলভাবে আপডেট ও লাইভ হয়েছে!");
           closeVisualEditor();
         } else {
           alert("❌ সেভ হতে সমস্যা হয়েছে: " + (data.error || 'Server error'));
