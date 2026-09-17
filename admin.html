@@ -1021,42 +1021,50 @@
       }
     }
 
-    async function saveVisualEdits() {
-      const btn = document.getElementById('saveVisualBtn');
-      btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ ও পাবলিশ হচ্ছে...`;
+    // 💾 সর্বজনীন ভিজ্যুয়াল এডিট সেভ করার ফাংশন
+async function saveVisualEdits() {
+  const btn = document.getElementById('saveVisualBtn');
+  btn.disabled = true;
+  btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ ও লাইভ হচ্ছে...`;
 
-      try {
-        const iframe = document.getElementById('liveEditorIframe');
-        const doc = iframe.contentDocument || iframe.contentWindow.document;
+  try {
+    const iframe = document.getElementById('liveEditorIframe');
+    const doc = iframe.contentDocument || iframe.contentWindow.document;
 
-        const edits = {
-          heroTitle: doc.querySelector('h1')?.innerHTML || '',
-          heroSubtitle: doc.querySelector('.hero-bg p')?.innerText || '',
-          productImg: doc.querySelector('.hero-bg img')?.src || ''
-        };
+    const allEdits = {};
 
-        const res = await fetch(`${WORKER_URL}/page-content`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ storeCode: 'FP', edits })
-        });
-        
-        const data = await res.json();
-        if (data.ok) {
-          showToast("🎉 ওয়েবসাইট সফলভাবে আপডেট ও লাইভ হয়েছে!");
-          closeVisualEditor();
-        } else {
-          alert("❌ এডিট সেভ হতে সমস্যা হয়েছে!");
-        }
-      } catch(err) {
-        alert("সার্ভারে সমস্যা হয়েছে!");
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Save & Publish (লাইভ করুন)`;
+    // পেজের সব টেক্সট, ছবি ও ভিডিওর এডিট সংগ্রহ করা
+    doc.querySelectorAll('[data-edit-id]').forEach(el => {
+      const editId = el.getAttribute('data-edit-id');
+      if (el.tagName === 'IMG') {
+        allEdits[editId] = { type: 'img', src: el.src };
+      } else if (el.tagName === 'IFRAME') {
+        allEdits[editId] = { type: 'iframe', src: el.src };
+      } else {
+        allEdits[editId] = { type: 'text', html: el.innerHTML };
       }
-    }
+    });
 
+    const res = await fetch(`${WORKER_URL}/page-content`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ storeCode: 'FP', edits: allEdits })
+    });
+    
+    const data = await res.json();
+    if (data.ok) {
+      showToast("🎉 ওয়েবসাইট সফলভাবে আপডেট ও লাইভ হয়েছে!");
+      closeVisualEditor();
+    } else {
+      alert("❌ এডিট সেভ হতে সমস্যা হয়েছে!");
+    }
+  } catch(err) {
+    alert("সার্ভারে সমস্যা হয়েছে! সংযোগ চেক করুন।");
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Save & Publish (লাইভ করুন)`;
+  }
+}
     // Settings Modal
     async function openSettingsModal() {
       document.getElementById('settingsModal').classList.remove('hidden');
