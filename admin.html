@@ -1073,7 +1073,7 @@
       }
     }
 
-    // 💾 Save & Publish Full Website (Header, Main, Footer)
+    // 💾 Save & Publish All Visual Changes Cleanly
     async function saveVisualEdits() {
       const btn = document.getElementById('saveVisualBtn');
       btn.disabled = true;
@@ -1082,33 +1082,28 @@
       try {
         const iframe = document.getElementById('liveEditorIframe');
         const doc = iframe.contentDocument || iframe.contentWindow.document;
+        const mainEl = doc.querySelector('main');
 
-        // ক্লিন ক্লোন তৈরি
-        const cleanSection = (selector) => {
-          const el = doc.querySelector(selector);
-          if (!el) return '';
-          const clone = el.cloneNode(true);
-          clone.querySelectorAll('[contenteditable]').forEach(c => c.removeAttribute('contenteditable'));
-          clone.querySelectorAll('[spellcheck]').forEach(c => c.removeAttribute('spellcheck'));
-          clone.querySelectorAll('.yt-edit-overlay').forEach(c => c.remove());
-          return clone.innerHTML;
-        };
+        if (!mainEl) throw new Error("Main element not found");
 
-        const pageData = {
-          headerHtml: cleanSection('header'),
-          mainHtml: cleanSection('main'),
-          footerHtml: cleanSection('footer')
-        };
+        // ক্লিন HTML ক্লোন তৈরি
+        const clone = mainEl.cloneNode(true);
+        clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+        clone.querySelectorAll('[spellcheck]').forEach(el => el.removeAttribute('spellcheck'));
+        // ভিডিও এডিট বাটন মুছে ফেলা
+        clone.querySelectorAll('.video-edit-btn').forEach(el => el.remove());
+
+        const cleanHtml = clone.innerHTML;
 
         const res = await fetch(`${WORKER_URL}/page-content`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ storeCode: 'FP', pageData })
+          body: JSON.stringify({ storeCode: 'FP', mainHtml: cleanHtml })
         });
         
         const data = await res.json();
         if (data.ok) {
-          showToast("🎉 সম্পূর্ণ ওয়েবসাইট সফলভাবে আপডেট ও লাইভ হয়েছে!");
+          showToast("🎉 ওয়েবসাইট সফলভাবে আপডেট ও লাইভ হয়েছে!");
           closeVisualEditor();
         } else {
           alert("❌ সেভ হতে সমস্যা হয়েছে: " + (data.error || 'Server error'));
@@ -1120,7 +1115,6 @@
         btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Save & Publish (লাইভ করুন)`;
       }
     }
-
     // Settings Modal
     async function openSettingsModal() {
       document.getElementById('settingsModal').classList.remove('hidden');
