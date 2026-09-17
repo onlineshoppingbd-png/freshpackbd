@@ -934,7 +934,8 @@
     }
 
     // ==========================================
-    // 🎨 Open Visual Editor (Always Loads Latest Saved Edits)
+    // 🎨 LIVE VISUAL INLINE EDITOR LOGIC
+    // ==========================================
     function openVisualEditor() {
       document.getElementById('visualEditorOverlay').classList.remove('hidden');
       const iframe = document.getElementById('liveEditorIframe');
@@ -946,7 +947,7 @@
           const mainEl = doc.querySelector('main');
           if (!mainEl) return;
 
-          // ১. ক্লাউডফ্লেয়ার থেকে সেভ করা আগের এডিট টেনে এনে আইফ্রেমে বসানো
+          // ১. ক্লাউডফ্লেয়ার থেকে সেভ করা আগের এডিট থাকলে তা আইফ্রেমে বসানো
           try {
             const res = await fetch(`${WORKER_URL}/page-content?store=FP&_t=` + Date.now(), { cache: 'no-store' });
             const data = await res.json();
@@ -1002,7 +1003,8 @@
         }
       };
     }
-    // ❌ Close Visual Editor Window
+
+    // ❌ এডিটর বন্ধ করার ফাংশন (যা আগের কোডে মিসিং ছিল)
     function closeVisualEditor() {
       document.getElementById('visualEditorOverlay').classList.add('hidden');
     }
@@ -1060,6 +1062,7 @@
         btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Save & Publish (লাইভ করুন)`;
       }
     }
+
     // Settings Modal
     async function openSettingsModal() {
       document.getElementById('settingsModal').classList.remove('hidden');
