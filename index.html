@@ -1371,48 +1371,74 @@
 
   // ১. স্ক্রিনের যেকোনো কার্ড থেকে প্রোডাক্ট ও প্যাকেজের নাম-দাম অটো-রিড করা
   function buildDynamicPackagesFromDOM() {
-    DYNAMIC_PACKAGES = {};
-    const cards = document.querySelectorAll('.price-card');
-    const select = document.getElementById('quantity');
-    if (select) select.innerHTML = '';
+  const cards = document.querySelectorAll('.price-card');
+  const select = document.getElementById('quantity');
 
-    cards.forEach((card, index) => {
-      const titleEl = card.querySelector('h3, .pkg-title');
-      const priceEl = card.querySelector('.text-4xl, .text-5xl, .price-val');
-      const btn = card.querySelector('[data-open-order]');
+  const packages = {};
 
-      // কার্ডের ভেতর ক্লায়েন্টের লেখা আসল নাম ও দাম রিড করা
-      const title = titleEl ? titleEl.innerText.trim() : `প্যাকেজ ${index + 1}`;
-      const priceNum = priceEl ? parseInt(toEn(priceEl.innerText).replace(/[^\d]/g, ''), 10) || 0 : 0;
-      const pkgKey = 'pkg_' + index;
+  cards.forEach((card, index) => {
+    const titleEl = card.querySelector('h3, .pkg-title');
+    const priceEl = card.querySelector('.text-4xl, .text-5xl, .price-val');
 
-      if (btn) btn.setAttribute('data-package', pkgKey);
+    const title = titleEl?.innerText.trim() || `প্যাকেজ ${index + 1}`;
+    const priceNum = priceEl
+      ? parseInt(toEn(priceEl.innerText).replace(/[^\d]/g, ''), 10) || 0
+      : 0;
 
-      DYNAMIC_PACKAGES[pkgKey] = {
-        key: pkgKey,
-        label: title,
-        price: priceNum
-      };
+    const key = `pkg_${index}`;
 
-      // চেকআউট মোডালের ড্রপডাউনে স্বয়ংক্রিয়ভাবে নতুন প্যাকেজ যোগ করা
-      if (select) {
-        const opt = document.createElement('option');
-        opt.value = pkgKey;
-        opt.textContent = `${title} — ৳${toBn(priceNum)}`;
-        if (index === 1 || cards.length === 1) opt.selected = true; // ২য় প্যাকেজ ডিফল্ট সিলেক্ট
+    packages[key] = {
+      key,
+      label: title,
+      price: priceNum
+    };
+
+    const btn = card.querySelector('[data-open-order]');
+    if (btn) btn.dataset.package = key;
+  });
+
+  // সব data ready হওয়ার পরেই UI update
+  requestAnimationFrame(() => {
+    DYNAMIC_PACKAGES = packages;
+
+    if (select) {
+      select.replaceChildren();
+
+      Object.values(packages).forEach((pkg, index) => {
+        const opt = new Option(
+          `${pkg.label} — ৳${toBn(pkg.price)}`,
+          pkg.key
+        );
+
+        if (index === 1 || cards.length === 1) {
+          opt.selected = true;
+        }
+
         select.appendChild(opt);
-      }
-    });
+      });
+    }
 
-    // হিরো সেকশন ও নিচের স্টিকি বারের দাম আপডেট করা
-    const firstPkg = Object.values(DYNAMIC_PACKAGES)[0];
+    const firstPkg = Object.values(packages)[0];
+
     if (firstPkg) {
       const heroPrice = document.querySelector('.hero-bg .text-3xl');
-      if (heroPrice) heroPrice.innerText = `৳${toBn(firstPkg.price)}`;
-      const stickyPrice = document.querySelector('#stickyBottomBar .text-lg, #stickyBottomBar .text-2xl');
-      if (stickyPrice) stickyPrice.innerHTML = `৳${toBn(firstPkg.price)} <span class="text-xs font-normal text-slate-500">থেকে শুরু</span>`;
+      const stickyPrice = document.querySelector(
+        '#stickyBottomBar .text-lg, #stickyBottomBar .text-2xl'
+      );
+
+      if (heroPrice) {
+        heroPrice.textContent = `৳${toBn(firstPkg.price)}`;
+      }
+
+      if (stickyPrice) {
+        stickyPrice.innerHTML =
+          `৳${toBn(firstPkg.price)}
+           <span class="text-xs font-normal text-slate-500">থেকে শুরু</span>`;
+      }
     }
-  }
+  });
+}
+
 
   // ২. ডায়নামিক ক্যালকুলেশন ইঞ্জিন
   function getSelection() {
