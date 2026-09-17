@@ -1338,5 +1338,31 @@
     }
   })();
 </script>
+  <!-- 🎨 INSTANT LIVE PAGE CONTENT LOADER -->
+<script>
+  (async function loadLiveCustomPage() {
+    try {
+      const res = await fetch('https://steep-rain-e346.azwadahshafhossain.workers.dev/page-content?store=FP&_t=' + Date.now(), { cache: 'no-store' });
+      const data = await res.json();
+      
+      if (data.ok && data.mainHtml && data.mainHtml.trim().length > 50) {
+        const main = document.querySelector('main');
+        if (main) {
+          main.innerHTML = data.mainHtml;
+          
+          // অর্ডার বাটনগুলো পুনরায় সক্রিয় করা
+          document.querySelectorAll('[data-open-order]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+              e.preventDefault();
+              if (typeof openModal === 'function') openModal(btn.dataset.package);
+            });
+          });
+        }
+      }
+    } catch(e) {
+      console.warn("Live page load error", e);
+    }
+  })();
+</script>
 </body>
 </html>
