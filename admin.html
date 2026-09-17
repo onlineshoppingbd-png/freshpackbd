@@ -1002,6 +1002,10 @@
         }
       };
     }
+    // ❌ Close Visual Editor Window
+    function closeVisualEditor() {
+      document.getElementById('visualEditorOverlay').classList.add('hidden');
+    }
 
     function setPreviewDevice(dev) {
       const wrap = document.getElementById('editorFrameWrapper');
