@@ -1024,6 +1024,7 @@
       }
     }
 
+    // 💾 Save & Publish All Visual Changes Cleanly
     async function saveVisualEdits() {
       const btn = document.getElementById('saveVisualBtn');
       btn.disabled = true;
@@ -1036,9 +1037,12 @@
 
         if (!mainEl) throw new Error("Main element not found");
 
+        // ক্লিন HTML ক্লোন তৈরি
         const clone = mainEl.cloneNode(true);
         clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
         clone.querySelectorAll('[spellcheck]').forEach(el => el.removeAttribute('spellcheck'));
+        // ভিডিও এডিট বাটন মুছে ফেলা
+        clone.querySelectorAll('.video-edit-btn').forEach(el => el.remove());
 
         const cleanHtml = clone.innerHTML;
 
@@ -1051,7 +1055,7 @@
         const data = await res.json();
         if (data.ok) {
           showToast("🎉 ওয়েবসাইট সফলভাবে আপডেট ও লাইভ হয়েছে!");
-          closeVisualEditor(); // এখন আর কোনো এরর আসবে না
+          closeVisualEditor();
         } else {
           alert("❌ সেভ হতে সমস্যা হয়েছে: " + (data.error || 'Server error'));
         }
