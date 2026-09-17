@@ -933,18 +933,28 @@
       }
     }
 
-    // ==========================================
-    // 🎨 LIVE VISUAL INLINE EDITOR LOGIC
-    // ==========================================
+    // 🎨 Open Visual Editor (Always Loads Latest Saved Edits)
     function openVisualEditor() {
       document.getElementById('visualEditorOverlay').classList.remove('hidden');
       const iframe = document.getElementById('liveEditorIframe');
       iframe.src = './index.html?edit=1&_t=' + Date.now();
 
-      iframe.onload = function() {
+      iframe.onload = async function() {
         try {
           const doc = iframe.contentDocument || iframe.contentWindow.document;
+          const mainEl = doc.querySelector('main');
+          if (!mainEl) return;
 
+          // ১. ক্লাউডফ্লেয়ার থেকে সেভ করা আগের এডিট টেনে এনে আইফ্রেমে বসানো
+          try {
+            const res = await fetch(`${WORKER_URL}/page-content?store=FP&_t=` + Date.now(), { cache: 'no-store' });
+            const data = await res.json();
+            if (data.ok && data.mainHtml && data.mainHtml.trim().length > 50) {
+              mainEl.innerHTML = data.mainHtml;
+            }
+          } catch (err) {}
+
+          // ২. এডিটর স্টাইল ইনজেক্ট (সবুজ ড্যাশ বর্ডার)
           const style = doc.createElement('style');
           style.innerHTML = `
             [contenteditable="true"]:hover {
@@ -966,14 +976,16 @@
           `;
           doc.head.appendChild(style);
 
-          doc.querySelectorAll('main h1, main h2, main h3, main h4, main p, main span, main li, main a').forEach(el => {
+          // ৩. সব লেখায় এডিটিং সক্রিয় করা
+          doc.querySelectorAll('main h1, main h2, main h3, main h4, main p, main span, main li, main a, main b, main strong').forEach(el => {
             el.setAttribute('contenteditable', 'true');
             el.setAttribute('spellcheck', 'false');
-            if (el.tagName === 'A') {
+            if (el.tagName === 'A' || el.closest('a')) {
               el.addEventListener('click', (e) => e.preventDefault());
             }
           });
 
+          // ৪. ছবিতে ক্লিক করলে ছবি বদলানো
           doc.querySelectorAll('main img').forEach(img => {
             img.style.cursor = 'pointer';
             img.title = 'ছবি পরিবর্তন করতে ক্লিক করুন';
@@ -983,28 +995,11 @@
               if (newUrl && newUrl.trim()) img.src = newUrl.trim();
             };
           });
-        } catch(e) {}
+
+        } catch(e) {
+          console.warn("Iframe load error", e);
+        }
       };
-    }
-
-    // ❌ Close Visual Editor Window
-    function closeVisualEditor() {
-      document.getElementById('visualEditorOverlay').classList.add('hidden');
-    }
-
-    function setPreviewDevice(dev) {
-      const wrap = document.getElementById('editorFrameWrapper');
-      const bDesk = document.getElementById('btnDesk');
-      const bMob = document.getElementById('btnMob');
-      if (dev === 'mobile') {
-        wrap.style.maxWidth = '390px';
-        bMob.classList.add('bg-emerald-600', 'text-white');
-        bDesk.classList.remove('bg-emerald-600', 'text-white');
-      } else {
-        wrap.style.maxWidth = '100%';
-        bDesk.classList.add('bg-emerald-600', 'text-white');
-        bMob.classList.remove('bg-emerald-600', 'text-white');
-      }
     }
 
     async function saveVisualEdits() {
