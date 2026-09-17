@@ -1236,6 +1236,94 @@
     } catch(e) {}
   })();
 </script>
+  <!-- 🎨 LIVE INLINE VISUAL EDITOR ENGINE -->
+<script>
+  (function initLiveInlineEditor() {
+    const isEditMode = window.location.search.includes('edit=1') || window.self !== window.top;
+    
+    if (isEditMode) {
+      // এডিটর স্টাইল ইনজেক্ট করা (হোভার করলে সবুজ ড্যাশ বর্ডার দেখাবে)
+      const style = document.createElement('style');
+      style.innerHTML = `
+        [contenteditable="true"]:hover {
+          outline: 2px dashed #10b981 !important;
+          outline-offset: 4px;
+          cursor: text !important;
+          background-color: rgba(16, 185, 129, 0.08) !important;
+          border-radius: 6px;
+        }
+        [contenteditable="true"]:focus {
+          outline: 2px solid #059669 !important;
+          outline-offset: 4px;
+          background-color: rgba(16, 185, 129, 0.12) !important;
+        }
+        img:hover {
+          outline: 3px dashed #3b82f6 !important;
+          cursor: pointer !important;
+        }
+      `;
+      document.head.appendChild(style);
+
+      // সব লেখার ওপর ক্লিক করে এডিট সক্রিয় করা
+      document.addEventListener('DOMContentLoaded', enableEditing);
+      window.addEventListener('load', enableEditing);
+      setTimeout(enableEditing, 500);
+
+      function enableEditing() {
+        const textNodes = document.querySelectorAll('h1, h2, h3, h4, p, span, li, a');
+        textNodes.forEach(el => {
+          el.setAttribute('contenteditable', 'true');
+          el.setAttribute('spellcheck', 'false');
+          // লিংকে ক্লিক করলে যেন পেজ না ঘুরে
+          el.addEventListener('click', (e) => {
+            if (el.tagName === 'A' || el.closest('a')) {
+              e.preventDefault();
+            }
+          });
+        });
+
+        // ছবিতে ক্লিক করলে নতুন ছবির লিংক বসানোর পপ-আপ
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+          img.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const currentSrc = img.src;
+            const newUrl = prompt('🖼️ নতুন ছবির লিংক (Image URL) দিন:', currentSrc);
+            if (newUrl && newUrl.trim() && newUrl !== currentSrc) {
+              img.src = newUrl.trim();
+            }
+          });
+        });
+      }
+
+      // ড্যাশবোর্ড থেকে সেভ রিকোয়েস্ট আসলে এডিটেড ডাটা পাঠানো
+      window.addEventListener('message', async (e) => {
+        if (e.data === 'REQUEST_PAGE_DATA') {
+          const pageData = {
+            heroTitle: document.querySelector('h1')?.innerHTML || '',
+            heroSubtitle: document.querySelector('.hero-bg p')?.innerText || '',
+            productImg: document.querySelector('.hero-bg img')?.src || ''
+          };
+          window.parent.postMessage({ type: 'SAVE_PAGE_DATA', data: pageData }, '*');
+        }
+      });
+    }
+
+    // লাইভ ওয়েবসাইটে সেভ করা কন্টেন্ট লোড করা
+    (async function loadSavedContent() {
+      try {
+        const res = await fetch('https://steep-rain-e346.azwadahshafhossain.workers.dev/page-content?store=FP');
+        const d = await res.json();
+        if (d.ok && d.edits) {
+          if (d.edits.heroTitle && document.querySelector('h1')) document.querySelector('h1').innerHTML = d.edits.heroTitle;
+          if (d.edits.heroSubtitle && document.querySelector('.hero-bg p')) document.querySelector('.hero-bg p').innerText = d.edits.heroSubtitle;
+          if (d.edits.productImg && document.querySelector('.hero-bg img')) document.querySelector('.hero-bg img').src = d.edits.productImg;
+        }
+      } catch(err) {}
+    })();
+  })();
+</script>
 
 </body>
 </html>
