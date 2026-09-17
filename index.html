@@ -1310,18 +1310,18 @@
       });
     }
 
-    // লাইভ ওয়েবসাইটে সেভ করা কন্টেন্ট লোড করা
-    (async function loadSavedContent() {
-      try {
-        const res = await fetch('https://steep-rain-e346.azwadahshafhossain.workers.dev/page-content?store=FP');
-        const d = await res.json();
-        if (d.ok && d.edits) {
-          if (d.edits.heroTitle && document.querySelector('h1')) document.querySelector('h1').innerHTML = d.edits.heroTitle;
-          if (d.edits.heroSubtitle && document.querySelector('.hero-bg p')) document.querySelector('.hero-bg p').innerText = d.edits.heroSubtitle;
-          if (d.edits.productImg && document.querySelector('.hero-bg img')) document.querySelector('.hero-bg img').src = d.edits.productImg;
-        }
-      } catch(err) {}
-    })();
+    <script>
+  // ল্যান্ডিং পেজে লাইভ এডিট লোডার
+  (async function initVisualEdits() {
+    try {
+      const res = await fetch('https://steep-rain-e346.azwadahshafhossain.workers.dev/page-content?store=FP');
+      const data = await res.json();
+      if (data.ok && data.edits) {
+        if (data.edits.heroTitle && document.querySelector('h1')) document.querySelector('h1').innerHTML = data.edits.heroTitle;
+        if (data.edits.heroSubtitle && document.querySelector('.hero-bg p')) document.querySelector('.hero-bg p').innerText = data.edits.heroSubtitle;
+        if (data.edits.productImg && document.querySelector('.hero-bg img')) document.querySelector('.hero-bg img').src = data.edits.productImg;
+      }
+    } catch(e) {}
   })();
 </script>
 
