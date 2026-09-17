@@ -67,7 +67,7 @@
         <span class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-sm"><i class="fa-solid fa-paintbrush"></i></span>
         <div>
           <h3 class="font-bold text-sm">লাইভ ভিজ্যুয়াল পেজ এডিটর</h3>
-          <p class="text-[10px] text-slate-400">যেকোনো লেখার ওপর ক্লিক করে সরাসরি টাইপ করুন বা ছবিতে ক্লিক করুন</p>
+          <p class="text-[10px] text-slate-400">যেকোনো লেখার ওপর ক্লিক করে সরাসরি টাইপ করুন বা ছবিতে ক্লিক করে ছবি বদলান</p>
         </div>
       </div>
 
@@ -78,7 +78,7 @@
           <button onclick="setPreviewDevice('mobile')" id="btnMob" class="px-3 py-1 rounded-lg hover:bg-slate-700 text-slate-300 font-bold"><i class="fa-solid fa-mobile-screen mr-1"></i> মোবাইল</button>
         </div>
 
-        <button onclick="saveVisualEdits()" id="saveVisualBtn" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 text-white font-bold text-xs px-4 py-2 rounded-xl shadow-md flex items-center gap-1.5 transition">
+        <button onclick="saveVisualEdits()" id="saveVisualBtn" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 text-white font-bold text-xs px-4 py-2 rounded-xl shadow-md flex items-center gap-1.5 transition active:scale-95">
           <i class="fa-solid fa-floppy-disk"></i> Save & Publish (লাইভ করুন)
         </button>
 
@@ -91,7 +91,7 @@
     <!-- Live Canvas Frame Container -->
     <div class="flex-1 bg-slate-900 flex items-center justify-center p-2 sm:p-4 overflow-hidden">
       <div id="editorFrameWrapper" class="w-full h-full bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-300">
-        <iframe id="liveEditorIframe" src="./index.html" class="w-full h-full border-0"></iframe>
+        <iframe id="liveEditorIframe" src="./index.html?edit=1" class="w-full h-full border-0"></iframe>
       </div>
     </div>
   </div>
@@ -934,38 +934,71 @@
     }
 
     // ==========================================
-    // 🎨 LIVE VISUAL INLINE EDITOR LOGIC
+    // 🎨 LIVE VISUAL INLINE EDITOR LOGIC (BULLETPROOF)
     // ==========================================
     function openVisualEditor() {
       document.getElementById('visualEditorOverlay').classList.remove('hidden');
       const iframe = document.getElementById('liveEditorIframe');
       
-      // Iframe লোড হলে ইনলাইন এডিটিং সক্রিয় করা
+      // edit=1 দিয়ে ফ্রেম লোড
+      iframe.src = './index.html?edit=1';
+
       iframe.onload = function() {
         try {
           const doc = iframe.contentDocument || iframe.contentWindow.document;
-          
-          // সব টেক্সট এলিমেন্টে contenteditable সক্রিয় করা
-          const textElements = doc.querySelectorAll('h1, h2, h3, h4, p, span, a, li');
-          textElements.forEach(el => {
+
+          // ড্যাশ বর্ডার স্টাইল ইনজেকশন
+          const style = doc.createElement('style');
+          style.innerHTML = `
+            [contenteditable="true"]:hover {
+              outline: 2px dashed #10b981 !important;
+              outline-offset: 4px;
+              cursor: text !important;
+              background-color: rgba(16, 185, 129, 0.08) !important;
+              border-radius: 6px;
+            }
+            [contenteditable="true"]:focus {
+              outline: 2px solid #059669 !important;
+              outline-offset: 4px;
+              background-color: rgba(16, 185, 129, 0.12) !important;
+            }
+            img:hover {
+              outline: 3px dashed #3b82f6 !important;
+              cursor: pointer !important;
+            }
+          `;
+          doc.head.appendChild(style);
+
+          // টেক্সট এডিটিং চালু করা
+          const textNodes = doc.querySelectorAll('h1, h2, h3, h4, p, span, li, a');
+          textNodes.forEach(el => {
             el.setAttribute('contenteditable', 'true');
-            el.style.outline = 'none';
-            el.addEventListener('focus', () => el.style.boxShadow = '0 0 0 2px #10b981');
-            el.addEventListener('blur', () => el.style.boxShadow = 'none');
+            el.setAttribute('spellcheck', 'false');
+            el.addEventListener('click', (e) => {
+              if (el.tagName === 'A' || el.closest('a')) {
+                e.preventDefault();
+              }
+            });
           });
 
-          // ছবিতে ক্লিক করলে নতুন ইমেজ লিংক বসানোর অপশন
+          // ছবিতে ক্লিক করে ছবি বদলানো
           const images = doc.querySelectorAll('img');
           images.forEach(img => {
             img.style.cursor = 'pointer';
             img.title = 'ছবি পরিবর্তন করতে ক্লিক করুন';
             img.addEventListener('click', (e) => {
               e.preventDefault();
-              const newUrl = prompt('নতুন ছবির লিংক (Image URL) দিন:', img.src);
-              if (newUrl && newUrl.trim()) img.src = newUrl.trim();
+              e.stopPropagation();
+              const currentSrc = img.src;
+              const newUrl = prompt('🖼️ নতুন ছবির লিংক (Image URL) দিন:', currentSrc);
+              if (newUrl && newUrl.trim() && newUrl !== currentSrc) {
+                img.src = newUrl.trim();
+              }
             });
           });
-        } catch(e) {}
+        } catch(e) {
+          console.warn("Cross-origin frame error", e);
+        }
       };
     }
 
@@ -997,7 +1030,6 @@
         const iframe = document.getElementById('liveEditorIframe');
         const doc = iframe.contentDocument || iframe.contentWindow.document;
 
-        // এডিট করা মূল ডেটা সংগ্রহ
         const edits = {
           heroTitle: doc.querySelector('h1')?.innerHTML || '',
           heroSubtitle: doc.querySelector('.hero-bg p')?.innerText || '',
