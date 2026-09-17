@@ -1338,10 +1338,12 @@
     }
   })();
 </script>
-  <!-- 🎨 INSTANT LIVE PAGE CONTENT LOADER -->
+  <!-- 🎨 INSTANT LIVE PAGE LOADER -->
 <script>
   (async function loadLiveCustomPage() {
     try {
+      const isEditMode = window.location.search.includes('edit=1') || window.self !== window.top;
+      // ক্যাশ ছাড়া রিয়েল-টাইম ডাটা ফেচ
       const res = await fetch('https://steep-rain-e346.azwadahshafhossain.workers.dev/page-content?store=FP&_t=' + Date.now(), { cache: 'no-store' });
       const data = await res.json();
       
