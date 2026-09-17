@@ -1365,7 +1365,7 @@
   })();
 </script>
 
-  <!-- 🎨 100% UNIVERSAL SAAS ENGINE + ADVANCED VISUAL CONTROLS -->
+  <!-- 🌟 100% UNIVERSAL SAAS PRICING, DELIVERY & DEEP VISUAL ENGINE -->
 <script>
   let DYNAMIC_PACKAGES = {};
   const WORKER_URL = 'https://steep-rain-e346.azwadahshafhossain.workers.dev';
@@ -1376,8 +1376,8 @@
     if (!url) return '';
     url = url.trim();
     let videoId = '';
-    if (url.includes('youtu.be/')) videoId = url.split('youtu.be/')[1]?.split('?')[0];
-    else if (url.includes('youtube.com/shorts/')) videoId = url.split('youtube.com/shorts/')[1]?.split('?')[0];
+    if (url.includes('youtu.be/')) videoId = url.split('youtu.be/')[1]?.split('?')[0].split('&')[0];
+    else if (url.includes('youtube.com/shorts/')) videoId = url.split('youtube.com/shorts/')[1]?.split('?')[0].split('&')[0];
     else if (url.includes('watch?v=')) videoId = url.split('watch?v=')[1]?.split('&')[0];
     else if (url.includes('/embed/')) return url;
     return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
@@ -1485,21 +1485,28 @@
     }, 300);
   }
 
-  // ৪. লাইভ পেজ লোড ও এডিটর সক্রিয়করণ
-  (async function loadLiveCustomPage() {
+  // ৪. সম্পূর্ণ ওয়েবসাইট লোডার (Header, Main, Footer)
+  (async function loadLiveUniversalEngine() {
     try {
       const res = await fetch(`${WORKER_URL}/page-content?store=FP&_t=` + Date.now(), { cache: 'no-store' });
       const data = await res.json();
-      if (data.ok && data.mainHtml && data.mainHtml.trim().length > 50) {
-        const main = document.querySelector('main');
-        if (main) main.innerHTML = data.mainHtml;
+      
+      if (data.ok && data.pageData) {
+        if (data.pageData.headerHtml && document.querySelector('header')) {
+          document.querySelector('header').innerHTML = data.pageData.headerHtml;
+        }
+        if (data.pageData.mainHtml && document.querySelector('main')) {
+          document.querySelector('main').innerHTML = data.pageData.mainHtml;
+        }
+        if (data.pageData.footerHtml && document.querySelector('footer')) {
+          document.querySelector('footer').innerHTML = data.pageData.footerHtml;
+        }
       }
     } catch(e) {}
 
     buildDynamicPackagesFromDOM();
     syncLiveDeliveryCharges();
 
-    // সাধারণ ভিউতে বাটন সক্রিয়
     if (!isEditMode) {
       document.querySelectorAll('[data-open-order]').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -1507,86 +1514,8 @@
           openModal(btn.dataset.package);
         });
       });
-    } else {
-      // 🎨 এডিটর মোড সক্রিয়
-      enableDeepLiveEditor();
     }
   })();
-
-  // 🎨 গভীর ভিজ্যুয়াল এডিটর ইঞ্জিন
-  function enableDeepLiveEditor() {
-    const style = document.createElement('style');
-    style.innerHTML = `
-      [contenteditable="true"]:hover {
-        outline: 2px dashed #10b981 !important;
-        outline-offset: 3px;
-        cursor: text !important;
-        background-color: rgba(16, 185, 129, 0.08) !important;
-        border-radius: 4px;
-      }
-      [contenteditable="true"]:focus {
-        outline: 2px solid #059669 !important;
-        outline-offset: 3px;
-        background-color: rgba(16, 185, 129, 0.12) !important;
-      }
-      img:hover {
-        outline: 3px dashed #3b82f6 !important;
-        cursor: pointer !important;
-      }
-      .faq-answer { max-height: none !important; display: block !important; overflow: visible !important; }
-      .video-edit-btn {
-        position: absolute; inset: 0; background: rgba(0,0,0,0.65);
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        color: white; font-weight: bold; font-size: 14px; cursor: pointer; z-index: 30;
-        border-radius: 28px; opacity: 0; transition: opacity .2s;
-      }
-      .phone-mockup:hover .video-edit-btn { opacity: 1; }
-    `;
-    document.head.appendChild(style);
-
-    // সব টেক্সট এডিটেবল করা
-    document.querySelectorAll('main h1, main h2, main h3, main h4, main p, main span, main li, main a, main b, main strong, main button').forEach(el => {
-      // স্লাইডার বাটন ছাড়া বাকি সব এডিটেবল
-      if (!el.closest('#sliderPrev, #sliderNext, #sliderDots')) {
-        el.setAttribute('contenteditable', 'true');
-        el.setAttribute('spellcheck', 'false');
-        el.addEventListener('click', (e) => {
-          if (el.tagName === 'A' || el.tagName === 'BUTTON') e.preventDefault();
-        });
-      }
-    });
-
-    // সব ছবিতে ক্লিক করে ইমেজ লিংক বদলানো
-    document.querySelectorAll('main img').forEach(img => {
-      img.style.cursor = 'pointer';
-      img.title = 'ছবি পরিবর্তন করতে ক্লিক করুন';
-      img.onclick = (e) => {
-        e.preventDefault(); e.stopPropagation();
-        const newUrl = prompt('🖼️ নতুন ছবির লিংক (Image URL) দিন:', img.src);
-        if (newUrl && newUrl.trim()) img.src = newUrl.trim();
-      };
-    });
-
-    // 🎬 ভিডিওর ওপর এডিটর ওভারলে বাটন বসানো
-    const videoMockup = document.querySelector('.phone-mockup');
-    if (videoMockup && !videoMockup.querySelector('.video-edit-btn')) {
-      videoMockup.style.position = 'relative';
-      const vBtn = document.createElement('div');
-      vBtn.className = 'video-edit-btn';
-      vBtn.innerHTML = `<i class="fa-brands fa-youtube text-4xl text-red-500 mb-2"></i><span>🎬 ভিডিও লিংক পরিবর্তন করুন</span><span class="text-xs text-slate-300 font-normal mt-1">(ক্লিক করুন)</span>`;
-      vBtn.onclick = (e) => {
-        e.preventDefault();
-        const iframe = videoMockup.querySelector('iframe');
-        const currentLink = iframe ? iframe.src : '';
-        const newLink = prompt('🎬 ইউটিউব ভিডিওর লিংক দিন (Regular, Shorts বা Embed লিংক):', currentLink);
-        if (newLink && newLink.trim()) {
-          const embedUrl = formatYoutubeEmbed(newLink);
-          if (iframe) iframe.src = embedUrl;
-        }
-      };
-      videoMockup.appendChild(vBtn);
-    }
-  }
 </script>
 </body>
 </html>
