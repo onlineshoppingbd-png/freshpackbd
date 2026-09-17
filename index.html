@@ -1310,102 +1310,33 @@
       });
     }
 
-    <!-- 🎨 UNIVERSAL LIVE VISUAL AUTO-SYNC ENGINE -->
+    <!-- 🎨 INSTANT LIVE PAGE LOADER -->
 <script>
-  (function initUniversalLiveSync() {
-    const WORKER_URL = 'https://steep-rain-e346.azwadahshafhossain.workers.dev';
-    const isEditMode = window.location.search.includes('edit=1') || window.self !== window.top;
-
-    // ১. পেজের সব এলিমেন্টে স্বয়ংক্রিয় আইডি সেট করা
-    function tagAllElements() {
-      let count = 0;
-      document.querySelectorAll('h1, h2, h3, h4, p, span, a, li, img, iframe').forEach(el => {
-        if (!el.closest('script, noscript, style, svg, #orderModal')) {
-          if (!el.getAttribute('data-edit-id')) {
-            el.setAttribute('data-edit-id', 'node_' + (count++));
-          }
-        }
-      });
-    }
-
-    tagAllElements();
-
-    // ২. ক্লাউডফ্লেয়ার থেকে সেভ করা সব এডিট লোড ও ডিসপ্লে করা
-    async function applySavedEdits() {
-      try {
-        const res = await fetch(`${WORKER_URL}/page-content?store=FP`);
-        const data = await res.json();
-        if (data.ok && data.edits) {
-          Object.entries(data.edits).forEach(([id, val]) => {
-            const el = document.querySelector(`[data-edit-id="${id}"]`);
-            if (el) {
-              if (val.type === 'img') el.src = val.src;
-              else if (val.type === 'iframe') el.src = val.src;
-              else el.innerHTML = val.html;
-            }
+  (async function loadLiveCustomPage() {
+    try {
+      const isEditMode = window.location.search.includes('edit=1') || window.self !== window.top;
+      // ক্যাশ ছাড়া রিয়েল-টাইম ডাটা ফেচ
+      const res = await fetch('https://steep-rain-e346.azwadahshafhossain.workers.dev/page-content?store=FP&_t=' + Date.now(), { cache: 'no-store' });
+      const data = await res.json();
+      
+      if (data.ok && data.mainHtml && data.mainHtml.trim().length > 50) {
+        const main = document.querySelector('main');
+        if (main) {
+          main.innerHTML = data.mainHtml;
+          
+          // অর্ডার বাটনগুলো পুনরায় সক্রিয় করা
+          document.querySelectorAll('[data-open-order]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+              e.preventDefault();
+              if (typeof openModal === 'function') openModal(btn.dataset.package);
+            });
           });
         }
-      } catch (err) {}
-    }
-
-    applySavedEdits();
-
-    // ৩. যদি এডিটর মোডে ওপেন করা থাকে (Click-to-Edit Engine)
-    if (isEditMode) {
-      const style = document.createElement('style');
-      style.innerHTML = `
-        [contenteditable="true"]:hover {
-          outline: 2px dashed #10b981 !important;
-          outline-offset: 3px;
-          cursor: text !important;
-          background-color: rgba(16, 185, 129, 0.08) !important;
-          border-radius: 4px;
-        }
-        [contenteditable="true"]:focus {
-          outline: 2px solid #059669 !important;
-          outline-offset: 3px;
-          background-color: rgba(16, 185, 129, 0.12) !important;
-        }
-        img:hover, iframe:hover {
-          outline: 3px dashed #3b82f6 !important;
-          cursor: pointer !important;
-        }
-      `;
-      document.head.appendChild(style);
-
-      function activateEditing() {
-        tagAllElements();
-        document.querySelectorAll('[data-edit-id]').forEach(el => {
-          if (el.tagName === 'IMG') {
-            el.style.cursor = 'pointer';
-            el.title = 'ছবি পরিবর্তন করতে ক্লিক করুন';
-            el.onclick = (e) => {
-              e.preventDefault(); e.stopPropagation();
-              const newSrc = prompt('🖼️ নতুন ছবির লিংক (Image URL) দিন:', el.src);
-              if (newSrc && newSrc.trim()) el.src = newSrc.trim();
-            };
-          } else if (el.tagName === 'IFRAME') {
-            el.onclick = (e) => {
-              e.preventDefault();
-              const newVid = prompt('🎬 ইউটিউব ভিডিও Embed লিংক দিন:', el.src);
-              if (newVid && newVid.trim()) el.src = newVid.trim();
-            };
-          } else {
-            el.setAttribute('contenteditable', 'true');
-            el.setAttribute('spellcheck', 'false');
-            el.onclick = (e) => {
-              if (el.tagName === 'A' || el.closest('a')) e.preventDefault();
-            };
-          }
-        });
       }
-
-      window.addEventListener('DOMContentLoaded', activateEditing);
-      window.addEventListener('load', activateEditing);
-      setTimeout(activateEditing, 600);
+    } catch(e) {
+      console.warn("Live page load error", e);
     }
   })();
 </script>
-
 </body>
 </html>
