@@ -1,5 +1,3 @@
-code
-Html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -936,78 +934,63 @@ Html
     }
 
     // ==========================================
-    // 🎨 Open Visual Editor (Always Loads Latest Saved Edits)
-    function openVisualEditor() {
-      document.getElementById('visualEditorOverlay').classList.remove('hidden');
-      const iframe = document.getElementById('liveEditorIframe');
-      iframe.src = './index.html?edit=1&_t=' + Date.now();
+    // 🎨 Open Visual Editor
+function openVisualEditor() {
+  document.getElementById('visualEditorOverlay').classList.remove('hidden');
+  const iframe = document.getElementById('liveEditorIframe');
+  // ক্যাশ ছাড়া লাইভ পেজ লোড
+  iframe.src = './index.html?edit=1&_t=' + Date.now();
 
-      iframe.onload = async function() {
-        try {
-          const doc = iframe.contentDocument || iframe.contentWindow.document;
-          const mainEl = doc.querySelector('main');
-          if (!mainEl) return;
+  iframe.onload = function() {
+    try {
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
 
-          // ১. ক্লাউডফ্লেয়ার থেকে সেভ করা আগের এডিট টেনে এনে আইফ্রেমে বসানো
-          try {
-            const res = await fetch(`${WORKER_URL}/page-content?store=FP&_t=` + Date.now(), { cache: 'no-store' });
-            const data = await res.json();
-            if (data.ok && data.mainHtml && data.mainHtml.trim().length > 50) {
-              mainEl.innerHTML = data.mainHtml;
-            }
-          } catch (err) {}
-
-          // ২. এডিটর স্টাইল ইনজেক্ট (সবুজ ড্যাশ বর্ডার)
-          const style = doc.createElement('style');
-          style.innerHTML = `
-            [contenteditable="true"]:hover {
-              outline: 2px dashed #10b981 !important;
-              outline-offset: 3px;
-              cursor: text !important;
-              background-color: rgba(16, 185, 129, 0.08) !important;
-              border-radius: 4px;
-            }
-            [contenteditable="true"]:focus {
-              outline: 2px solid #059669 !important;
-              outline-offset: 3px;
-              background-color: rgba(16, 185, 129, 0.12) !important;
-            }
-            img:hover {
-              outline: 3px dashed #3b82f6 !important;
-              cursor: pointer !important;
-            }
-          `;
-          doc.head.appendChild(style);
-
-          // ৩. সব লেখায় এডিটিং সক্রিয় করা
-          doc.querySelectorAll('main h1, main h2, main h3, main h4, main p, main span, main li, main a, main b, main strong').forEach(el => {
-            el.setAttribute('contenteditable', 'true');
-            el.setAttribute('spellcheck', 'false');
-            if (el.tagName === 'A' || el.closest('a')) {
-              el.addEventListener('click', (e) => e.preventDefault());
-            }
-          });
-
-          // ৪. ছবিতে ক্লিক করলে ছবি বদলানো
-          doc.querySelectorAll('main img').forEach(img => {
-            img.style.cursor = 'pointer';
-            img.title = 'ছবি পরিবর্তন করতে ক্লিক করুন';
-            img.onclick = (e) => {
-              e.preventDefault(); e.stopPropagation();
-              const newUrl = prompt('🖼️ নতুন ছবির লিংক (Image URL) দিন:', img.src);
-              if (newUrl && newUrl.trim()) img.src = newUrl.trim();
-            };
-          });
-
-        } catch(e) {
-          console.warn("Iframe load error", e);
+      // স্টাইল ইনজেক্ট
+      const style = doc.createElement('style');
+      style.innerHTML = `
+        [contenteditable="true"]:hover {
+          outline: 2px dashed #10b981 !important;
+          outline-offset: 3px;
+          cursor: text !important;
+          background-color: rgba(16, 185, 129, 0.08) !important;
+          border-radius: 4px;
         }
-      };
-    }
-    // ❌ এডিটর বন্ধ করার ফাংশন (যা আগের কোডে মিসিং ছিল)
-    function closeVisualEditor() {
-      document.getElementById('visualEditorOverlay').classList.add('hidden');
-    }
+        [contenteditable="true"]:focus {
+          outline: 2px solid #059669 !important;
+          outline-offset: 3px;
+          background-color: rgba(16, 185, 129, 0.12) !important;
+        }
+        img:hover {
+          outline: 3px dashed #3b82f6 !important;
+          cursor: pointer !important;
+        }
+      `;
+      doc.head.appendChild(style);
+
+      // সব টেক্সট এডিটেবল করা
+      doc.querySelectorAll('main h1, main h2, main h3, main h4, main p, main span, main li, main a, main div').forEach(el => {
+        if (!el.children.length || el.tagName === 'P' || el.tagName === 'H1' || el.tagName === 'H2' || el.tagName === 'H3' || el.tagName === 'SPAN') {
+          el.setAttribute('contenteditable', 'true');
+          el.setAttribute('spellcheck', 'false');
+        }
+        if (el.tagName === 'A') {
+          el.addEventListener('click', (e) => e.preventDefault());
+        }
+      });
+
+      // ছবিতে ক্লিক করলে ইমেজ লিংক চেঞ্জ
+      doc.querySelectorAll('main img').forEach(img => {
+        img.style.cursor = 'pointer';
+        img.title = 'ছবি পরিবর্তন করতে ক্লিক করুন';
+        img.onclick = (e) => {
+          e.preventDefault(); e.stopPropagation();
+          const newUrl = prompt('🖼️ নতুন ছবির লিংক (Image URL) দিন:', img.src);
+          if (newUrl && newUrl.trim()) img.src = newUrl.trim();
+        };
+      });
+    } catch(e) {}
+  };
+}
 
     function setPreviewDevice(dev) {
       const wrap = document.getElementById('editorFrameWrapper');
@@ -1024,10 +1007,46 @@ Html
       }
     }
 
-    async function saveVisualEdits() {
-      const btn = document.getElementById('saveVisualBtn');
-      btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ ও পাবলিশ হচ্ছে...`;
+   // 💾 Save & Publish All Visual Changes
+async function saveVisualEdits() {
+  const btn = document.getElementById('saveVisualBtn');
+  btn.disabled = true;
+  btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ ও পাবলিশ হচ্ছে...`;
+
+  try {
+    const iframe = document.getElementById('liveEditorIframe');
+    const doc = iframe.contentDocument || iframe.contentWindow.document;
+    const mainEl = doc.querySelector('main');
+
+    if (!mainEl) throw new Error("Main element not found");
+
+    // অতিরিক্ত স্টাইল ও contenteditable মুছে ক্লিন HTML তৈরি
+    const clone = mainEl.cloneNode(true);
+    clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+    clone.querySelectorAll('[spellcheck]').forEach(el => el.removeAttribute('spellcheck'));
+
+    const cleanHtml = clone.innerHTML;
+
+    const res = await fetch(`${WORKER_URL}/page-content`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ storeCode: 'FP', mainHtml: cleanHtml })
+    });
+    
+    const data = await res.json();
+    if (data.ok) {
+      showToast("🎉 ওয়েবসাইট সফলভাবে আপডেট ও লাইভ হয়েছে!");
+      closeVisualEditor();
+    } else {
+      alert("❌ সেভ হতে সমস্যা হয়েছে: " + (data.error || 'Server error'));
+    }
+  } catch(err) {
+    alert("সার্ভারে সমস্যা হয়েছে: " + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Save & Publish (লাইভ করুন)`;
+  }
+}
 
       try {
         const iframe = document.getElementById('liveEditorIframe');
