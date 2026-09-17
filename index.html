@@ -1222,5 +1222,20 @@
     setInterval(showRandomSalesPopup, 15000);
     setTimeout(showRandomSalesPopup, 3000);
   </script>
+<script>
+  // ল্যান্ডিং পেজে লাইভ এডিট লোডার
+  (async function initVisualEdits() {
+    try {
+      const res = await fetch('https://steep-rain-e346.azwadahshafhossain.workers.dev/page-content?store=FP');
+      const data = await res.json();
+      if (data.ok && data.edits) {
+        if (data.edits.heroTitle) document.querySelector('h1').innerHTML = data.edits.heroTitle;
+        if (data.edits.heroSubtitle) document.querySelector('.hero-bg p').innerText = data.edits.heroSubtitle;
+        if (data.edits.productImg) document.querySelector('.hero-bg img').src = data.edits.productImg;
+      }
+    } catch(e) {}
+  })();
+</script>
+
 </body>
 </html>
