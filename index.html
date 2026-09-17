@@ -1365,11 +1365,11 @@
   })();
 </script>
 
-  <!-- 🌟 100% UNIVERSAL SAAS PRICING & DYNAMIC DELIVERY ENGINE -->
+  <!-- 🌟 100% UNIVERSAL SAAS DYNAMIC PRICING & ORDER ENGINE -->
 <script>
   let DYNAMIC_PACKAGES = {};
 
-  // ১. পেজের কার্ড থেকে প্যাকেজ ও দাম অটো-রিড করা
+  // ১. স্ক্রিনের যেকোনো কার্ড থেকে প্রোডাক্ট ও প্যাকেজের নাম-দাম অটো-রিড করা
   function buildDynamicPackagesFromDOM() {
     DYNAMIC_PACKAGES = {};
     const cards = document.querySelectorAll('.price-card');
@@ -1381,6 +1381,7 @@
       const priceEl = card.querySelector('.text-4xl, .text-5xl, .price-val');
       const btn = card.querySelector('[data-open-order]');
 
+      // কার্ডের ভেতর ক্লায়েন্টের লেখা আসল নাম ও দাম রিড করা
       const title = titleEl ? titleEl.innerText.trim() : `প্যাকেজ ${index + 1}`;
       const priceNum = priceEl ? parseInt(toEn(priceEl.innerText).replace(/[^\d]/g, ''), 10) || 0 : 0;
       const pkgKey = 'pkg_' + index;
@@ -1393,16 +1394,17 @@
         price: priceNum
       };
 
+      // চেকআউট মোডালের ড্রপডাউনে স্বয়ংক্রিয়ভাবে নতুন প্যাকেজ যোগ করা
       if (select) {
         const opt = document.createElement('option');
         opt.value = pkgKey;
         opt.textContent = `${title} — ৳${toBn(priceNum)}`;
-        if (index === 1 || cards.length === 1) opt.selected = true;
+        if (index === 1 || cards.length === 1) opt.selected = true; // ২য় প্যাকেজ ডিফল্ট সিলেক্ট
         select.appendChild(opt);
       }
     });
 
-    // হিরো সেকশন ও স্টিকি বার আপডেট
+    // হিরো সেকশন ও নিচের স্টিকি বারের দাম আপডেট করা
     const firstPkg = Object.values(DYNAMIC_PACKAGES)[0];
     if (firstPkg) {
       const heroPrice = document.querySelector('.hero-bg .text-3xl');
@@ -1412,45 +1414,7 @@
     }
   }
 
-  // ২. পেজের লেখা থেকে ডেলিভারি চার্জ অটো-সিঙ্ক করা
-  function syncLiveDeliveryCharges() {
-    const pageText = document.querySelector('main')?.innerText || '';
-
-    // ঢাকার ভেতরের চার্জ রিড করা
-    const insideMatch = pageText.match(/ঢাকার ভিতরে[^\d]*(\d+)/) || pageText.match(/ঢাকা সিটি[^\d]*(\d+)/);
-    if (insideMatch && insideMatch[1]) {
-      const charge = parseInt(toEn(insideMatch[1]), 10);
-      if (!isNaN(charge) && DELIVERY && DELIVERY.inside) {
-        DELIVERY.inside.charge = charge;
-      }
-    } else if (pageText.includes('ফ্রি ডেলিভারি') || pageText.includes('ডেলিভারি চার্জ ফ্রি')) {
-      if (DELIVERY && DELIVERY.inside) DELIVERY.inside.charge = 0;
-    }
-
-    // ঢাকার বাইরের চার্জ রিড করা
-    const outsideMatch = pageText.match(/ঢাকার বাইরে[^\d]*(\d+)/) || pageText.match(/ঢাকার বাহিরে[^\d]*(\d+)/) || pageText.match(/সারা বাংলাদেশ[^\d]*(\d+)/);
-    if (outsideMatch && outsideMatch[1]) {
-      const charge = parseInt(toEn(outsideMatch[1]), 10);
-      if (!isNaN(charge) && DELIVERY && DELIVERY.outside) {
-        DELIVERY.outside.charge = charge;
-      }
-    } else if (pageText.includes('ফ্রি ডেলিভারি') || pageText.includes('ডেলিভারি চার্জ ফ্রি')) {
-      if (DELIVERY && DELIVERY.outside) DELIVERY.outside.charge = 0;
-    }
-
-    // চেকআউট ফর্মের রেডিও বাটনে নতুন ডেলিভারি চার্জ দেখানো
-    const insidePill = document.querySelector('input[name="deliveryArea"][value="inside"]')?.closest('label')?.querySelector('.pill');
-    if (insidePill && DELIVERY.inside) {
-      insidePill.innerHTML = `<i class="fa-solid fa-city"></i> ঢাকার ভিতরে <strong>(${DELIVERY.inside.charge === 0 ? 'ফ্রি' : '৳' + toBn(DELIVERY.inside.charge)})</strong>`;
-    }
-
-    const outsidePill = document.querySelector('input[name="deliveryArea"][value="outside"]')?.closest('label')?.querySelector('.pill');
-    if (outsidePill && DELIVERY.outside) {
-      outsidePill.innerHTML = `<i class="fa-solid fa-map-location-dot"></i> ঢাকার বাইরে <strong>(${DELIVERY.outside.charge === 0 ? 'ফ্রি' : '৳' + toBn(DELIVERY.outside.charge)})</strong>`;
-    }
-  }
-
-  // ৩. সম্পূর্ণ ক্যালকুলেশন হ্যান্ডলার
+  // ২. ডায়নামিক ক্যালকুলেশন ইঞ্জিন
   function getSelection() {
     const qtySelect = document.getElementById('quantity');
     const pkgKey = qtySelect ? qtySelect.value : 'pkg_0';
@@ -1471,7 +1435,7 @@
 
     if (sumPkg) sumPkg.textContent = pkg.label;
     if (sumPrice) sumPrice.textContent = money(pkg.price);
-    if (sumDelivery) sumDelivery.textContent = del.charge === 0 ? 'ফ্রি (৳০)' : money(del.charge);
+    if (sumDelivery) sumDelivery.textContent = money(del.charge);
     if (sumTotal) sumTotal.textContent = money(total);
   }
 
@@ -1489,7 +1453,7 @@
     }, 300);
   }
 
-  // ৪. ক্লাউডফ্লেয়ার থেকে সেভ করা পেজ লোড ও লাইভ ইনিশিয়ালাইজেশন
+  // ৩. ক্লাউডফ্লেয়ার থেকে সেভ করা পেজ লোড ও স্বয়ংক্রিয় সিঙ্ক
   (async function loadLiveUniversalEngine() {
     try {
       const res = await fetch('https://steep-rain-e346.azwadahshafhossain.workers.dev/page-content?store=FP&_t=' + Date.now(), { cache: 'no-store' });
@@ -1503,11 +1467,10 @@
       }
     } catch(e) {}
 
-    // প্যাকেজ ও ডেলিভারি চার্জ অটো-সিঙ্ক করা
+    // পেজের সব কার্ড থেকে ডায়নামিক হিসাব চালু করা
     buildDynamicPackagesFromDOM();
-    syncLiveDeliveryCharges();
 
-    // বাটন ক্লিক ইভেন্ট পুনরায় চালু করা
+    // বাটন ক্লিক ইভেন্ট পুনরায় কানেক্ট করা
     document.querySelectorAll('[data-open-order]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
