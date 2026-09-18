@@ -1003,6 +1003,29 @@
             }
           });
 
+          // ৫. ইউটিউব ভিডিওতে ক্লিক করলে ভিডিও লিংক বদলানো
+          doc.querySelectorAll('main iframe').forEach(iframe => {
+            if (iframe.src.includes('youtube.com') || iframe.src.includes('youtu.be')) {
+              iframe.style.cursor = 'pointer';
+              iframe.title = 'ইউটিউব ভিডিও পরিবর্তন করতে ক্লিক করুন';
+              
+              iframe.onclick = (e) => {
+                e.preventDefault(); e.stopPropagation();
+                const newYtUrl = prompt('🎬 নতুন ইউটিউব ভিডিওর এমবেড লিংক (Embed URL) দিন:', iframe.src);
+                if (newYtUrl && newYtUrl.trim()) {
+                  let embedLink = newYtUrl.trim();
+                  if (embedLink.includes('watch?v=')) {
+                    embedLink = embedLink.replace('watch?v=', 'embed/');
+                  } else if (embedLink.includes('youtu.be/')) {
+                    embedLink = embedLink.replace('youtu.be/', 'www.youtube.com/embed/');
+                  }
+                  iframe.src = embedLink;
+                  showToast("✅ ভিডিও লিংক আপডেট করা হয়েছে! সেভ করতে 'Save & Publish' চাপুন।");
+                }
+              };
+            }
+          });
+
           // ৪. ছবিতে ক্লিক করলে ছবি বদলানো
           doc.querySelectorAll('main img').forEach(img => {
             img.style.cursor = 'pointer';
