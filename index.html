@@ -218,8 +218,8 @@
         <div class="mt-9 max-w-2xl mx-auto bg-brand-50/80 border border-brand-200 rounded-2xl p-4 text-center">
           <p class="text-sm font-semibold text-brand-950">
             <i class="fa-solid fa-truck text-brand-600 mr-1.5"></i> ডেলিভারি চার্জ: 
-            <span id="deliveryInsideText" class="text-brand-800 font-bold">ঢাকার ভিতরে ৳৭০</span> | 
-            <span id="deliveryOutsideText" class="text-brand-800 font-bold">ঢাকার বাইরে ৳১১০</span> 
+            <span class="text-brand-800 font-bold">ঢাকার ভিতরে ৳৭০</span> | 
+            <span class="text-brand-800 font-bold">ঢাকার বাইরে ৳১১০</span> 
           </p>
         </div>
       </div>
@@ -362,17 +362,12 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT & SMART SYNC ENGINE -->
+  <!-- JAVASCRIPT & ROBUST SMART SYNC ENGINE -->
   <script>
     const CONFIG = {
       WORKER_URL: 'https://steep-rain-e346.azwadahshafhossain.workers.dev',
       STORE_CODE: 'FP',
       STORE_NAME: 'FreshPack BD'
-    };
-
-    let DELIVERY = {
-      inside:  { label: 'ঢাকার ভিতরে', charge: 70 },
-      outside: { label: 'ঢাকার বাইরে', charge: 110 }
     };
 
     let DYNAMIC_PACKAGES = {};
@@ -389,7 +384,28 @@
       if(btn) btn.addEventListener('click', () => item.classList.toggle('open'));
     });
 
-    // Smart DOM Package, Price & Delivery Charge Sync Engine
+    // Extract Delivery Charges Dynamically from Page DOM Elements
+    function getPageDeliveryCharges() {
+      let inside = 70, outside = 110;
+      const allTexts = document.body.innerText || '';
+      
+      // Match pattern like "ঢাকার ভিতরে ৳৯০" or similar
+      const insideMatch = allTexts.match(/ঢাকার ভিতরে[^\d]*(\d+)/);
+      if (insideMatch && insideMatch[1]) {
+        const val = parseInt(toEn(insideMatch[1]), 10);
+        if (!isNaN(val)) inside = val;
+      }
+
+      const outsideMatch = allTexts.match(/ঢাকার বাইরে[^\d]*(\d+)/) || allTexts.match(/ঢাকার বাহিরে[^\d]*(\d+)/);
+      if (outsideMatch && outsideMatch[1]) {
+        const val = parseInt(toEn(outsideMatch[1]), 10);
+        if (!isNaN(val)) outside = val;
+      }
+
+      return { inside, outside };
+    }
+
+    // Smart DOM Package, Price & Live Delivery Charge Sync Engine
     function smartSyncEngine() {
       DYNAMIC_PACKAGES = {};
       const cards = document.querySelectorAll('.price-card');
@@ -417,25 +433,15 @@
         }
       });
 
-      // Auto-extract delivery charges if edited anywhere on the page
-      const pageText = document.querySelector('main')?.innerText || '';
-      const insideMatch = pageText.match(/ঢাকার ভিতরে[^\d]*(\d+)/);
-      if (insideMatch && insideMatch[1]) {
-        const ch = parseInt(toEn(insideMatch[1]), 10);
-        if (!isNaN(ch)) DELIVERY.inside.charge = ch;
-      }
-      const outsideMatch = pageText.match(/ঢাকার বাইরে[^\d]*(\d+)/) || pageText.match(/ঢাকার বাহিরে[^\d]*(\d+)/);
-      if (outsideMatch && outsideMatch[1]) {
-        const ch = parseInt(toEn(outsideMatch[1]), 10);
-        if (!isNaN(ch)) DELIVERY.outside.charge = ch;
-      }
+      // Get latest charges
+      const charges = getPageDeliveryCharges();
 
-      // Update Delivery Pills in Modal
+      // Update Delivery Pills in Modal with exact numbers
       const insidePill = document.getElementById('insidePillText');
-      if (insidePill) insidePill.innerHTML = `<i class="fa-solid fa-city"></i> ঢাকার ভিতরে <strong>(৳${toBn(DELIVERY.inside.charge)})</strong>`;
+      if (insidePill) insidePill.innerHTML = `<i class="fa-solid fa-city"></i> ঢাকার ভিতরে <strong>(৳${toBn(charges.inside)})</strong>`;
       
       const outsidePill = document.getElementById('outsidePillText');
-      if (outsidePill) outsidePill.innerHTML = `<i class="fa-solid fa-map-location-dot"></i> ঢাকার বাইরে <strong>(৳${toBn(DELIVERY.outside.charge)})</strong>`;
+      if (outsidePill) outsidePill.innerHTML = `<i class="fa-solid fa-map-location-dot"></i> ঢাকার বাইরে <strong>(৳${toBn(charges.outside)})</strong>`;
 
       // Update Sticky Bar Price Automatically from 1st Package
       const firstPkg = Object.values(DYNAMIC_PACKAGES)[0];
@@ -449,14 +455,18 @@
     }
 
     function getSelection() {
+      smartSyncEngine(); // Always fetch fresh page data
       const qtySelect = document.getElementById('quantity');
       const pkgKey = qtySelect ? qtySelect.value : 'pkg_0';
       const areaInput = document.querySelector('input[name="deliveryArea"]:checked');
       const area = areaInput ? areaInput.value : 'inside';
       
+      const charges = getPageDeliveryCharges();
       const pkg = DYNAMIC_PACKAGES[pkgKey] || Object.values(DYNAMIC_PACKAGES)[0] || { label: 'প্যাকেজ', price: 650 };
-      const del = DELIVERY[area] || DELIVERY.inside;
-      return { pkg, del, total: pkg.price + del.charge };
+      const delCharge = area === 'outside' ? charges.outside : charges.inside;
+      const delLabel = area === 'outside' ? 'ঢাকার বাইরে' : 'ঢাকার ভিতরে';
+
+      return { pkg, del: { label: delLabel, charge: delCharge }, total: pkg.price + delCharge };
     }
 
     function updateSummary() {
