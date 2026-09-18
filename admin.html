@@ -955,14 +955,22 @@
           const mainEl = doc.querySelector('main');
           if (!mainEl) return;
 
-          // ১. ক্লাউডফ্লেয়ার থেকে সেভ করা আগের এডিট থাকলে তা আইফ্রেমে বসানো
+          // ১. সরাসরি লাইভ সাইট (index.html) থেকে লেটেস্ট কোড ফেচ করে আনা
           try {
-            const res = await fetch(`${WORKER_URL}/page-content?store=FP&_t=` + Date.now(), { cache: 'no-store' });
-            const data = await res.json();
-            if (data.ok && data.mainHtml && data.mainHtml.trim().length > 50) {
-              mainEl.innerHTML = data.mainHtml;
+            const res = await fetch('./index.html?_t=' + Date.now(), { cache: 'no-store' });
+            const liveHtml = await res.text();
+            
+            // লাইভ এইচটিএমএল থেকে শুধু <main> ট্যাগ বা মূল কন্টেন্ট এক্সট্রাক্ট করা
+            const parser = new DOMParser();
+            const docLive = parser.parseFromString(liveHtml, 'text/html');
+            const liveMain = docLive.querySelector('main');
+
+            if (liveMain && liveMain.innerHTML.trim().length > 50) {
+              mainEl.innerHTML = liveMain.innerHTML;
             }
-          } catch (err) {}
+          } catch (err) {
+            console.warn("Could not fetch live content, using default iframe content.", err);
+          }
 
           // ২. এডিটর স্টাইল ইনজেক্ট (সবুজ ড্যাশ বর্ডার) - শুধুমাত্র এডমিন এডিটর মোডের জন্য
           const style = doc.createElement('style');
