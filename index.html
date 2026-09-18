@@ -7,19 +7,49 @@
   <meta name="description" content="প্রিমিয়াম Aluminum Foil Storage Bag — ফ্রিজে মাছ, মাংস ও সবজি সংরক্ষণ করুন একদম টাটকা। ক্যাশ অন ডেলিভারি, সারাদেশে ডেলিভারি। ১০ পিস মাত্র ৳৩৯০।" />
   <meta name="theme-color" content="#064e3b" />
 
-  <!-- Meta Pixel Code -->
+ <!-- Dynamic Meta Pixel Code (Fetched from Worker Settings) -->
   <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1507252884365898');
-    fbq('track', 'PageView');
+    async function initDynamicPixel() {
+      try {
+        // আপনার ওয়ার্কার থেকে স্টোরের সেটিংস ফেচ করা
+        const res = await fetch('https://steep-rain-e346.azwadahshafhossain.workers.dev/settings?store=FP', { cache: 'no-store' });
+        const data = await res.json();
+        
+        if (data.ok && data.settings && data.settings.metaPixelId) {
+          const pixelId = data.settings.metaPixelId.trim();
+          if (pixelId && /^\d+$/.test(pixelId)) {
+            // ফেসবুক পিক্সেল ইনিশিয়ালাইজ করা
+            !(function (f, b, e, v, n, t, s) {
+              if (f.fbq) return;
+              n = f.fbq = function () {
+                n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+              };
+              if (!f._fbq) f._fbq = n;
+              n.push = n;
+              n.loaded = !0;
+              n.version = '2.0';
+              n.queue = [];
+              t = b.createElement(e);
+              t.async = !0;
+              t.src = v;
+              s = b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t, s);
+            })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
+            fbq('init', pixelId);
+            fbq('track', 'PageView');
+          }
+        }
+      } catch (err) {
+        console.warn("Could not load dynamic pixel:", err);
+      }
+    }
+
+    initDynamicPixel();
   </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=0000000000&ev=PageView&noscript=1"/>
+  </noscript>
 
   <!-- Google Font: Hind Siliguri -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
