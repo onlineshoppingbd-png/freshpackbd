@@ -110,6 +110,11 @@
 
     .field { width: 100%; border: 1.5px solid #d1fae5; background: #f8fbf9; border-radius: 12px; padding: 12px 14px; font-size: 15px; outline: none; color: #052e26; transition: all .25s; }
     .field:focus { border-color: #059669; background: #fff; box-shadow: 0 0 0 4px rgba(16,185,129,.15); }
+    
+    .radio-pill input { position: absolute; opacity: 0; pointer-events: none; }
+    .radio-pill .pill { border: 1.5px solid #d1fae5; background: #f8fbf9; border-radius: 12px; padding: 10px 12px; cursor: pointer; transition: all .25s; display: flex; align-items: center; gap: 8px; justify-content: center; font-weight: 500; color: #065f46; }
+    .radio-pill input:checked + .pill { border-color: #059669; background: #064e3b; color: #fff; box-shadow: 0 8px 20px -10px rgba(6,78,59,.6); }
+
     .no-scroll { overflow: hidden; }
 
     .phone-mockup {
@@ -182,7 +187,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-2xl mx-auto">
           <h2 class="text-2xl sm:text-4xl font-bold text-brand-950 leading-tight">আপনার পছন্দের প্যাকেজটি বেছে নিন</h2>
-          <p class="mt-2 text-sm text-slate-600">যত বেশি নিবেন, প্রতি পিসে সেভ করবেন তত বেশি। সম্পূর্ণ ক্যাশ অন ডেলিভারি।</p>
+          <p class="mt-2 text-sm text-slate-600">যত বেশি নিবেন, প্রতি পিসে সেভ করবেন তত বেশি। সম্পূর্ণ ক্যাশ অন ডেলিভারি সুবিধা।</p>
         </div>
 
         <div class="mt-10 md:mt-14 grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
@@ -247,7 +252,7 @@
     <div class="modal-card relative w-full sm:max-w-lg bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden max-h-[94vh] flex flex-col">
       <div class="bg-gradient-to-r from-brand-900 to-brand-800 text-white px-6 py-4 flex items-center justify-between shrink-0">
         <h3 class="text-lg font-bold">অর্ডার ফর্ম</h3>
-        <button id="modalClose" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white"><i class="fa-solid fa-xmark"></i></button>
+        <button id="modalClose" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="modal-scroll overflow-y-auto p-6">
         <form id="orderForm" class="space-y-4" novalidate>
@@ -267,9 +272,42 @@
             <label class="block text-xs font-bold text-slate-700 mb-1">সম্পূর্ণ ঠিকানা *</label>
             <textarea id="address" name="address" rows="2" placeholder="বাসা, রোড, থানা, জেলা" class="field resize-none py-2.5" required></textarea>
           </div>
-          <div class="bg-brand-50 border border-brand-100 rounded-2xl p-4 text-sm">
-            <div class="flex justify-between items-center"><span class="font-bold text-brand-950">সর্বমোট প্রদেয়</span><span id="sumTotal" class="text-2xl font-extrabold text-brand-900">৳৭২০</span></div>
+
+          <!-- Delivery Area Selection -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">ডেলিভারি এলাকা</label>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="radio-pill relative">
+                <input type="radio" name="deliveryArea" value="inside" checked />
+                <span class="pill text-xs sm:text-sm"><i class="fa-solid fa-city"></i> ঢাকার ভিতরে <strong>(৳৭০)</strong></span>
+              </label>
+              <label class="radio-pill relative">
+                <input type="radio" name="deliveryArea" value="outside" />
+                <span class="pill text-xs sm:text-sm"><i class="fa-solid fa-map-location-dot"></i> ঢাকার বাইরে <strong>(৳১১০)</strong></span>
+              </label>
+            </div>
           </div>
+
+          <!-- Payment Method Box -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">পেমেন্ট মেথড</label>
+            <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center text-sm"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+              <div>
+                <span class="text-sm font-bold text-emerald-950 block">ক্যাশ অন ডেলিভারি (Cash on Delivery)</span>
+                <span class="text-xs text-emerald-800">পণ্য হাতে পেয়ে দেখে মূল্য পরিশোধ করবেন।</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bill Summary Box -->
+          <div class="bg-brand-50 border border-brand-100 rounded-2xl p-4 text-sm space-y-1.5">
+            <div class="flex justify-between text-slate-700"><span>প্যাকেজ মূল্য (<span id="sumPkg">প্যাকেজ</span>)</span><span id="sumPrice" class="font-bold">৳০</span></div>
+            <div class="flex justify-between text-slate-700"><span>ডেলিভারি চার্জ</span><span id="sumDelivery" class="font-bold">৳৭০</span></div>
+            <div class="border-t border-dashed border-brand-200 my-1"></div>
+            <div class="flex justify-between items-center"><span class="font-bold text-brand-950 text-base">সর্বমোট প্রদেয়</span><span id="sumTotal" class="text-2xl font-extrabold text-brand-900">৳০</span></div>
+          </div>
+
           <button type="submit" id="submitBtn" class="btn w-full bg-gradient-to-r from-gold-500 to-gold-400 text-brand-950 font-bold text-lg px-6 py-4 rounded-xl shadow-soft">
             অর্ডার কনফার্ম করুন (ক্যাশ অন ডেলিভারি)
           </button>
@@ -284,6 +322,11 @@
       WORKER_URL: 'https://steep-rain-e346.azwadahshafhossain.workers.dev',
       STORE_CODE: 'FP',
       STORE_NAME: 'FreshPack BD'
+    };
+
+    const DELIVERY = {
+      inside:  { label: 'ঢাকার ভিতরে', charge: 70 },
+      outside: { label: 'ঢাকার বাইরে', charge: 110 }
     };
 
     let DYNAMIC_PACKAGES = {};
@@ -336,12 +379,23 @@
       }
     }
 
-    function updateSummary() {
+    function getSelection() {
       const qtySelect = document.getElementById('quantity');
       const pkgKey = qtySelect ? qtySelect.value : 'pkg_0';
-      const pkg = DYNAMIC_PACKAGES[pkgKey] || Object.values(DYNAMIC_PACKAGES)[0] || { price: 650 };
-      const sumTotal = document.getElementById('sumTotal');
-      if (sumTotal) sumTotal.textContent = money(pkg.price + 70);
+      const areaInput = document.querySelector('input[name="deliveryArea"]:checked');
+      const area = areaInput ? areaInput.value : 'inside';
+      
+      const pkg = DYNAMIC_PACKAGES[pkgKey] || Object.values(DYNAMIC_PACKAGES)[0] || { label: 'প্যাকেজ', price: 650 };
+      const del = DELIVERY[area] || DELIVERY.inside;
+      return { pkg, del, total: pkg.price + del.charge };
+    }
+
+    function updateSummary() {
+      const { pkg, del, total } = getSelection();
+      document.getElementById('sumPkg').textContent = pkg.label;
+      document.getElementById('sumPrice').textContent = money(pkg.price);
+      document.getElementById('sumDelivery').textContent = money(del.charge);
+      document.getElementById('sumTotal').textContent = money(total);
     }
 
     const modal = document.getElementById('orderModal');
@@ -351,8 +405,12 @@
       if (pkgKey && DYNAMIC_PACKAGES[pkgKey] && qtySelect) qtySelect.value = pkgKey;
       updateSummary();
       modal.classList.add('open');
+      document.body.classList.add('no-scroll');
     }
-    function closeModal() { modal.classList.remove('open'); }
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+    }
 
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('[data-open-order]');
@@ -362,23 +420,26 @@
     document.getElementById('modalClose')?.addEventListener('click', closeModal);
     document.getElementById('modalBackdrop')?.addEventListener('click', closeModal);
     document.getElementById('quantity')?.addEventListener('change', updateSummary);
+    document.querySelectorAll('input[name="deliveryArea"]').forEach(input => {
+      input.addEventListener('change', updateSummary);
+    });
 
     // Form Submission
     document.getElementById('orderForm')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const qtySelect = document.getElementById('quantity');
-      const pkg = DYNAMIC_PACKAGES[qtySelect.value] || { label: '২০ পিস', price: 650 };
+      const { pkg, del, total } = getSelection();
       
       const order = {
         store_name: CONFIG.STORE_NAME,
         store_code: CONFIG.STORE_CODE,
         product: 'Aluminum Foil Storage Bag',
-        quantity: pkg.label,
+        quantity: `${pkg.label} (৳${toBn(pkg.price)})`,
         name: document.getElementById('customerName').value.trim(),
         phone: document.getElementById('phone').value.trim(),
         address: document.getElementById('address').value.trim(),
+        deliveryArea: `${del.label} (৳${toBn(del.charge)})`,
         payment: 'Cash on Delivery',
-        total: money(pkg.price + 70)
+        total: money(total)
       };
 
       try {
@@ -390,8 +451,9 @@
         alert('🎉 অর্ডার সফলভাবে সম্পন্ন হয়েছে!');
         closeModal();
         e.target.reset();
+        updateSummary();
       } catch(err) {
-        alert('সার্ভার সমস্যার কারণে অর্ডার সাবমিট হয়নি। আবার চেষ্টা করুন।');
+        alert('সার্ভার সমস্যার কারণে অর্ডার সাবমিট হয়নি। আবার চেষ্টা করুন।');
       }
     });
 
