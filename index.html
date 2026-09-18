@@ -1366,5 +1366,119 @@
     }
   })();
 </script>
+  <!-- 🌟 100% UNIVERSAL SAAS DYNAMIC PRICING & ORDER ENGINE -->
+<script>
+  let DYNAMIC_PACKAGES = {};
+
+  // ১. স্ক্রিনের যেকোনো কার্ড থেকে প্রোডাক্ট ও প্যাকেজের নাম-দাম অটো-রিড করা
+  function buildDynamicPackagesFromDOM() {
+    DYNAMIC_PACKAGES = {};
+    const cards = document.querySelectorAll('.price-card');
+    const select = document.getElementById('quantity');
+    if (select) select.innerHTML = '';
+
+    cards.forEach((card, index) => {
+      const titleEl = card.querySelector('h3, .pkg-title');
+      const priceEl = card.querySelector('.text-4xl, .text-5xl, .price-val');
+      const btn = card.querySelector('[data-open-order]');
+
+      // কার্ডের ভেতর ক্লায়েন্টের লেখা আসল নাম ও দাম রিড করা
+      const title = titleEl ? titleEl.innerText.trim() : `প্যাকেজ ${index + 1}`;
+      const priceNum = priceEl ? parseInt(toEn(priceEl.innerText).replace(/[^\d]/g, ''), 10) || 0 : 0;
+      const pkgKey = 'pkg_' + index;
+
+      if (btn) btn.setAttribute('data-package', pkgKey);
+
+      DYNAMIC_PACKAGES[pkgKey] = {
+        key: pkgKey,
+        label: title,
+        price: priceNum
+      };
+
+      // চেকআউট মোডালের ড্রপডাউনে স্বয়ংক্রিয়ভাবে নতুন প্যাকেজ যোগ করা
+      if (select) {
+        const opt = document.createElement('option');
+        opt.value = pkgKey;
+        opt.textContent = `${title} — ৳${toBn(priceNum)}`;
+        if (index === 1 || cards.length === 1) opt.selected = true; // ২য় প্যাকেজ ডিফল্ট সিলেক্ট
+        select.appendChild(opt);
+      }
+    });
+
+    // হিরো সেকশন ও নিচের স্টিকি বারের দাম আপডেট করা
+    const firstPkg = Object.values(DYNAMIC_PACKAGES)[0];
+    if (firstPkg) {
+      const heroPrice = document.querySelector('.hero-bg .text-3xl');
+      if (heroPrice) heroPrice.innerText = `৳${toBn(firstPkg.price)}`;
+      const stickyPrice = document.querySelector('#stickyBottomBar .text-lg, #stickyBottomBar .text-2xl');
+      if (stickyPrice) stickyPrice.innerHTML = `৳${toBn(firstPkg.price)} <span class="text-xs font-normal text-slate-500">থেকে শুরু</span>`;
+    }
+  }
+
+  // ২. ডায়নামিক ক্যালকুলেশন ইঞ্জিন
+  function getSelection() {
+    const qtySelect = document.getElementById('quantity');
+    const pkgKey = qtySelect ? qtySelect.value : 'pkg_0';
+    const form = document.getElementById('orderForm');
+    const area = form && form.deliveryArea ? form.deliveryArea.value : 'inside';
+    
+    const pkg = DYNAMIC_PACKAGES[pkgKey] || Object.values(DYNAMIC_PACKAGES)[0] || { label: 'অর্ডার', price: 0 };
+    const del = DELIVERY[area] || { label: 'ঢাকার ভিতরে', charge: 70 };
+    return { pkgKey, pkg, area, del, total: pkg.price + del.charge };
+  }
+
+  function updateSummary() {
+    const { pkg, del, total } = getSelection();
+    const sumPkg = document.getElementById('sumPkg');
+    const sumPrice = document.getElementById('sumPrice');
+    const sumDelivery = document.getElementById('sumDelivery');
+    const sumTotal = document.getElementById('sumTotal');
+
+    if (sumPkg) sumPkg.textContent = pkg.label;
+    if (sumPrice) sumPrice.textContent = money(pkg.price);
+    if (sumDelivery) sumDelivery.textContent = money(del.charge);
+    if (sumTotal) sumTotal.textContent = money(total);
+  }
+
+  function openModal(pkgKey) {
+    const qtySelect = document.getElementById('quantity');
+    if (pkgKey && DYNAMIC_PACKAGES[pkgKey] && qtySelect) {
+      qtySelect.value = pkgKey;
+    }
+    updateSummary();
+    modal.classList.add('open');
+    document.body.classList.add('no-scroll');
+    setTimeout(() => {
+      const nameInput = document.getElementById('customerName');
+      if (nameInput) nameInput.focus({ preventScroll: true });
+    }, 300);
+  }
+
+  // ৩. ক্লাউডফ্লেয়ার থেকে সেভ করা পেজ লোড ও স্বয়ংক্রিয় সিঙ্ক
+  (async function loadLiveUniversalEngine() {
+    try {
+      const res = await fetch('https://steep-rain-e346.azwadahshafhossain.workers.dev/page-content?store=FP&_t=' + Date.now(), { cache: 'no-store' });
+      const data = await res.json();
+      
+      if (data.ok && data.mainHtml && data.mainHtml.trim().length > 50) {
+        const main = document.querySelector('main');
+        if (main) {
+          main.innerHTML = data.mainHtml;
+        }
+      }
+    } catch(e) {}
+
+    // পেজের সব কার্ড থেকে ডায়নামিক হিসাব চালু করা
+    buildDynamicPackagesFromDOM();
+
+    // বাটন ক্লিক ইভেন্ট পুনরায় কানেক্ট করা
+    document.querySelectorAll('[data-open-order]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(btn.dataset.package);
+      });
+    });
+  })();
+</script>
 </body>
 </html>
