@@ -1003,13 +1003,24 @@
             }
           });
 
-          // ৫. ইউটিউব ভিডিওতে ক্লিক করলে ভিডিও লিংক বদলানো
+          // ৫. ইউটিউব ভিডিওর ওপর এডিটিং ওভারলে ও ক্লিক হ্যান্ডলার যোগ করা
           doc.querySelectorAll('main iframe').forEach(iframe => {
             if (iframe.src.includes('youtube.com') || iframe.src.includes('youtu.be')) {
-              iframe.style.cursor = 'pointer';
-              iframe.title = 'ইউটিউব ভিডিও পরিবর্তন করতে ক্লিক করুন';
+              // আইফ্রেমের চারপাশে একটি র‍্যাপার বা পজিশন তৈরি করা
+              const wrapper = doc.createElement('div');
+              wrapper.style.position = 'relative';
+              wrapper.style.display = 'inline-block';
+              wrapper.style.width = '100%';
+              wrapper.style.height = '100%';
               
-              iframe.onclick = (e) => {
+              iframe.parentNode.insertBefore(wrapper, iframe);
+              wrapper.appendChild(iframe);
+
+              // এডিটর মোডের জন্য একটি ক্লিক করার উপযোগী ওভারলে বা বাটন
+              const overlay = doc.createElement('div');
+              overlay.innerHTML = `<div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:14px; cursor:pointer; border-radius:12px; border:2px dashed #3b82f6; z-index:20;">🎬 ভিডিও পরিবর্তন করতে এখানে ক্লিক করুন</div>`;
+              
+              overlay.onclick = (e) => {
                 e.preventDefault(); e.stopPropagation();
                 const newYtUrl = prompt('🎬 নতুন ইউটিউব ভিডিওর এমবেড লিংক (Embed URL) দিন:', iframe.src);
                 if (newYtUrl && newYtUrl.trim()) {
@@ -1023,9 +1034,9 @@
                   showToast("✅ ভিডিও লিংক আপডেট করা হয়েছে! সেভ করতে 'Save & Publish' চাপুন।");
                 }
               };
+              wrapper.appendChild(overlay);
             }
           });
-
           // ৪. ছবিতে ক্লিক করলে ছবি বদলানো
           doc.querySelectorAll('main img').forEach(img => {
             img.style.cursor = 'pointer';
