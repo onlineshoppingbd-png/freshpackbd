@@ -1111,7 +1111,18 @@
     }
     setInterval(showRandomSalesPopup, 15000);
     setTimeout(showRandomSalesPopup, 3000);
-  </script>
 
-
+    // সিকিউরিটি চেক: শুধুমাত্র যখন ড্যাশবোর্ডের এডিটর থেকে ?edit=1 প্যারামিটার দিয়ে পেজ ওপেন হবে
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('edit') === '1') {
+        // এডিটর মোড চালু (যেহেতু সাধারণ ভিজিটররা কখনোই ?edit=1 সহ ঢুকবে না)
+        document.querySelectorAll('main h1, main h2, main h3, main h4, main p, main span, main li, main a, main b, main strong').forEach(el => {
+            el.setAttribute('contenteditable', 'true');
+            el.setAttribute('spellcheck', 'false');
+        });
+        console.log("Visual Editor Mode Active");
+    } else {
+        // সাধারণ ভিজিটরদের জন্য এডিটিং ফিচার বা ট্যাগ সম্পূর্ণ বন্ধ থাকবে
+        console.log("Normal Visitor Mode");
+    }
 </body></html>
