@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landingpage.Dev | আধুনিক ড্যাশবোর্ড</title>
+  <title>Landingpage.Dev | adhunik dashborad</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -42,19 +42,19 @@
       <div class="w-16 h-16 bg-emerald-50 border border-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto text-2xl mb-4 shadow-sm">
         <i class="fa-solid fa-shield-halved"></i>
       </div>
-      <h2 class="text-2xl font-black text-slate-900 tracking-tight">এডমিন লগইন</h2>
-      <p class="text-xs text-slate-500 mt-1 mb-6">অর্ডার ও সেলস রিপোর্ট দেখতে পাসওয়ার্ড দিন</p>
+      <h2 class="text-2xl font-black text-slate-900 tracking-tight">Admin login</h2>
+      <p class="text-xs text-slate-500 mt-1 mb-6">Order o sales report dekhte password din</p>
       
       <div class="space-y-3">
-        <input type="password" id="adminPass" placeholder="পাসওয়ার্ড লিখুন..." 
+        <input type="password" id="adminPass" placeholder="Password likhun..." 
           onkeydown="if(event.key==='Enter') checkAuth()"
           class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-center font-medium text-slate-800 outline-none focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-500/10 transition" />
         <button onclick="checkAuth()" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-bold py-3 rounded-xl shadow-lg shadow-emerald-600/25 transition">
-          প্রবেশ করুন <i class="fa-solid fa-arrow-right ml-1"></i>
+          Probesh korun <i class="fa-solid fa-arrow-right ml-1"></i>
         </button>
       </div>
       <p id="loginError" class="text-rose-500 text-xs font-semibold mt-3 hidden flex items-center justify-center gap-1">
-        <i class="fa-solid fa-circle-exclamation"></i> ভুল পাসওয়ার্ড!
+        <i class="fa-solid fa-circle-exclamation"></i> Bhul password!
       </p>
     </div>
   </div>
@@ -66,20 +66,20 @@
       <div class="flex items-center gap-3">
         <span class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-sm"><i class="fa-solid fa-paintbrush"></i></span>
         <div>
-          <h3 class="font-bold text-sm">লাইভ ভিজ্যুয়াল পেজ এডিটর</h3>
-          <p class="text-[10px] text-slate-400">যেকোনো লেখার ওপর ক্লিক করে সরাসরি টাইপ করুন বা ছবিতে ক্লিক করে ছবি বদলান</p>
+          <h3 class="font-bold text-sm">Live Visual Page Editor</h3>
+          <p class="text-[10px] text-slate-400">Jekono lekhar upor click kore soraSori type korun ba chhobi te click kore chhobi bodlan</p>
         </div>
       </div>
 
       <!-- Device Switcher & Save Buttons -->
       <div class="flex items-center gap-3">
         <div class="bg-slate-800 p-1 rounded-xl flex items-center gap-1 text-xs">
-          <button onclick="setPreviewDevice('desktop')" id="btnDesk" class="px-3 py-1 rounded-lg bg-emerald-600 text-white font-bold"><i class="fa-solid fa-desktop mr-1"></i> ডেক্সটপ</button>
-          <button onclick="setPreviewDevice('mobile')" id="btnMob" class="px-3 py-1 rounded-lg hover:bg-slate-700 text-slate-300 font-bold"><i class="fa-solid fa-mobile-screen mr-1"></i> মোবাইল</button>
+          <button onclick="setPreviewDevice('desktop')" id="btnDesk" class="px-3 py-1 rounded-lg bg-emerald-600 text-white font-bold"><i class="fa-solid fa-desktop mr-1"></i> Desktop</button>
+          <button onclick="setPreviewDevice('mobile')" id="btnMob" class="px-3 py-1 rounded-lg hover:bg-slate-700 text-slate-300 font-bold"><i class="fa-solid fa-mobile-screen mr-1"></i> Mobile</button>
         </div>
 
         <button onclick="saveVisualEdits()" id="saveVisualBtn" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 text-white font-bold text-xs px-4 py-2 rounded-xl shadow-md flex items-center gap-1.5 transition active:scale-95">
-          <i class="fa-solid fa-floppy-disk"></i> Save & Publish (লাইভ করুন)
+          <i class="fa-solid fa-floppy-disk"></i> Save & Publish (Live korun)
         </button>
 
         <button onclick="closeVisualEditor()" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-sm transition">
@@ -103,8 +103,8 @@
         <div class="flex items-center gap-2.5">
           <span class="w-9 h-9 rounded-xl bg-white/10 text-amber-300 flex items-center justify-center text-base"><i class="fa-solid fa-cart-plus"></i></span>
           <div>
-            <h3 class="font-bold text-base">ম্যানুয়াল নতুন অর্ডার যোগ করুন</h3>
-            <p class="text-[11px] text-emerald-200">কাস্টমারের তথ্য দিয়ে সরাসরি অর্ডার এন্ট্রি করুন</p>
+            <h3 class="font-bold text-base">Manual notun order jog korun</h3>
+            <p class="text-[11px] text-emerald-200">Customer er tottho diye soraSori order entry korun</p>
           </div>
         </div>
         <button onclick="closeNewOrderModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm transition">
@@ -114,46 +114,46 @@
 
       <form id="manualOrderForm" onsubmit="submitManualOrder(event)" class="p-6 overflow-y-auto space-y-3.5 text-xs sm:text-sm">
         <div>
-          <label class="block font-bold text-slate-700 mb-1">কাস্টমারের নাম <span class="text-red-500">*</span></label>
-          <input type="text" id="mCustName" required placeholder="মোঃ রফিকুল ইসলাম" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 outline-none focus:border-emerald-600 focus:bg-white" />
+          <label class="block font-bold text-slate-700 mb-1">Customer er nam <span class="text-red-500">*</span></label>
+          <input type="text" id="mCustName" required placeholder="Md Rafiqul Islam" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 outline-none focus:border-emerald-600 focus:bg-white" />
         </div>
 
         <div>
-          <label class="block font-bold text-slate-700 mb-1">মোবাইল নাম্বার <span class="text-red-500">*</span></label>
+          <label class="block font-bold text-slate-700 mb-1">Mobile number <span class="text-red-500">*</span></label>
           <input type="tel" id="mCustPhone" required placeholder="017xxxxxxxx" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 outline-none focus:border-emerald-600 focus:bg-white" />
         </div>
 
         <div>
-          <label class="block font-bold text-slate-700 mb-1">সম্পূর্ণ ডেলিভারি ঠিকানা <span class="text-red-500">*</span></label>
-          <textarea id="mCustAddress" required rows="2" placeholder="বাসা/রোড, এলাকা, থানা, জেলা" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 outline-none focus:border-emerald-600 focus:bg-white resize-none"></textarea>
+          <label class="block font-bold text-slate-700 mb-1">Sompurno delivery thikana <span class="text-red-500">*</span></label>
+          <textarea id="mCustAddress" required rows="2" placeholder="Basa/Road, Elaka, Thana, Zila" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 outline-none focus:border-emerald-600 focus:bg-white resize-none"></textarea>
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block font-bold text-slate-700 mb-1">প্যাকেজ বাছাই</label>
+            <label class="block font-bold text-slate-700 mb-1">Package bachai</label>
             <select id="mPackage" onchange="updateManualPrice()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 outline-none focus:border-emerald-600 font-semibold cursor-pointer">
-              <option value="10 পিস ব্যাগ" data-price="390">১০ পিস — ৳৩৯০</option>
-              <option value="20 পিস ফ্যামিলি প্যাক" data-price="650" selected>২০ পিস — ৳৬৫০</option>
-              <option value="30 পিস মেগা সেভার" data-price="850">৩০ পিস — ৳৮৫০</option>
+              <option value="10 pis bag" data-price="390">10 pis — ৳390</option>
+              <option value="20 pis family pack" data-price="650" selected>20 pis — ৳650</option>
+              <option value="30 pis mega saver" data-price="850">30 pis — ৳850</option>
             </select>
           </div>
 
           <div>
-            <label class="block font-bold text-slate-700 mb-1">ডেলিভারি এলাকা</label>
+            <label class="block font-bold text-slate-700 mb-1">Delivery elaka</label>
             <select id="mArea" onchange="updateManualPrice()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 outline-none focus:border-emerald-600 font-semibold cursor-pointer">
-              <option value="ঢাকার ভিতরে (৳৭০)" data-charge="70" selected>ঢাকার ভিতরে (+৳৭০)</option>
-              <option value="ঢাকার বাইরে (৳১১০)" data-charge="110">ঢাকার বাইরে (+৳১১০)</option>
+              <option value="Dhakar bhitore (৳70)" data-charge="70" selected>Dhakar bhitore (+৳70)</option>
+              <option value="Dhakar baire (৳110)" data-charge="110">Dhakar baire (+৳110)</option>
             </select>
           </div>
         </div>
 
         <div>
-          <label class="block font-bold text-slate-700 mb-1">সর্বমোট বিল (৳)</label>
-          <input type="text" id="mTotalBill" value="৳৭২০" class="w-full bg-emerald-50 text-emerald-900 font-extrabold border border-emerald-200 rounded-xl px-3.5 py-2.5 outline-none num text-base" />
+          <label class="block font-bold text-slate-700 mb-1">Sormoto bil (৳)</label>
+          <input type="text" id="mTotalBill" value="৳720" class="w-full bg-emerald-50 text-emerald-900 font-extrabold border border-emerald-200 rounded-xl px-3.5 py-2.5 outline-none num text-base" />
         </div>
 
         <button type="submit" id="createOrderBtn" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-bold py-3 rounded-xl shadow-lg shadow-emerald-600/20 transition flex items-center justify-center gap-2 text-sm mt-2">
-          <i class="fa-solid fa-circle-check"></i> অর্ডার কনফার্ম ও সেভ করুন
+          <i class="fa-solid fa-circle-check"></i> Order confirm o save korun
         </button>
       </form>
     </div>
@@ -162,12 +162,12 @@
   <!-- ================= ⚙️ SETTINGS MODAL ================= -->
   <div id="settingsModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center z-50 p-4 hidden transition-all">
     <div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-slate-100 overflow-hidden flex flex-col max-h-[90vh]">
-      <div class="bg-slate-900 text-white px-6 py-4 flex items-center justify-between">
+      <div class="bg-slate-900 text-white px6 py-4 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <span class="w-9 h-9 rounded-xl bg-white/10 text-amber-400 flex items-center justify-center text-base"><i class="fa-solid fa-sliders"></i></span>
           <div>
-            <h3 class="font-bold text-base">API & পিক্সেল সেটিংস</h3>
-            <p class="text-[11px] text-slate-400">কুরিয়ার ও ফেসবুক পিক্সেল কনফিগারেশন</p>
+            <h3 class="font-bold text-base">API & Pixel settings</h3>
+            <p class="text-[11px] text-slate-400">Courier o Facebook pixel configuration</p>
           </div>
         </div>
         <button onclick="closeSettingsModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm transition">
@@ -180,7 +180,7 @@
           <label class="block font-bold text-slate-800 mb-1 flex items-center gap-1.5">
             <i class="fa-brands fa-facebook text-blue-600 text-sm"></i> Meta (Facebook) Pixel ID
           </label>
-          <input type="text" id="cfgMetaPixel" placeholder="যেমন: 1507252884365898" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 font-mono text-xs outline-none focus:border-emerald-600" />
+          <input type="text" id="cfgMetaPixel" placeholder="Jemon: 1507252884365898" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 font-mono text-xs outline-none focus:border-emerald-600" />
         </div>
 
         <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-3">
@@ -205,7 +205,7 @@
         </div>
 
         <button type="submit" id="saveCfgBtn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-emerald-600/20 transition flex items-center justify-center gap-2 text-sm">
-          <i class="fa-solid fa-floppy-disk"></i> সেটিংস সংরক্ষণ করুন
+          <i class="fa-solid fa-floppy-disk"></i> Settings songrokkhon korun
         </button>
       </form>
     </div>
@@ -225,28 +225,28 @@
 
     <nav class="space-y-1.5 text-xs font-semibold text-slate-600">
       <a href="#" class="flex items-center gap-3 px-3.5 py-3 rounded-xl bg-emerald-50 text-emerald-700 font-bold">
-        <i class="fa-solid fa-house text-emerald-600 w-4 text-center"></i> ড্যাশবোর্ড
+        <i class="fa-solid fa-house text-emerald-600 w-4 text-center"></i> Dashboard
       </a>
       <!-- 🎨 Live Visual Page Editor Button -->
       <button onclick="openVisualEditor()" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 text-white font-bold hover:from-emerald-700 shadow-sm shadow-emerald-600/20 transition text-left">
-        <i class="fa-solid fa-paintbrush w-4 text-center"></i> 🎨 লাইভ পেজ এডিটর
+        <i class="fa-solid fa-paintbrush w-4 text-center"></i> 🎨 Live Page Editor
       </button>
       <a href="#orderSection" class="flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition">
-        <i class="fa-solid fa-chart-pie text-slate-400 w-4 text-center"></i> লাইভ রিপোর্ট & অ্যানালিটিক্স
+        <i class="fa-solid fa-chart-pie text-slate-400 w-4 text-center"></i> Live Report & Analytics
       </a>
       <button onclick="openSettingsModal()" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition text-left">
-        <i class="fa-solid fa-gear text-slate-400 w-4 text-center"></i> সেটিংস (API & Pixel)
+        <i class="fa-solid fa-gear text-slate-400 w-4 text-center"></i> Settings (API & Pixel)
       </button>
     </nav>
 
     <div class="mt-6 pt-5 border-t border-slate-100 text-xs text-slate-600">
-      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-2">দ্রুত অ্যাক্সেস</p>
+      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-2">Druto access</p>
       <div class="space-y-1.5">
         <button onclick="openNewOrderModal()" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-slate-900 text-white font-bold hover:bg-slate-800 transition shadow-sm">
-          <i class="fa-solid fa-plus w-4 text-center"></i> + নতুন অর্ডার
+          <i class="fa-solid fa-plus w-4 text-center"></i> + Notun order
         </button>
         <button onclick="exportToCSV()" class="w-full flex items-center gap-3 px-3.5 py-2 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition text-left">
-          <i class="fa-solid fa-file-excel text-emerald-600 w-4 text-center"></i> এক্সেল রিপোর্ট ডাউনলোড
+          <i class="fa-solid fa-file-excel text-emerald-600 w-4 text-center"></i> Excel report download
         </button>
       </div>
     </div>
@@ -256,7 +256,7 @@
         <i class="fa-solid fa-chart-line"></i>
       </div>
       <h4 class="font-bold text-xs text-slate-800">Your Growth Partner</h4>
-      <p class="text-[10px] text-slate-500 mt-1 leading-relaxed">আপনার বিজনেসকে আরও বড় করতে আমরা আছি আপনার সাথে।</p>
+      <p class="text-[10px] text-slate-500 mt-1 leading-relaxed">Apnar business ke aro boro korte amra achi apnar sathe.</p>
     </div>
   </aside>
 
@@ -265,22 +265,22 @@
     <header class="bg-white border-b border-slate-200/80 px-5 lg:px-8 py-4 sticky top-0 z-30 flex flex-wrap items-center justify-between gap-4">
       <div>
         <h2 class="text-lg lg:text-xl font-black text-slate-900 flex items-center gap-2">
-          <span>👋</span> <span id="greetingText">সুপ্রভাত</span>, আজাদ আহসাফ!
+          <span>👋</span> <span id="greetingText">Suprobhat</span>, Azad Ahshaf!
         </h2>
-        <p class="text-xs text-slate-500">আপনার ড্যাশবোর্ডে স্বাগতম। এখানে সবকিছু সহজে ম্যানেজ করুন।</p>
+        <p class="text-xs text-slate-500">Apnar dashboard e swagotom. Ekhane sobkichu sohoje manage korun.</p>
       </div>
 
       <div class="flex items-center gap-2.5">
         <button onclick="openVisualEditor()" class="inline-flex items-center gap-1.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow-sm transition">
-          <i class="fa-solid fa-paintbrush"></i> 🎨 পেজ এডিট করুন
+          <i class="fa-solid fa-paintbrush"></i> 🎨 Page edit korun
         </button>
 
         <button onclick="openNewOrderModal()" class="inline-flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow-sm transition">
-          <i class="fa-solid fa-plus"></i> + নতুন অর্ডার
+          <i class="fa-solid fa-plus"></i> + Notun order
         </button>
 
         <button onclick="openSettingsModal()" class="inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold px-3 py-2 rounded-xl shadow-sm transition">
-          <i class="fa-solid fa-gear text-slate-500"></i> সেটিংস
+          <i class="fa-solid fa-gear text-slate-500"></i> Settings
         </button>
 
         <button onclick="exportToCSV()" class="inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold px-3 py-2 rounded-xl shadow-sm transition">
@@ -293,7 +293,7 @@
             <div class="text-xs font-bold text-slate-900">Azad Ahshaf</div>
             <div class="text-[10px] text-slate-400 font-medium">Admin</div>
           </div>
-          <button onclick="logout()" title="লগআউট" class="text-xs text-slate-400 hover:text-rose-600 ml-1">
+          <button onclick="logout()" title="Logout" class="text-xs text-slate-400 hover:text-rose-600 ml-1">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
           </button>
         </div>
@@ -306,7 +306,7 @@
         <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-3xl p-5 shadow-lg shadow-emerald-700/10 relative overflow-hidden flex flex-col justify-between">
           <div class="flex justify-between items-start">
             <span class="text-xs font-semibold text-emerald-100 flex items-center gap-1.5" id="salesCardTitle">
-              <i class="fa-solid fa-box-open"></i> মোট সেল (নির্বাচিত সময়)
+              <i class="fa-solid fa-box-open"></i> Mot sale (Nirbachito somoy)
             </span>
             <span class="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-xs text-white">
               <i class="fa-solid fa-arrow-trend-up"></i>
@@ -315,13 +315,13 @@
           <div class="my-3 flex items-baseline gap-2">
             <h3 id="statSelectedSales" class="text-3xl font-black tracking-tight num">৳০</h3>
           </div>
-          <p class="text-[11px] text-emerald-100/90 font-medium">ফিল্টারের সময় অনুযায়ী মোট সেলস</p>
+          <p class="text-[11px] text-emerald-100/90 font-medium">Filter er somoy onujayi mot sales</p>
         </div>
 
         <div class="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
           <div class="flex justify-between items-start">
             <span class="text-xs font-semibold text-slate-500 flex items-center gap-1.5">
-              <i class="fa-regular fa-calendar text-blue-500"></i> মোট অর্ডার সংখ্যা
+              <i class="fa-regular fa-calendar text-blue-500"></i> Mot order songkha
             </span>
             <span class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-xs">
               <i class="fa-solid fa-cart-shopping"></i>
@@ -329,15 +329,15 @@
           </div>
           <div class="my-3 flex items-baseline gap-2">
             <h3 id="statTotalOrdersCount" class="text-3xl font-black text-slate-900 tracking-tight num">০</h3>
-            <span class="text-xs text-slate-400 font-bold">টি অর্ডার</span>
+            <span class="text-xs text-slate-400 font-bold">ti order</span>
           </div>
-          <p class="text-[11px] text-slate-500 font-semibold">সর্বমোট বিল: <span id="statTotalRevenue" class="text-slate-800 font-extrabold num">৳০</span></p>
+          <p class="text-[11px] text-slate-500 font-semibold">Sormoto bil: <span id="statTotalRevenue" class="text-slate-800 font-extrabold num">৳০</span></p>
         </div>
 
         <div class="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
           <div class="flex justify-between items-start">
             <span class="text-xs font-semibold text-emerald-600 flex items-center gap-1.5">
-              <i class="fa-solid fa-circle-check"></i> ডেলিভার্ড সম্পন্ন
+              <i class="fa-solid fa-circle-check"></i> Delivered somponno
             </span>
             <span class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs">
               <i class="fa-solid fa-user-check"></i>
@@ -346,13 +346,13 @@
           <div class="my-3 flex items-baseline gap-2">
             <h3 id="statDeliveredAmount" class="text-3xl font-black text-emerald-700 tracking-tight num">৳০</h3>
           </div>
-          <p class="text-[11px] text-slate-500 font-medium">সফল ডেলিভারি: <strong id="statDeliveredCount" class="text-emerald-700 font-bold num">০</strong> টি</p>
+          <p class="text-[11px] text-slate-500 font-medium">Sofol delivery: <strong id="statDeliveredCount" class="text-emerald-700 font-bold num">০</strong> ti</p>
         </div>
 
         <div class="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
           <div class="flex justify-between items-start">
             <span class="text-xs font-semibold text-rose-600 flex items-center gap-1.5">
-              <i class="fa-solid fa-ban"></i> বাতিল (Cancelled)
+              <i class="fa-solid fa-ban"></i> Batil (Cancelled)
             </span>
             <span class="w-8 h-8 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center text-xs">
               <i class="fa-solid fa-xmark"></i>
@@ -361,7 +361,7 @@
           <div class="my-3 flex items-baseline gap-2">
             <h3 id="statCancelledAmount" class="text-3xl font-black text-rose-600 tracking-tight num">৳০</h3>
           </div>
-          <p class="text-[11px] text-slate-500 font-medium">মোট বাতিল: <strong id="statCancelledCount" class="text-rose-600 font-bold num">০</strong> টি</p>
+          <p class="text-[11px] text-slate-500 font-medium">Mot batil: <strong id="statCancelledCount" class="text-rose-600 font-bold num">০</strong> ti</p>
         </div>
       </div>
 
@@ -370,26 +370,26 @@
         <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
           <div class="relative flex-1">
             <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400 text-sm"></i>
-            <input type="text" id="searchInput" oninput="filterOrders()" placeholder="নাম, ঠিকানা, অর্ডার আইডি বা মোবাইল নাম্বার দিয়ে খুঁজুন..." 
+            <input type="text" id="searchInput" oninput="filterOrders()" placeholder="Nam, thikana, order ID ba mobile number diye khujun..." 
               class="w-full bg-white border border-slate-200/90 rounded-2xl pl-11 pr-4 py-3 text-xs sm:text-sm outline-none focus:border-emerald-600 shadow-sm transition" />
           </div>
 
           <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
             <div class="relative">
               <select id="dateFilter" onchange="handleDatePresetChange()" class="bg-white border border-slate-200/90 text-xs font-bold text-slate-700 rounded-2xl px-4 py-3 outline-none focus:border-emerald-600 shadow-sm cursor-pointer appearance-none pr-8">
-                <option value="ALL">📅 সব সময়ের অর্ডার (All Time)</option>
-                <option value="TODAY">✨ আজকের অর্ডার (Today)</option>
-                <option value="YESTERDAY">গতকালকের অর্ডার (Yesterday)</option>
-                <option value="7DAYS">বিগত ৭ দিন</option>
-                <option value="30DAYS">বিগত ৩০ দিন</option>
-                <option value="CUSTOM">📅 তারিখ থেকে তারিখ (Custom Range)</option>
+                <option value="ALL">📅 Sob somoyer order (All Time)</option>
+                <option value="TODAY">✨ Ajker order (Today)</option>
+                <option value="YESTERDAY">Goterker order (Yesterday)</option>
+                <option value="7DAYS">Bigoto 7 din</option>
+                <option value="30DAYS">Bigoto 30 din</option>
+                <option value="CUSTOM">📅 Tarikh theke tarikh (Custom Range)</option>
               </select>
               <i class="fa-solid fa-chevron-down absolute right-3 top-3.5 text-[10px] text-slate-400 pointer-events-none"></i>
             </div>
 
             <div class="relative">
               <select id="statusFilter" onchange="filterOrders()" class="bg-white border border-slate-200/90 text-xs font-bold text-slate-700 rounded-2xl px-4 py-3 outline-none focus:border-emerald-600 shadow-sm cursor-pointer appearance-none pr-8">
-                <option value="ALL">⚡ সকল স্ট্যাটাস</option>
+                <option value="ALL">⚡ Sokol status</option>
                 <option value="Pending">🟡 Processing / Pending</option>
                 <option value="Confirmed">🔵 Confirmed</option>
                 <option value="Shipped">🟣 Shipped</option>
@@ -399,7 +399,7 @@
               <i class="fa-solid fa-chevron-down absolute right-3 top-3.5 text-[10px] text-slate-400 pointer-events-none"></i>
             </div>
 
-            <button onclick="loadOrders()" id="refreshBtn" title="রিফ্রেশ করুন" class="w-11 h-11 bg-white hover:bg-slate-50 border border-slate-200/90 text-slate-700 rounded-2xl flex items-center justify-center text-sm shadow-sm transition">
+            <button onclick="loadOrders()" id="refreshBtn" title="Refresh korun" class="w-11 h-11 bg-white hover:bg-slate-50 border border-slate-200/90 text-slate-700 rounded-2xl flex items-center justify-center text-sm shadow-sm transition">
               <i class="fa-solid fa-rotate" id="refreshIcon"></i>
             </button>
           </div>
@@ -407,14 +407,14 @@
 
         <div id="customDateRangeBox" class="bg-white border border-emerald-200 rounded-2xl p-3.5 shadow-sm hidden flex flex-wrap items-center justify-between gap-3">
           <div class="flex items-center gap-2 text-xs font-bold text-emerald-800">
-            <i class="fa-solid fa-calendar-days text-emerald-600"></i> তারিখ থেকে তারিখ নির্বাচন করুন:
+            <i class="fa-solid fa-calendar-days text-emerald-600"></i> Tarikh theke tarikh nirbachon korun:
           </div>
           <div class="flex items-center gap-2 text-xs">
-            <span class="text-slate-500 font-semibold">শুরু:</span>
+            <span class="text-slate-500 font-semibold">Suru:</span>
             <input type="date" id="startDateInput" onchange="filterOrders()" class="border border-slate-200 rounded-xl px-3 py-1.5 outline-none font-semibold focus:border-emerald-600" />
-            <span class="text-slate-500 font-semibold ml-2">শেষ:</span>
+            <span class="text-slate-500 font-semibold ml-2">Shes:</span>
             <input type="date" id="endDateInput" onchange="filterOrders()" class="border border-slate-200 rounded-xl px-3 py-1.5 outline-none font-semibold focus:border-emerald-600" />
-            <button onclick="resetCustomDate()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-1.5 rounded-xl ml-2">রিসেট</button>
+            <button onclick="resetCustomDate()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-1.5 rounded-xl ml-2">Reset</button>
           </div>
         </div>
       </div>
@@ -423,12 +423,12 @@
       <div class="bg-white border border-slate-200/90 rounded-3xl shadow-sm overflow-hidden">
         <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
           <div class="flex items-center gap-2.5">
-            <h3 class="font-extrabold text-slate-900 text-base">অর্ডার তালিকা</h3>
+            <h3 class="font-extrabold text-slate-900 text-base">Order talika</h3>
             <span id="filteredCountBadge" class="bg-emerald-100 text-emerald-800 text-xs font-black px-2.5 py-0.5 rounded-full num">০</span>
           </div>
           <div class="text-xs text-slate-400 flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            সর্বশেষ আপডেট: <span id="lastUpdatedTime" class="font-bold text-slate-700">--:--</span>
+            Sorbosesh update: <span id="lastUpdatedTime" class="font-bold text-slate-700">--:--</span>
           </div>
         </div>
 
@@ -436,19 +436,19 @@
           <table class="w-full text-left border-collapse text-xs">
             <thead class="bg-slate-50/70 border-b border-slate-200/80 text-slate-400 uppercase text-[10px] font-extrabold tracking-wider">
               <tr>
-                <th class="p-4">অর্ডার আইডি ও সময়</th>
-                <th class="p-4">কাস্টমার, ঠিকানা ও ফোন</th>
-                <th class="p-4">পণ্যের বিবরণ</th>
-                <th class="p-4">মোট মূল্য</th>
-                <th class="p-4 text-center">যোগাযোগ & কুরিয়ার</th>
-                <th class="p-4 text-right">অর্ডার স্ট্যাটাস</th>
+                <th class="p-4">Order ID o somoy</th>
+                <th class="p-4">Customer, thikana o phone</th>
+                <th class="p-4">Ponyer biboron</th>
+                <th class="p-4">Mot mullo</th>
+                <th class="p-4 text-center">Jogajog & Courier</th>
+                <th class="p-4 text-right">Order status</th>
               </tr>
             </thead>
             <tbody id="orderTableBody" class="divide-y divide-slate-100 font-medium">
               <tr>
                 <td colspan="6" class="text-center py-16 text-slate-400">
                   <i class="fa-solid fa-circle-notch fa-spin text-2xl text-emerald-600 mb-2"></i>
-                  <p>অর্ডার লোড হচ্ছে, অপেক্ষা করুন...</p>
+                  <p>Order load hocche, opekha korun...</p>
                 </td>
               </tr>
             </tbody>
@@ -463,14 +463,14 @@
     <div class="rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm relative group bg-slate-900">
       <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600&auto=format&fit=crop&q=80" alt="Delivery" class="w-full h-32 object-cover opacity-80 group-hover:scale-105 transition duration-500" />
       <div class="p-4 bg-white">
-        <h4 class="font-bold text-xs text-slate-900 leading-snug">প্রতিটি অর্ডার আমাদের কাছে গুরুত্বপূর্ণ</h4>
-        <p class="text-[10px] text-slate-500 mt-1 leading-relaxed">নিরাপদ, দ্রুত এবং নির্ভরযোগ্য ডেলিভারি আপনার সন্তুষ্টি আমাদের লক্ষ্য।</p>
+        <h4 class="font-bold text-xs text-slate-900 leading-snug">Protiti order amader kase guroturnurno</h4>
+        <p class="text-[10px] text-slate-500 mt-1 leading-relaxed">Nirapod, druto ebong nirbhogjoggo delivery apnar sontusti amader lokkho.</p>
       </div>
     </div>
 
     <div class="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-sm">
       <h4 class="font-black text-xs text-slate-900 mb-3 flex items-center justify-between">
-        <span>অর্ডার স্ট্যাটাস সারাংশ</span>
+        <span>Order status sarangsho</span>
         <i class="fa-solid fa-chart-pie text-slate-400"></i>
       </h4>
       <div class="space-y-2 text-xs">
@@ -497,10 +497,10 @@
       <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto text-sm mb-2">
         <i class="fa-solid fa-truck-fast"></i>
       </div>
-      <h4 class="font-bold text-xs text-slate-900">দ্রুত ডেলিভারি, খুশি গ্রাহক</h4>
-      <p class="text-[10px] text-slate-500 mt-1">আপনার প্রতিটি অর্ডার এখন আরও দ্রুত ও নিরাপদ পৌঁছে যায়।</p>
+      <h4 class="font-bold text-xs text-slate-900">Druto delivery, khusi ग्राहक</h4>
+      <p class="text-[10px] text-slate-500 mt-1">Apnar protiti order ekhon aro druto o nirapod pouche jay.</p>
       <a href="https://portal.packzy.com" target="_blank" class="mt-3 inline-flex items-center justify-center gap-1.5 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2 rounded-xl transition shadow-sm">
-        কুরিয়ার ট্র্যাক চেক করুন <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        Courier track check korun <i class="fa-solid fa-arrow-right text-[10px]"></i>
       </a>
     </div>
 
@@ -508,10 +508,10 @@
       <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto text-sm mb-2">
         <i class="fa-solid fa-headset"></i>
       </div>
-      <h4 class="font-bold text-xs text-slate-900">সাহায্য প্রয়োজন?</h4>
-      <p class="text-[10px] text-slate-500 mt-0.5">আমাদের সাপোর্ট টিম সবসময় প্রস্তুত</p>
+      <h4 class="font-bold text-xs text-slate-900">Sahajjo proyojon?</h4>
+      <p class="text-[10px] text-slate-500 mt-0.5">Amader support team sobshomoy prostut</p>
       <a href="https://wa.me/8801794821159" target="_blank" class="mt-2.5 inline-flex items-center justify-center gap-1.5 w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-2 rounded-xl transition">
-        সাপোর্ট যোগাযোগ করুন <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        Support jogajog korun <i class="fa-solid fa-arrow-right text-[10px]"></i>
       </a>
     </div>
   </aside>
@@ -519,7 +519,7 @@
   <!-- Toast -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white text-xs font-bold px-4 py-3 rounded-2xl shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2">
     <i class="fa-solid fa-circle-check text-emerald-400"></i>
-    <span id="toastMsg">কপি করা হয়েছে!</span>
+    <span id="toastMsg">Copy kora hoyeche!</span>
   </div>
 
   <!-- JAVASCRIPT LOGIC -->
@@ -538,9 +538,9 @@
 
     (function setGreeting() {
       const hour = new Date().getHours();
-      let greeting = "সুপ্রভাত";
-      if (hour >= 12 && hour < 17) greeting = "শুভ অপরাহ্ন";
-      else if (hour >= 17) greeting = "শুভ সন্ধ্যা";
+      let greeting = "Suprobhat";
+      if (hour >= 12 && hour < 17) greeting = "Subho oporanho";
+      else if (hour >= 17) greeting = "Subho sondha";
       document.getElementById('greetingText').innerText = greeting;
     })();
 
@@ -582,7 +582,7 @@
         filterOrders();
         document.getElementById('lastUpdatedTime').innerText = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
       } catch (err) {
-        alert("অর্ডার লোড হতে সমস্যা হয়েছে! Worker চেক করুন।");
+        alert("Order load hote somossha hoyeche! Worker check korun.");
       } finally {
         icon.classList.remove('fa-spin');
       }
@@ -679,7 +679,7 @@
 
     function renderFraudBadge(fraud) {
       if (!fraud || fraud.status !== 'success' || !fraud.data || !fraud.data.summary) {
-        return `<span class="inline-flex items-center gap-1 text-[10px] font-semibold text-slate-500 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full"><i class="fa-solid fa-magnifying-glass"></i> নো ফ্রড ডাটা</span>`;
+        return `<span class="inline-flex items-center gap-1 text-[10px] font-semibold text-slate-500 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full"><i class="fa-solid fa-magnifying-glass"></i> No fraud data</span>`;
       }
       const s = fraud.data.summary;
       const ratio = s.success_ratio !== undefined ? parseFloat(s.success_ratio) : 0;
@@ -687,9 +687,9 @@
       const success = s.success_parcel ?? 0;
 
       if (ratio >= 70) {
-        return `<span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-2.5 py-0.5 rounded-full"><i class="fa-solid fa-circle-check text-emerald-600"></i> ${ratio}% সাকসেস (${success}/${total})</span>`;
+        return `<span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-2.5 py-0.5 rounded-full"><i class="fa-solid fa-circle-check text-emerald-600"></i> ${ratio}% success (${success}/${total})</span>`;
       } else {
-        return `<span class="inline-flex items-center gap-1 text-[10px] font-bold text-rose-800 bg-rose-100 border border-rose-300 px-2.5 py-0.5 rounded-full"><i class="fa-solid fa-triangle-exclamation text-rose-600"></i> রিস্কি (${ratio}%)</span>`;
+        return `<span class="inline-flex items-center gap-1 text-[10px] font-bold text-rose-800 bg-rose-100 border border-rose-300 px-2.5 py-0.5 rounded-full"><i class="fa-solid fa-triangle-exclamation text-rose-600"></i> Risky (${ratio}%)</span>`;
       }
     }
 
@@ -735,7 +735,7 @@
           <tr>
             <td colspan="6" class="text-center py-16 text-slate-400">
               <i class="fa-solid fa-box-open text-3xl mb-2 text-slate-300"></i>
-              <p class="font-semibold text-sm">কোনো অর্ডার পাওয়া যায়নি!</p>
+              <p class="font-semibold text-sm">Kono order paoa jayni!</p>
             </td>
           </tr>`;
         return;
@@ -748,11 +748,11 @@
         const isSent = o.consignmentId || o.rawStatus === 'sent_to_steadfast';
         const steadfastHtml = isSent
           ? `<div class="inline-flex items-center gap-1 bg-[#10b981] text-white font-bold text-[10px] px-2.5 py-0.5 rounded-full shadow-sm">
-              <i class="fa-solid fa-check text-[9px]"></i> SteadFast চলছে
+              <i class="fa-solid fa-check text-[9px]"></i> SteadFast cholche
              </div>
              <div class="text-[9px] text-slate-400 font-bold num mt-0.5">CID: ${o.consignmentId || 'N/A'}</div>`
           : `<button onclick="sendToSteadFast('${o.orderId}')" class="inline-flex items-center gap-1 bg-slate-900 hover:bg-emerald-700 text-white font-bold text-[10px] px-2.5 py-1 rounded-full shadow-sm transition">
-              <i class="fa-solid fa-truck-fast"></i> SteadFast পাঠান
+              <i class="fa-solid fa-truck-fast"></i> SteadFast pathan
              </button>`;
 
         return `
@@ -773,7 +773,7 @@
             
             <div class="flex items-center gap-1.5 mt-1.5 flex-wrap">
               <span class="inline-block text-[10px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
-                <i class="fa-solid fa-location-dot text-[9px] mr-0.5 text-emerald-600"></i>${o.deliveryArea || 'ঢাকার ভিতর (৳৭০)'}
+                <i class="fa-solid fa-location-dot text-[9px] mr-0.5 text-emerald-600"></i>${o.deliveryArea || 'Dhakar bhitor (৳70)'}
               </span>
               ${renderFraudBadge(o.fraud)}
             </div>
@@ -795,13 +795,13 @@
 
           <td class="p-4 whitespace-nowrap text-center">
             <div class="flex items-center justify-center gap-1 mb-1.5">
-              <a href="tel:${cleanPhone}" class="w-6 h-6 rounded-full bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-600 flex items-center justify-center text-[10px] transition" title="কল করুন">
+              <a href="tel:${cleanPhone}" class="w-6 h-6 rounded-full bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-600 flex items-center justify-center text-[10px] transition" title="Call korun">
                 <i class="fa-solid fa-phone"></i>
               </a>
-              <a href="https://wa.me/88${cleanPhone}?text=${encodeURIComponent('আসসালামু আলাইকুম ' + o.name + ', FreshPack BD থেকে বলছি।')}" target="_blank" class="w-6 h-6 rounded-full bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-600 flex items-center justify-center text-[10px] transition" title="WhatsApp">
+              <a href="https://wa.me/88${cleanPhone}?text=${encodeURIComponent('Assalamu Alaikum ' + o.name + ', FreshPack BD theke bolchi.')}" target="_blank" class="w-6 h-6 rounded-full bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-600 flex items-center justify-center text-[10px] transition" title="WhatsApp">
                 <i class="fa-brands fa-whatsapp"></i>
               </a>
-              <button onclick="copyToClipboard('${courierText.replace(/'/g, "\\'")}', 'কুরিয়ার টেক্সট কপি হয়েছে!')" class="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-800 hover:text-white text-slate-600 flex items-center justify-center text-[10px] transition" title="কুরিয়ার কপি">
+              <button onclick="copyToClipboard('${courierText.replace(/'/g, "\\'")}', 'Courier text copy hoyeche!')" class="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-800 hover:text-white text-slate-600 flex items-center justify-center text-[10px] transition" title="Courier copy">
                 <i class="fa-solid fa-copy"></i>
               </button>
             </div>
@@ -833,7 +833,7 @@
     }
 
     async function updateOrderStatus(orderId, newStatus) {
-      showToast("স্ট্যাটাস আপডেট হচ্ছে...");
+      showToast("Status update hocche...");
       try {
         const res = await fetch(`${WORKER_URL}/update-status`, {
           method: 'POST',
@@ -841,13 +841,13 @@
           body: JSON.stringify({ orderId: orderId, status: newStatus })
         });
         if(res.ok) {
-          showToast("✅ স্ট্যাটাস সংরক্ষিত হয়েছে!");
+          showToast("✅ Status songrokkhon hoyeche!");
           loadOrders();
         } else {
-          alert("আপডেট ব্যর্থ হয়েছে!");
+          alert("Update borto hoyeche!");
         }
       } catch (err) {
-        alert("সার্ভারে সমস্যা হয়েছে!");
+        alert("Server e somossha hoyeche!");
       }
     }
 
@@ -872,7 +872,7 @@
       e.preventDefault();
       const btn = document.getElementById('createOrderBtn');
       btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> অর্ডার সেভ হচ্ছে...`;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Order save hocche...`;
 
       const orderPayload = {
         store_code: 'FP',
@@ -897,24 +897,24 @@
         });
         const data = await res.json();
         if (res.ok && data.ok) {
-          showToast("🎉 নতুন অর্ডার সফলভাবে তৈরি হয়েছে!");
+          showToast("🎉 Notun order sofolbhabe toiri hoyeche!");
           document.getElementById('manualOrderForm').reset();
           closeNewOrderModal();
           loadOrders();
         } else {
-          alert(`❌ অর্ডার তৈরি ব্যর্থ: ${data.error || 'Server Error'}`);
+          alert(`❌ Order toiri borto: ${data.error || 'Server Error'}`);
         }
       } catch (err) {
-        alert("সার্ভার রিকোয়েস্টে সমস্যা হয়েছে!");
+        alert("Server request e somossha hoyeche!");
       } finally {
         btn.disabled = false;
-        btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> অর্ডার কনফার্ম ও সেভ করুন`;
+        btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Order confirm o save korun`;
       }
     }
 
     async function sendToSteadFast(orderId) {
-      if (!confirm(`আপনি কি অর্ডার #${orderId} SteadFast কুরিয়ারে বুকিং করতে চান?`)) return;
-      showToast("⏳ SteadFast-এ পাঠানো হচ্ছে...");
+      if (!confirm(`Apni ki order #${orderId} SteadFast courier e booking korte chan?`)) return;
+      showToast("⏳ SteadFast e pathano hocche...");
       try {
         const res = await fetch(`${WORKER_URL}/send-steadfast`, {
           method: 'POST',
@@ -923,13 +923,13 @@
         });
         const data = await res.json();
         if (res.ok && data.ok) {
-          alert(`🎉 সফলভাবে SteadFast-এ বুকিং হয়েছে!\nConsignment ID: ${data.consignmentId}\nTracking Code: ${data.trackingCode}`);
+          alert(`🎉 Sofolbhabe SteadFast e booking hoyeche!\nConsignment ID: ${data.consignmentId}\nTracking Code: ${data.trackingCode}`);
           loadOrders();
         } else {
-          alert(`❌ ব্যর্থ হয়েছে: ${data.error || 'SteadFast API Error'}`);
+          alert(`❌ Borto hoyeche: ${data.error || 'SteadFast API Error'}`);
         }
       } catch (err) {
-        alert("সার্ভার রিকোয়েস্টে সমস্যা হয়েছে!");
+        alert("Server request e somossha hoyeche!");
       }
     }
 
@@ -1001,13 +1001,13 @@
 
           doc.querySelectorAll('main img').forEach(img => {
             img.style.cursor = 'pointer';
-            img.title = 'ছবি পরিবর্তন করতে ক্লিক করুন';
+            img.title = 'Chhobi poriborton korte click korun';
             img.onclick = (e) => {
               e.preventDefault(); e.stopPropagation();
-              const newUrl = prompt('🖼️ নতুন ছবির লিংক (Image URL) দিন:', img.src);
+              const newUrl = prompt('🖼️ Notun chhobir link (Image URL) din:', img.src);
               if (newUrl && newUrl.trim()) {
                 img.src = newUrl.trim();
-                showToast("✅ ছবি আপডেট করা হয়েছে!");
+                showToast("✅ Chhobi update kora hoyeche!");
               }
             };
           });
@@ -1026,14 +1026,15 @@
               if (!wrapper.querySelector('.yt-edit-overlay')) {
                 const overlay = doc.createElement('div');
                 overlay.className = 'yt-edit-overlay';
-                overlay.innerHTML = `<div style="position:absolute; inset:0; background:rgba(0,0,0,0.5); display:flex; flex-direction:column; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:13px; cursor:pointer; border-radius:inherit; border:2px dashed #fbbf24; z-index:30; gap:5px;">
-                  <i class="fa-solid fa-film" style="font-size:20px; color:#fbbf24;"></i>
-                  <span>ইউটিউব ভিডিও পরিবর্তন করতে ক্লিক করুন</span>
+                overlay.innerHTML = `<div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; cursor:pointer; border-radius:inherit; border:2px dashed #fbbf24; z-index:30;">
+                  <div style="background:#059669; color:white; padding:8px 16px; border-radius:8px; font-weight:bold; font-size:13px; box-shadow:0 4px 12px rgba(0,0,0,0.3); display:flex; align-items:center; gap:6px;">
+                    <i class="fa-solid fa-film"></i> Video edit korun
+                  </div>
                 </div>`;
                 
                 overlay.onclick = (e) => {
                   e.preventDefault(); e.stopPropagation();
-                  const newYtUrl = prompt('🎬 নতুন ইউটিউব ভিডিওর লিংক বা এমবেড কোড দিন:', iframe.src);
+                  const newYtUrl = prompt('🎬 Notun YouTube videoar link ba embed code din:', iframe.src);
                   if (newYtUrl && newYtUrl.trim()) {
                     let embedLink = newYtUrl.trim();
                     if (embedLink.includes('watch?v=')) {
@@ -1042,7 +1043,7 @@
                       embedLink = embedLink.replace('youtu.be/', 'www.youtube.com/embed/');
                     }
                     iframe.src = embedLink;
-                    showToast("✅ ভিডিও লিংক আপডেট করা হয়েছে!");
+                    showToast("✅ Video link update kora hoyeche!");
                   }
                 };
                 wrapper.appendChild(overlay);
@@ -1067,7 +1068,7 @@
               slideNavBox.style.cssText = "text-align:center; margin-top:12px; position:relative; z-index:40;";
               slideNavBox.innerHTML = `
                 <button id="editorNextSlideBtn" style="background:#059669; color:white; font-weight:bold; padding:8px 16px; border-radius:8px; border:none; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
-                  ➡️ গ্যালারির পরের ছবি আনতে এখানে ক্লিক করুন (Next Slide)
+                  ➡️ Gallery r porer chhobi ante ekhane click korun (Next Slide)
                 </button>
               `;
               gallerySection.querySelector('.max-w-xl').appendChild(slideNavBox);
@@ -1079,7 +1080,7 @@
                 currentSlideIdx = (currentSlideIdx + 1) % totalSlides;
                 track.style.transition = 'transform 0.4s ease';
                 track.style.transform = `translateX(-${currentSlideIdx * 100}%)`;
-                showToast(`📷 স্লাইড ${currentSlideIdx + 1} সামনে আনা হয়েছে।`);
+                showToast(`📷 Slide ${currentSlideIdx + 1} samne ana hoyeche.`);
               };
             }
           } catch (err) {
@@ -1114,7 +1115,7 @@
     async function saveVisualEdits() {
       const btn = document.getElementById('saveVisualBtn');
       btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> গিটহাব ও লাইভে সেভ হচ্ছে...`;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> GitHub o live e save hocche...`;
 
       try {
         const iframe = document.getElementById('liveEditorIframe');
@@ -1137,16 +1138,16 @@
         
         const data = await res.json();
         if (data.ok && data.success) {
-          showToast("🎉 ওয়েবসাইট সফলভাবে গিটহাব এবং লাইভে আপডেট হয়েছে!");
+          showToast("🎉 Website sofolbhabe GitHub ebong live e update hoyeche!");
           closeVisualEditor();
         } else {
-          alert("❌ সেভ হতে সমস্যা হয়েছে: " + (data.error || 'Server error'));
+          alert("❌ Save hote somossha hoyeche: " + (data.error || 'Server error'));
         }
       } catch(err) {
-        alert("সার্ভারে সমস্যা হয়েছে: " + err.message);
+        alert("Server e somossha hoyeche: " + err.message);
       } finally {
         btn.disabled = false;
-        btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Save & Publish (লাইভ করুন)`;
+        btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Save & Publish (Live korun)`;
       }
     }
 
@@ -1172,7 +1173,7 @@
       e.preventDefault();
       const btn = document.getElementById('saveCfgBtn');
       btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Save hocche...`;
 
       const payload = {
         storeCode: 'FP',
@@ -1190,16 +1191,16 @@
         });
         const data = await res.json();
         if(res.ok && data.ok) {
-          showToast("✅ সেটিংস সফলভাবে সংরক্ষিত হয়েছে!");
+          showToast("✅ Settings sofolbhabe songrokkhon hoyeche!");
           closeSettingsModal();
         } else {
-          alert("❌ সেটিংস সংরক্ষণ ব্যর্থ হয়েছে!");
+          alert("❌ Settings songrokkhon borto!");
         }
       } catch(err) {
-        alert("সার্ভারে সমস্যা হয়েছে!");
+        alert("Server e somossha hoyeche!");
       } finally {
         btn.disabled = false;
-        btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> সেটিংস সংরক্ষণ করুন`;
+        btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Settings songrokkhon korun`;
       }
     }
 
@@ -1212,12 +1213,12 @@
 
     function copyToClipboard(text, successMsg) {
       navigator.clipboard.writeText(text).then(() => {
-        showToast(successMsg || "কপি সম্পন্ন!");
+        showToast(successMsg || "Copy somponno!");
       });
     }
 
     function exportToCSV() {
-      if(!allOrders.length) return alert("কোনো ডাটা নেই!");
+      if(!allOrders.length) return alert("Kono data nei!");
       let csv = "Order ID,Time,Product,Package,Name,Phone,Address,Area,Total,Status,ConsignmentID\n";
       allOrders.forEach(o => {
         csv += `"${o.orderId}","${o.time}","${o.product}","${o.quantity}","${o.name}","${o.phone}","${o.address.replace(/"/g, '""')}","${o.deliveryArea}","${o.total}","${o.status}","${o.consignmentId || ''}"\n`;
