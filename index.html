@@ -7,8 +7,9 @@
   <meta name="description" content="প্রিমিয়াম Aluminum Foil Storage Bag — ফ্রিজে মাছ, মাংস ও সবজি সংরক্ষণ করুন একদম টাটকা। ক্যাশ অন ডেলিভারি, সারাদেশে ডেলিভারি। ১০ পিস মাত্র ৳৩৯০।" />
   <meta name="theme-color" content="#064e3b" />
 
-  <!-- Meta Pixel Code -->
+  <!-- 🎯 DYNAMIC META PIXEL LOADER (DASHBOARD SYNCED) -->
   <script>
+    // ১. মেটা পিক্সেল লাইব্রেরি লোডার
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -17,8 +18,34 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1507252884365898');
-    fbq('track', 'PageView');
+
+    // ২. ড্যাশবোর্ড থেকে লাইভ Pixel ID ফেচ ও ইনিশিয়ালাইজেশন
+    (async function initDynamicMetaPixel() {
+      const FALLBACK_PIXEL_ID = '1507252884365898'; // ক্লাউডফ্লেয়ার অফলাইন থাকলে ডিফল্ট
+      const WORKER_URL = 'https://steep-rain-e346.azwadahshafhossain.workers.dev';
+      const STORE_CODE = 'FP'; // আপনার স্টোর কোড (যেমন: FP, PT, RJ, LP)
+
+      let activePixelId = FALLBACK_PIXEL_ID;
+
+      try {
+        // ড্যাশবোর্ডের সেভ করা সেটিংস থেকে Pixel ID রিড করা
+        const res = await fetch(`${WORKER_URL}/settings?store=${STORE_CODE}&_t=` + Date.now(), { cache: 'no-store' });
+        const data = await res.json();
+        if (data && data.ok && data.settings && data.settings.metaPixelId && data.settings.metaPixelId.trim().length > 5) {
+          activePixelId = data.settings.metaPixelId.trim();
+        }
+      } catch (e) {
+        console.warn('Using fallback Pixel ID');
+      }
+
+      // পিক্সেল স্টার্ট ও PageView ফায়ার
+      if (window.fbq && activePixelId) {
+        fbq('init', activePixelId);
+        fbq('track', 'PageView');
+        window.__ACTIVE_PIXEL_ID__ = activePixelId;
+        console.log('🎯 Dynamic Meta Pixel Active:', activePixelId);
+      }
+    })();
   </script>
 
   <!-- Google Font: Hind Siliguri -->
