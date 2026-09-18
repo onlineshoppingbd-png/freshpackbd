@@ -971,6 +971,18 @@
           } catch (err) {
             console.warn("Could not fetch live content, using default iframe content.", err);
           }
+            
+            // লাইভ এইচটিএমএল থেকে শুধু <main> ট্যাগ বা মূল কন্টেন্ট এক্সট্রাক্ট করা
+            const parser = new DOMParser();
+            const docLive = parser.parseFromString(liveHtml, 'text/html');
+            const liveMain = docLive.querySelector('main');
+
+            if (liveMain && liveMain.innerHTML.trim().length > 50) {
+              mainEl.innerHTML = liveMain.innerHTML;
+            }
+          } catch (err) {
+            console.warn("Could not fetch live content, using default iframe content.", err);
+          }
 
           // ২. এডিটর স্টাইল ইনজেক্ট (সবুজ ড্যাশ বর্ডার) - শুধুমাত্র এডমিন এডিটর মোডের জন্য
           const style = doc.createElement('style');
