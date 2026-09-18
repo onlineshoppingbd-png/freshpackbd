@@ -1049,50 +1049,24 @@
               wrapper.appendChild(overlay);
             }
           });
-
-          // ৬. স্লাইডারের অটো-প্লে থামিয়ে দেওয়া এবং এডিটর ফ্রেন্ডলি করা
+          // ৬. এডিটর মোডে স্লাইডার থামিয়ে দেওয়া এবং নেভিগেশন সচল করা
           try {
-            // আইফ্রেমের ভেতরের সমস্ত চলমান ইন্টারভাল এবং টাইমআউট বন্ধ করে দেওয়া যাতে স্লাইড নিজে নিজে না ওড়ে
             const iframeWin = iframe.contentWindow;
-            if (iframeWin) {
-              const id = iframeWin.setTimeout(() => {}, 0);
-              for (let i = 0; i < id; i++) {
+            if (iframeWin && iframeWin.document) {
+              // যদি স্লাইডারের কোনো অটো-ইন্টারভাল থাকে তা ক্লিয়ার করা
+              const highestId = iframeWin.setTimeout(() => {}, 0);
+              for (let i = 0; i < highestId; i++) {
                 iframeWin.clearInterval(i);
-                iframeWin.clearTimeout(i);
               }
             }
 
-            // স্লাইডার ট্র্যাকের ওপর থেকে মার্জিন বা ওভারফ্লো ফিক্স করা যাতে সব ছবি পাশাপাশি বা অর্গানাইজড দেখায়
-            const track = doc.querySelector('#sliderTrack');
-            if (track) {
-              track.style.transition = 'transform 0.5s ease';
-            }
-
-            // একটি সহজ "স্লাইড পরিবর্তন করুন" ফ্লোটিং বাটন তৈরি করে দেওয়া যাতে আপনি এক ক্লিকে পরের ছবি সামনে আনতে পারেন
-            const gallerySection = doc.querySelector('#gallery-slider');
-            if (gallerySection && !doc.querySelector('#editorNextSlideBtn')) {
-              const slideNavBox = doc.createElement('div');
-              slideNavBox.style.cssText = "text-align:center; margin-top:15px;";
-              slideNavBox.innerHTML = `
-                <button id="editorNextSlideBtn" style="background:#059669; color:white; font-weight:bold; padding:8px 16px; border-radius:8px; border:none; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
-                  ➡️ পরের ছবিটি এডিট করতে এখানে ক্লিক করুন (Next Slide)
-                </button>
-              `;
-              gallerySection.querySelector('.max-w-xl').appendChild(slideNavBox);
-
-              let currentSlideIdx = 0;
-              const totalSlides = doc.querySelectorAll('#sliderTrack > div').length;
-
-              doc.querySelector('#editorNextSlideBtn').onclick = () => {
-                currentSlideIdx = (currentSlideIdx + 1) % totalSlides;
-                if (track) {
-                  track.style.transform = `translateX(-${currentSlideIdx * 100}%)`;
-                }
-                showToast(`📷 স্লাইড ${currentSlideIdx + 1} সামনে আনা হয়েছে।`);
-              };
-            }
+            // স্লাইডারের নেভিগেশন বাটনগুলো এডমিন প্যানেলে ক্লিকযোগ্য করা
+            doc.querySelectorAll('#sliderPrev, #sliderNext, #sliderDots button').forEach(btn => {
+              btn.style.zIndex = '9999';
+              btn.style.cursor = 'pointer';
+            });
           } catch (err) {
-            console.warn("Slider edit fix error", err);
+            console.warn("Slider control fix error", err);
           }
           // ৪. ছবিতে ক্লিক করলে ছবি বদলানো
           doc.querySelectorAll('main img').forEach(img => {
