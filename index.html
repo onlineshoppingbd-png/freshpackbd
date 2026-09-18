@@ -73,17 +73,9 @@
       -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
     }
     .soft-section { background: linear-gradient(180deg, #f6fbf8 0%, #ffffff 100%); }
-    .dots-pattern {
-      background-image: radial-gradient(rgba(6,95,70,0.10) 1px, transparent 1px);
-      background-size: 22px 22px;
-    }
 
     @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-10px) } }
-    @keyframes floatSlow { 0%,100% { transform: translateY(0) rotate(-2deg) } 50% { transform: translateY(-7px) rotate(-2deg) } }
-    @keyframes floatSlow2 { 0%,100% { transform: translateY(0) rotate(2deg) } 50% { transform: translateY(-7px) rotate(2deg) } }
     .animate-float { animation: float 4.5s ease-in-out infinite; }
-    .animate-float-slow { animation: floatSlow 5s ease-in-out infinite; }
-    .animate-float-slow2 { animation: floatSlow2 6s ease-in-out infinite 0.6s; }
 
     @keyframes ctaPulse {
       0% { box-shadow: 0 0 0 0 rgba(251,191,36,.65), 0 10px 30px -8px rgba(245,158,11,.6) }
@@ -92,9 +84,6 @@
     }
     .cta-pulse { animation: ctaPulse 2.2s infinite; }
 
-    @keyframes waBounce { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
-    .wa-btn { animation: waBounce 2.4s ease-in-out infinite; }
-
     @keyframes shimmer { 0% { background-position: -200% 0 } 100% { background-position: 200% 0 } }
     .shimmer-text {
       background: linear-gradient(90deg, #fcd34d 0%, #fff7d6 40%, #fbbf24 60%, #f59e0b 100%);
@@ -102,57 +91,30 @@
       animation: shimmer 4s linear infinite;
     }
 
-    @keyframes spin { to { transform: rotate(360deg) } }
-    .spinner { width: 20px; height: 20px; border: 3px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite; }
-
-    @keyframes popIn { 0% { transform: scale(.4); opacity: 0 } 60% { transform: scale(1.12); opacity: 1 } 100% { transform: scale(1) } }
-    .pop-in { animation: popIn .6s cubic-bezier(.2,.8,.2,1) both; }
-    @keyframes drawCheck { to { stroke-dashoffset: 0 } }
-    .check-path { stroke-dasharray: 60; stroke-dashoffset: 60; animation: drawCheck .5s ease .35s forwards; }
-
-    .feature-card { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .35s; }
-    .feature-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px -18px rgba(6,78,59,.3); border-color: #a7f3d0; }
-
-    .price-card { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s; }
+    .price-card { transition: transform .35s ease, box-shadow .35s; }
     .price-card:hover { transform: translateY(-6px); box-shadow: 0 25px 50px -18px rgba(6,78,59,.3); }
     .price-card.popular { border: 2px solid rgba(251,191,36,.85); box-shadow: 0 20px 50px -16px rgba(245,158,11,.4); }
 
     .btn { transition: transform .25s ease, box-shadow .25s ease; }
     .btn:hover { transform: translateY(-2px); }
-    .btn:active { transform: translateY(0); }
 
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.2,.8,.2,1); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
     .faq-item.open .faq-answer { max-height: 320px; }
     .faq-icon { transition: transform .3s ease; }
     .faq-item.open .faq-icon { transform: rotate(180deg); background: #064e3b; color: #fbbf24; }
 
     .modal { opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s; }
     .modal.open { opacity: 1; visibility: visible; }
-    .modal-card { transform: scale(.94) translateY(20px); opacity: 0; transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .35s; }
+    .modal-card { transform: scale(.94) translateY(20px); opacity: 0; transition: transform .35s ease, opacity .35s; }
     .modal.open .modal-card { transform: none; opacity: 1; }
-    .modal-scroll { scrollbar-width: thin; scrollbar-color: #a7f3d0 transparent; }
 
     .field { width: 100%; border: 1.5px solid #d1fae5; background: #f8fbf9; border-radius: 12px; padding: 12px 14px; font-size: 15px; outline: none; color: #052e26; transition: all .25s; }
     .field:focus { border-color: #059669; background: #fff; box-shadow: 0 0 0 4px rgba(16,185,129,.15); }
-    .field.error { border-color: #ef4444; background: #fff5f5; }
-    .field-error { display: none; color: #dc2626; font-size: 13px; margin-top: 5px; }
-    .field-error.show { display: flex; align-items: center; gap: 6px; }
-
-    .radio-pill input { position: absolute; opacity: 0; pointer-events: none; }
-    .radio-pill .pill { border: 1.5px solid #d1fae5; background: #f8fbf9; border-radius: 12px; padding: 10px 12px; cursor: pointer; transition: all .25s; display: flex; align-items: center; gap: 8px; justify-content: center; font-weight: 500; color: #065f46; }
-    .radio-pill input:checked + .pill { border-color: #059669; background: #064e3b; color: #fff; box-shadow: 0 8px 20px -10px rgba(6,78,59,.6); }
-
-    @keyframes marquee { 0% { transform: translateX(0) } 100% { transform: translateX(-50%) } }
-    .marquee { animation: marquee 26s linear infinite; }
-    .marquee:hover { animation-play-state: paused; }
     .no-scroll { overflow: hidden; }
 
     .phone-mockup {
-      border: 8px solid #064e3b;
-      border-radius: 36px;
-      box-shadow: 0 20px 50px -12px rgba(6,78,59,0.5);
-      overflow: hidden;
-      background: #000;
+      border: 8px solid #064e3b; border-radius: 36px;
+      box-shadow: 0 20px 50px -12px rgba(6,78,59,0.5); overflow: hidden; background: #000;
     }
   </style>
 </head>
@@ -165,7 +127,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-[66px]">
         <a href="#home" class="brand-link flex items-center gap-2.5">
-          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTtRQ31ALi6ErNn_y6Gs49ExbA9YQSe_R9Q0HARh_-ge5aXXCd4e_jOa_49l7tQiKrAu5yreZJGXHs9CPGd2fC2qCQ3768KawX3DVpJIKIZvFYB8RKeAPIeG0TPmyowtkKH69WQakODyhPDfgIoIysBh2hylrKdsKhdKAFzdI4mbBwI8YcJYWVrwUOMxo/w640-h640/805731951_122107436595464960_7379429479524552197_n.jpg" alt="FreshPackBD logo" class="w-10 h-10 rounded-xl object-cover shadow-soft" />
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTtRQ31ALi6ErNn_y6Gs49ExbA9YQSe_R9Q0HARh_-ge5aXXCd4e_jOa_49l7tQiKrAu5yreZJGXHs9CPGd2fC2qCQ3768KawX3DVpJIKIZvFYB8RKeAPIeG0TPmyowtkKH69WQakODyhPDfgIoIysBh2hylrKdsKhdKAFzdI4mbBwI8YcJYWVrwUOMxo/w640-h640/805731951_122107436595464960_7379429479524552197_n.jpg" alt="Logo" class="w-10 h-10 rounded-xl object-cover shadow-soft" />
           <span class="leading-tight">
             <span class="block text-xl md:text-2xl font-bold text-brand-900 tracking-tight">FreshPack<span class="text-gold-500">BD</span></span>
             <span class="text-[11px] text-brand-700 font-medium block -mt-0.5">খাবার থাকবে টাটকা, সবসময়</span>
@@ -174,18 +136,13 @@
 
         <nav class="hidden lg:flex items-center gap-1 rounded-full border border-brand-100 bg-white/80 p-1 font-medium text-[15px] text-brand-900 shadow-sm">
           <a href="#home" class="px-4 py-1.5 rounded-full hover:text-brand-600">হোম</a>
-          <a href="#video-demo" class="px-4 py-1.5 rounded-full hover:text-brand-600">ভিডিও</a>
-          <a href="#gallery-slider" class="px-4 py-1.5 rounded-full hover:text-brand-600">ফটো গ্যালারি</a>
           <a href="#pricing" class="px-4 py-1.5 rounded-full hover:text-brand-600 font-bold text-brand-700 bg-brand-50">প্যাকেজ ও দাম</a>
           <a href="#details" class="px-4 py-1.5 rounded-full hover:text-brand-600">বিস্তারিত তথ্য</a>
           <a href="#faq" class="px-4 py-1.5 rounded-full hover:text-brand-600">প্রশ্নোত্তর</a>
         </nav>
 
         <div class="flex items-center gap-3">
-          <span class="hidden sm:flex items-center gap-2 text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
-            <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> ক্যাশ অন ডেলিভারি
-          </span>
-          <button data-open-order class="btn inline-flex items-center gap-2 bg-gradient-to-r from-gold-500 to-gold-400 text-brand-950 font-bold px-5 py-2 rounded-full shadow-soft hover:shadow-glow text-sm sm:text-base">
+          <button data-open-order class="btn inline-flex items-center gap-2 bg-gradient-to-r from-gold-500 to-gold-400 text-brand-950 font-bold px-5 py-2 rounded-full shadow-soft text-sm sm:text-base">
             <i class="fa-solid fa-cart-shopping"></i> অর্ডার করুন
           </button>
         </div>
@@ -195,190 +152,26 @@
 
   <main>
     <!-- HERO SECTION -->
-    <section id="home" class="hero-bg relative overflow-hidden text-white">
+    <section id="home" class="hero-bg relative overflow-hidden text-white py-12 md:py-16">
       <div class="absolute inset-0 grid-pattern"></div>
-      <div class="absolute -top-24 -right-24 w-80 h-80 bg-gold-400/20 rounded-full blur-3xl"></div>
-      <div class="absolute -bottom-32 -left-20 w-96 h-96 bg-brand-400/20 rounded-full blur-3xl"></div>
-
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-12 md:pt-16 md:pb-18">
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-10 items-center">
-          
           <div class="text-center lg:text-left order-2 lg:order-1">
-            <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold text-gold-300 mb-4">
-              <span class="w-2.5 h-2.5 rounded-full bg-gold-400 animate-pulse"></span>
-              বাংলাদেশের সবচেয়ে বেশি বিক্রিত কিচেন স্টোরেজ সল্যুশন
-            </div>
-            
             <h1 class="text-3xl sm:text-5xl lg:text-[3.2rem] font-bold leading-[1.2] tracking-tight">
               ফ্রিজে মাছ-মাংস ও সবজি থাকবে<br class="hidden sm:block" />
               <span class="shimmer-text">একদম টাটকা ও সতেজ!</span> ❄️
             </h1>
-
             <p class="mt-4 text-base sm:text-lg text-brand-100/90 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              প্রিমিয়াম <span class="text-white font-semibold">Aluminum Foil Storage Bag</span>-এ খাবার গুছিয়ে সংরক্ষণ করুন। সাধারণ পলিথিনের মতো গন্ধ ছড়াবে না এবং ফ্রিজার বার্ন থেকে খাবার থাকবে সম্পূর্ণ সুরক্ষিত।
+              প্রিমিয়াম Aluminum Foil Storage Bag-এ খাবার গুছিয়ে সংরক্ষণ করুন। গন্ধ ছড়াবে না এবং ফ্রিজার বার্ন থেকে সুরক্ষিত থাকবে।
             </p>
-
-            <div class="mt-5 flex items-center justify-center lg:justify-start gap-4 flex-wrap">
-              <div class="bg-black/30 backdrop-blur px-4 py-2 rounded-2xl border border-white/10 flex items-baseline gap-2">
-                <span class="text-brand-200 text-xs sm:text-sm">শুরু মাত্র</span>
-                <span class="text-3xl font-extrabold text-gold-400">৳৩৯০</span>
-                <span class="text-brand-300 text-sm">থেকে</span>
-              </div>
-              <div class="flex items-center gap-1 text-gold-400 text-sm">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-                <span class="text-brand-100 ml-1 font-semibold">৪.৯ (২,৩০০+ রিভিউ)</span>
-              </div>
-            </div>
-
             <div class="mt-6 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
-              <button data-open-order class="btn cta-pulse w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 text-brand-950 font-bold text-base sm:text-lg px-8 py-3.5 rounded-full">
+              <button data-open-order class="btn cta-pulse w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-gold-500 to-gold-400 text-brand-950 font-bold text-base px-8 py-3.5 rounded-full">
                 <i class="fa-solid fa-bag-shopping"></i> ক্যাশ অন ডেলিভারিতে অর্ডার করুন
               </button>
-              <a href="#pricing" class="w-full sm:w-auto text-center font-bold text-sm text-brand-200 hover:text-white py-3 px-5 underline underline-offset-4">
-                সব প্যাকেজ ও দাম দেখুন ↓
-              </a>
-            </div>
-
-            <div class="mt-5 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-xs sm:text-sm font-medium text-brand-100">
-              <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-400"></i> সম্পূর্ণ ক্যাশ অন ডেলিভারি</span>
-              <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-400"></i> ধুয়ে বারবার ব্যবহারযোগ্য</span>
-              <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-400"></i> ১০০% ফুড-গ্রেড সিল</span>
             </div>
           </div>
-
-          <!-- Product Showcase -->
           <div class="relative order-1 lg:order-2 max-w-md mx-auto w-full">
-            <div class="absolute inset-4 bg-gradient-to-tr from-gold-400/30 via-brand-300/20 to-transparent blur-3xl rounded-full"></div>
-            <div class="relative animate-float">
-              <div class="relative rounded-[2rem] p-2 bg-white/10 border border-white/20 backdrop-blur shadow-2xl">
-                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgtWnCBMiLuxEEHCjtk1abvkSR4XcTjxhSVb48rtQO2T6PYJoBMjmdoQiUy83HxrSYojo7qkQe-E0UOrvgT2RVpKrR8QaTYyb8eumnGScAK3iMCNbLwQlrZ_kIwT6a0Hegtoq_0QjIFbGgvhYLw5vEjjuPj39eE6KEtjYDvbUinxtngtIt1_QOSUSYvV1M=w480-h640" alt="Aluminum Foil Storage Bag" class="w-full rounded-[1.6rem] object-cover aspect-square" />
-              </div>
-              
-              <div class="animate-float-slow absolute -left-3 top-6 bg-white text-brand-950 rounded-2xl px-3 py-1.5 shadow-soft flex items-center gap-2">
-                <span class="w-8 h-8 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center text-sm"><i class="fa-solid fa-weight-hanging"></i></span>
-                <div class="leading-tight">
-                  <div class="text-[10px] text-slate-500">ধারণক্ষমতা</div>
-                  <div class="font-bold text-xs">২–২.৫ কেজি / ব্যাগ</div>
-                </div>
-              </div>
-
-              <div class="animate-float-slow2 absolute -right-3 bottom-6 bg-white text-brand-950 rounded-2xl px-3 py-1.5 shadow-soft flex items-center gap-2">
-                <span class="w-8 h-8 rounded-xl bg-gold-200 text-gold-700 flex items-center justify-center text-sm"><i class="fa-solid fa-box-open"></i></span>
-                <div class="leading-tight">
-                  <div class="text-[10px] text-slate-500">প্রতি প্যাকে</div>
-                  <div class="font-bold text-xs">১০টি প্রিমিয়াম ব্যাগ</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Trust ticker -->
-      <div class="relative border-t border-white/10 bg-black/20 backdrop-blur-sm py-3 overflow-hidden">
-        <div class="marquee flex w-max gap-10 text-xs sm:text-sm font-medium text-brand-100 whitespace-nowrap">
-          <span class="flex gap-10">
-            <span><i class="fa-solid fa-truck-fast text-gold-400 mr-1.5"></i>ঢাকায় ১–২ দিনে এবং বাইরে ২–৩ দিনে ডেলিভারি</span>
-            <span><i class="fa-solid fa-hand-holding-dollar text-gold-400 mr-1.5"></i>পণ্য হাতে পেয়ে দেখে মূল্য দিন</span>
-            <span><i class="fa-solid fa-shield-halved text-gold-400 mr-1.5"></i>১০০% ফুড-গ্রেড অ্যালুমিনিয়াম ফয়েল</span>
-            <span><i class="fa-solid fa-recycle text-gold-400 mr-1.5"></i>ধুয়ে বারবার ব্যবহারযোগ্য ও টেকসই</span>
-          </span>
-          <span class="flex gap-10" aria-hidden="true">
-            <span><i class="fa-solid fa-truck-fast text-gold-400 mr-1.5"></i>ঢাকায় ১–২ দিনে এবং বাইরে ২–৩ দিনে ডেলিভারি</span>
-            <span><i class="fa-solid fa-hand-holding-dollar text-gold-400 mr-1.5"></i>পণ্য হাতে পেয়ে দেখে মূল্য দিন</span>
-            <span><i class="fa-solid fa-shield-halved text-gold-400 mr-1.5"></i>১০০% ফুড-গ্রেড অ্যালুমিনিয়াম ফয়েল</span>
-            <span><i class="fa-solid fa-recycle text-gold-400 mr-1.5"></i>ধুয়ে বারবার ব্যবহারযোগ্য ও টেকসই</span>
-          </span>
-        </div>
-      </div>
-    </section>
-
-    <!-- VIDEO DEMO -->
-    <section id="video-demo" class="py-12 md:py-16 bg-brand-950 text-white relative">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-gold-400 bg-white/10 px-3.5 py-1.5 rounded-full mb-3">
-          <i class="fa-solid fa-circle-play"></i> প্রোডাক্ট ডেমো ভিডিও
-        </span>
-        <h2 class="text-2xl sm:text-3xl font-bold">ভিডিওতে দেখুন এটি বাস্তবে কীভাবে কাজ করে</h2>
-        <p class="mt-2 text-xs sm:text-sm text-brand-200">মাত্র ৩০ সেকেন্ডে দেখে নিন কীভাবে ফ্রিজের খাবার ফ্রেশ ও অর্গানাইজড থাকে</p>
-
-        <div class="mt-8 flex justify-center">
-          <div class="phone-mockup w-full max-w-[310px] sm:max-w-[340px]">
-            <div class="w-20 h-3 bg-slate-800 mx-auto rounded-b-xl mb-1"></div>
-            <div class="relative w-full aspect-[9/16] bg-black">
-              <iframe 
-                class="w-full h-full object-cover"
-                src="https://www.youtube.com/embed/M6ZqcWiYKms" 
-                title="FreshPack Demo Video" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="w-24 h-1 bg-slate-700 mx-auto my-2 rounded-full"></div>
-          </div>
-        </div>
-
-        <div class="mt-7">
-          <button data-open-order class="btn cta-pulse inline-flex items-center justify-center gap-2 bg-gradient-to-r from-gold-500 to-gold-400 text-brand-950 font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-full shadow-soft">
-            <i class="fa-solid fa-cart-shopping"></i> পছন্দ হলে অর্ডার করুন (ক্যাশ অন ডেলিভারি)
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- GALLERY SLIDER -->
-    <section id="gallery-slider" class="py-12 md:py-16 bg-brand-50/50">
-      <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 bg-brand-100 px-3.5 py-1.5 rounded-full">
-            <i class="fa-solid fa-images"></i> এইচডি ফটো গ্যালারি
-          </span>
-          <h2 class="mt-2 text-2xl sm:text-3xl font-bold text-brand-950">প্রোডাক্টের প্রতিটি দিক কাছ থেকে দেখুন</h2>
-          <p class="mt-1 text-xs text-slate-500">ছবি স্পর্শ করলে বা মাউস রাখলে স্লাইডারটি স্থির থাকবে</p>
-        </div>
-
-        <div class="relative mt-7 overflow-hidden rounded-3xl border-2 border-brand-200 shadow-card bg-slate-900 group aspect-square" id="sliderWrapper">
-          <div class="flex transition-transform duration-700 ease-out h-full" id="sliderTrack">
-            <div class="w-full h-full flex-shrink-0 relative">
-              <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgjJChinXe2y4vBC4VRi2X0Y_rXSo00YISPgcJv3vGJxMYSUM-Tz4EhYEKzzQm7zF0cOPPpnPp-gpHmpP1gvH3_gzuFj3rQ0YsHCVzRyJ63wpjA487rgiGzHZdPvmF9Pf_JMJlfFb4ppb5-iAlDP6uG05UdL_2e0RLN3fJMlPfokEISHQFCzTjvQYuGikc=w640-h640" alt="ফ্রিজারে সাজানো ব্যাগ" class="w-full h-full object-cover" />
-              <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-brand-950/90 to-transparent text-white">
-                <span class="text-[11px] bg-gold-500 text-brand-950 font-bold px-2 py-0.5 rounded">ফ্রিজার সেফ</span>
-                <p class="font-bold text-sm mt-0.5">ফ্রিজারে নিখুঁতভাবে ও সুন্দরভাবে গুছিয়ে রাখুন</p>
-              </div>
-            </div>
-            <div class="w-full h-full flex-shrink-0 relative">
-              <img src="https://blogger.googleusercontent.com/img/a/AVvXsEiPLMYm3k8sUP3aRZ2Bv0OEowtdrpNLUe2tRUiRIpc1q5ZJRA4o2hjHttl0BlBAsXJOaXzKB97AxNIgfzbYsmRC3wu-mhsjoZWDI9x9TQgVstHjWa3Xc0FxcgANkM6GAMtfoCvO8uaBfWCL_ojbfp6wPx1OTqdBZC7KcdZx2aQSfpz48rZs38gR82-fLsM=w640-h640" alt="মাছ-মাংস সংরক্ষণ" class="w-full h-full object-cover" />
-              <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-brand-950/90 to-transparent text-white">
-                <span class="text-[11px] bg-gold-500 text-brand-950 font-bold px-2 py-0.5 rounded">ভাগ করে সংরক্ষণ</span>
-                <p class="font-bold text-sm mt-0.5">মাছ ও মাংস আলাদা আলাদা প্যাকে সংরক্ষণ সহজ</p>
-              </div>
-            </div>
-            <div class="w-full h-full flex-shrink-0 relative">
-              <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjd3ism3CA1PCtbyXFE4JXbaq54wmllSWjluMC3yeE0OTAHuEAs0rU1h8mUoEMD8-11g_wDvh3gTWgqFKZc_bjiyvoCHfqSRBMd7BPaOyxzLSj11kTkyZczSNh9gCsHGwI7iMAYVC4WdtREHTZCu-Aq4gUrHFnrb_S7FZ4pmWDyKTni07Pjnvpxq8Wfo5s=w640-h640" alt="এয়ার-টাইট সিল" class="w-full h-full object-cover" />
-              <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-brand-950/90 to-transparent text-white">
-                <span class="text-[11px] bg-gold-500 text-brand-950 font-bold px-2 py-0.5 rounded">এয়ার-টাইট লক</span>
-                <p class="font-bold text-sm mt-0.5">শক্তিশালী জিপ লক আর্দ্রতা ও বাতাস আটকে রাখে</p>
-              </div>
-            </div>
-            <div class="w-full h-full flex-shrink-0 relative">
-              <img src="https://blogger.googleusercontent.com/img/a/AVvXsEglabzBRPgNmah5DgB4uHe_eLWEh7-C2xvsypsQTFqUCzf3P6z07DQySPGdbSgCaD3Os7Q5t03osvG7pMlGIa8SPMaBUh-X6PxSen2sRZAc4vZEd3ISisrY2KE94nTjB28EDjglq7sRPRFf3cTnnfFKUDQgLVfe4WdFNEjkbfeyEQP0uO0qhdYLkKDX4-A" alt="১০ পিসের প্যাক" class="w-full h-full object-cover" />
-              <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-brand-950/90 to-transparent text-white">
-                <span class="text-[11px] bg-gold-500 text-brand-950 font-bold px-2 py-0.5 rounded">কমপ্লিট প্যাক</span>
-                <p class="font-bold text-sm mt-0.5">প্রতি প্যাকে পাচ্ছেন ১০টি রিইউজেবল ব্যাগ</p>
-              </div>
-            </div>
-          </div>
-
-          <button id="sliderPrev" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/85 hover:bg-white text-brand-950 flex items-center justify-center text-sm shadow transition-all"><i class="fa-solid fa-chevron-left"></i></button>
-          <button id="sliderNext" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/85 hover:bg-white text-brand-950 flex items-center justify-center text-sm shadow transition-all"><i class="fa-solid fa-chevron-right"></i></button>
-
-          <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10" id="sliderDots">
-            <button class="w-2.5 h-2.5 rounded-full bg-gold-400 transition-all scale-125" data-slide="0"></button>
-            <button class="w-2.5 h-2.5 rounded-full bg-white/60 hover:bg-white transition-all" data-slide="1"></button>
-            <button class="w-2.5 h-2.5 rounded-full bg-white/60 hover:bg-white transition-all" data-slide="2"></button>
-            <button class="w-2.5 h-2.5 rounded-full bg-white/60 hover:bg-white transition-all" data-slide="3"></button>
+            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgtWnCBMiLuxEEHCjtk1abvkSR4XcTjxhSVb48rtQO2T6PYJoBMjmdoQiUy83HxrSYojo7qkQe-E0UOrvgT2RVpKrR8QaTYyb8eumnGScAK3iMCNbLwQlrZ_kIwT6a0Hegtoq_0QjIFbGgvhYLw5vEjjuPj39eE6KEtjYDvbUinxtngtIt1_QOSUSYvV1M=w480-h640" alt="Bag" class="w-full rounded-[1.6rem] object-cover aspect-square shadow-2xl" />
           </div>
         </div>
       </div>
@@ -388,177 +181,59 @@
     <section id="pricing" class="py-14 md:py-20 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-2xl mx-auto">
-          <span class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-brand-700 bg-brand-100 px-4 py-1.5 rounded-full">
-            <i class="fa-solid fa-tags"></i> বিশেষ প্যাকেজ অফার
-          </span>
-          <h2 class="mt-3 text-2xl sm:text-4xl font-bold text-brand-950 leading-tight">আপনার পছন্দের প্যাকেজটি বেছে নিন</h2>
-          <p class="mt-2 text-sm text-slate-600">যত বেশি নিবেন, প্রতি পিসে সেভ করবেন তত বেশি। সম্পূর্ণ ক্যাশ অন ডেলিভারি সুবিধা।</p>
+          <h2 class="text-2xl sm:text-4xl font-bold text-brand-950 leading-tight">আপনার পছন্দের প্যাকেজটি বেছে নিন</h2>
+          <p class="mt-2 text-sm text-slate-600">যত বেশি নিবেন, প্রতি পিসে সেভ করবেন তত বেশি। সম্পূর্ণ ক্যাশ অন ডেলিভারি।</p>
         </div>
 
         <div class="mt-10 md:mt-14 grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+          <!-- Package 1 -->
           <div class="price-card bg-white border border-brand-100 rounded-3xl p-6 sm:p-7 shadow-card flex flex-col">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-brand-700 bg-brand-50 border border-brand-100 px-3 py-1 rounded-full">স্টার্টার প্যাক</span>
-              <span class="w-10 h-10 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-lg"><i class="fa-solid fa-box"></i></span>
-            </div>
-            <h3 class="mt-4 text-xl font-bold text-brand-950">১০ পিস ব্যাগ</h3>
-            <p class="text-slate-500 text-xs">১ প্যাক — ছোট পরিবারের জন্য</p>
+            <h3 class="mt-2 text-xl font-bold text-brand-950">১০ পিস ব্যাগ</h3>
             <div class="mt-4 flex items-end gap-2"><span class="text-4xl sm:text-5xl font-bold text-brand-900 leading-none">৳৩৯০</span></div>
-            <ul class="mt-5 space-y-2.5 text-sm text-slate-700 flex-1">
-              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check text-brand-500 mt-1"></i> ১০টি প্রিমিয়াম ফয়েল ব্যাগ</li>
-              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check text-gold-400 mt-1"></i> ২–২.৫ কেজি ধারণক্ষমতা L Size</li>
-              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check text-brand-500 mt-1"></i> শক্তিশালী জিপ সিল লক</li>
-            </ul>
-            <button data-open-order data-package="10" class="btn mt-6 w-full inline-flex items-center justify-center gap-2 bg-brand-900 hover:bg-brand-800 text-white font-bold px-6 py-3.5 rounded-xl text-base">
-              <i class="fa-solid fa-cart-shopping"></i> অর্ডার করুন
-            </button>
+            <button data-open-order data-package="pkg_0" class="btn mt-6 w-full bg-brand-900 hover:bg-brand-800 text-white font-bold py-3.5 rounded-xl">অর্ডার করুন</button>
           </div>
 
+          <!-- Package 2 (Popular) -->
           <div class="price-card popular relative bg-gradient-to-br from-brand-800 via-brand-900 to-brand-950 text-white rounded-3xl p-6 sm:p-7 shadow-soft flex flex-col md:-mt-3">
-            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gold-400 via-gold-500 to-gold-400 text-brand-950 text-xs font-extrabold px-5 py-1.5 rounded-full shadow-glow whitespace-nowrap">
-              <i class="fa-solid fa-crown mr-1"></i> মোস্ট পপুলার — সবচেয়ে জনপ্রিয়
-            </div>
-            <div class="flex items-center justify-between mt-2">
-              <span class="text-xs font-bold text-gold-400 bg-white/10 border border-white/15 px-3 py-1 rounded-full">ফ্যামিলি প্যাক</span>
-              <span class="w-10 h-10 rounded-xl bg-white/10 text-gold-400 flex items-center justify-center text-lg"><i class="fa-solid fa-boxes-stacked"></i></span>
-            </div>
-            <h3 class="mt-4 text-xl font-bold">২০ পিস ব্যাগ</h3>
-            <p class="text-brand-200 text-xs">২ প্যাক — পুরো মাসের বাজারের জন্য আদর্শ</p>
-            <div class="mt-4 flex items-end gap-3">
-              <span class="text-4xl sm:text-5xl font-bold text-gold-400 leading-none">৳৬৫০</span>
-              <span class="text-brand-300 line-through text-base mb-1">৳৭৮০</span>
-            </div>
-            <p class="mt-1 text-xs text-brand-200"> · <span class="text-gold-300 font-bold">৳১৩০ সাশ্রয়</span></p>
-            <ul class="mt-5 space-y-2.5 text-sm text-brand-50 flex-1">
-              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check text-gold-400 mt-1"></i> ২০টি প্রিমিয়াম ফয়েল ব্যাগ</li>
-              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check text-gold-400 mt-1"></i> ২–২.৫ কেজি ধারণক্ষমতা L Size</li>
-              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check text-gold-400 mt-1"></i> এয়ার-টাইট ডাবল প্রটেকশন</li>
-            </ul>
-            <button data-open-order data-package="20" class="btn cta-pulse mt-6 w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-gold-500 to-gold-400 text-brand-950 font-bold px-6 py-3.5 rounded-xl text-base">
-              <i class="fa-solid fa-cart-shopping"></i> অর্ডার করুন (বেস্ট অফার)
-            </button>
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gold-400 to-gold-500 text-brand-950 text-xs font-extrabold px-5 py-1 rounded-full shadow">সবচেয়ে জনপ্রিয়</div>
+            <h3 class="mt-2 text-xl font-bold">২০ পিস ব্যাগ</h3>
+            <div class="mt-4 flex items-end gap-3"><span class="text-4xl sm:text-5xl font-bold text-gold-400 leading-none">৳৬৫০</span></div>
+            <button data-open-order data-package="pkg_1" class="btn cta-pulse mt-6 w-full bg-gradient-to-r from-gold-500 to-gold-400 text-brand-950 font-bold py-3.5 rounded-xl">অর্ডার করুন (বেস্ট অফার)</button>
           </div>
 
+          <!-- Package 3 -->
           <div class="price-card bg-white border border-brand-100 rounded-3xl p-6 sm:p-7 shadow-card flex flex-col">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-brand-700 bg-brand-50 border border-brand-100 px-3 py-1 rounded-full">মেগা সেভার</span>
-              <span class="w-10 h-10 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-lg"><i class="fa-solid fa-warehouse"></i></span>
-            </div>
-            <h3 class="mt-4 text-xl font-bold text-brand-950">৩০ পিস ব্যাগ</h3>
-            <p class="text-slate-500 text-xs">৩ প্যাক — মাঝারি পরিবারের জন্য পারফেক্ট</p>
-            <div class="mt-4 flex items-end gap-3">
-              <span class="text-4xl sm:text-5xl font-bold text-brand-900 leading-none">৳৮৫০</span>
-              <span class="text-slate-400 line-through text-base mb-1">৳১,১৭০</span>
-            </div>
-            <p class="mt-1 text-xs text-slate-500"> · <span class="text-brand-700 font-bold">৳৩২০ সাশ্রয়</span></p>
-            <ul class="mt-5 space-y-2.5 text-sm text-slate-700 flex-1">
-              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check text-brand-500 mt-1"></i> ৩০টি প্রিমিয়াম ফয়েল ব্যাগ</li>
-              <li class="flex gap-2.5"><i class="fa-solid fa-circle-check text-gold-400 mt-1"></i> সর্বোচ্চ পরিমাণ সাশ্রয়</li>
-            </ul>
-            <button data-open-order data-package="30" class="btn mt-6 w-full inline-flex items-center justify-center gap-2 bg-brand-900 hover:bg-brand-800 text-white font-bold px-6 py-3.5 rounded-xl text-base">
-              <i class="fa-solid fa-cart-shopping"></i> অর্ডার করুন
-            </button>
-          </div>
-        </div>
-
-        <div class="mt-9 max-w-2xl mx-auto bg-brand-50/80 border border-brand-200 rounded-2xl p-4 text-center">
-          <p class="text-sm font-semibold text-brand-950">
-            <i class="fa-solid fa-truck text-brand-600 mr-1.5"></i> ডেলিভারি চার্জ: 
-            <span class="text-brand-800 font-bold">ঢাকার ভিতরে ৳৭০</span> | 
-            <span class="text-brand-800 font-bold">ঢাকার বাইরে ৳১১০</span> 
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- DETAILED PRODUCT BREAKDOWN -->
-    <section id="details" class="soft-section py-14 md:py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto">
-          <span class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-brand-700 bg-brand-100 px-4 py-1.5 rounded-full">
-            <i class="fa-solid fa-circle-info"></i> প্রোডাক্টের বিশেষত্ব
-          </span>
-          <h2 class="mt-3 text-2xl sm:text-4xl font-bold text-brand-950 leading-tight">কেন এই ফয়েল স্টোরেজ ব্যাগ সাধারণ পলিথিনের চেয়ে সেরা?</h2>
-        </div>
-
-        <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div class="bg-white border border-brand-100 rounded-2xl p-5 shadow-card">
-            <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center text-xl font-bold mb-4"><i class="fa-solid fa-snowflake"></i></div>
-            <h4 class="font-bold text-lg text-brand-950">১. ফ্রিজার বার্ন প্রতিরোধ</h4>
-            <p class="mt-2 text-sm text-slate-600 leading-relaxed">ডিপ ফ্রিজে মাছ বা মাংস মাসের পর মাস রাখলেও শক্ত বা খসখসে হয়ে শুকিয়ে যায় না।</p>
-          </div>
-          <div class="bg-white border border-brand-100 rounded-2xl p-5 shadow-card">
-            <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center text-xl font-bold mb-4"><i class="fa-solid fa-lock"></i></div>
-            <h4 class="font-bold text-lg text-brand-950">২. গন্ধ মেশে না</h4>
-            <p class="mt-2 text-sm text-slate-600 leading-relaxed">মাছের তীব্র গন্ধ ফ্রিজের অন্য খাবারে কিংবা আইসক্রিম/দুধে মিশবে না।</p>
-          </div>
-          <div class="bg-white border border-brand-100 rounded-2xl p-5 shadow-card">
-            <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center text-xl font-bold mb-4"><i class="fa-solid fa-recycle"></i></div>
-            <h4 class="font-bold text-lg text-brand-950">৩. ধুয়ে বারবার ব্যবহারযোগ্য</h4>
-            <p class="mt-2 text-sm text-slate-600 leading-relaxed">হালকা সাবান পানিতে সহজে ধুয়ে শুকিয়ে অনেকবার নিশ্চিন্তে ব্যবহার করা যায়।</p>
+            <h3 class="mt-2 text-xl font-bold text-brand-950">৩০ পিস ব্যাগ</h3>
+            <div class="mt-4 flex items-end gap-3"><span class="text-4xl sm:text-5xl font-bold text-brand-900 leading-none">৳৮৫০</span></div>
+            <button data-open-order data-package="pkg_2" class="btn mt-6 w-full bg-brand-900 hover:bg-brand-800 text-white font-bold py-3.5 rounded-xl">অর্ডার করুন</button>
           </div>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="py-14 md:py-20 bg-white">
+    <section id="faq" class="py-14 md:py-20 bg-slate-50">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <span class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-brand-700 bg-brand-100 px-4 py-1.5 rounded-full">
-            <i class="fa-solid fa-circle-question"></i> সচরাচর জিজ্ঞাসা
-          </span>
-          <h2 class="mt-3 text-2xl sm:text-3xl font-bold text-brand-950">সাধারণ কিছু প্রশ্নের উত্তর</h2>
-        </div>
-
-        <div class="mt-8 space-y-3" id="faqList">
-          <div class="faq-item bg-white border border-brand-100 rounded-2xl shadow-card overflow-hidden">
-            <button class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 font-bold text-brand-950 text-[15px] sm:text-base">
-              <span><i class="fa-solid fa-hand-holding-dollar text-brand-600 mr-2"></i> কোনো অগ্রিম টাকা দিতে হবে কি?</span>
-              <span class="faq-icon w-8 h-8 shrink-0 rounded-full bg-brand-50 text-brand-700 flex items-center justify-center"><i class="fa-solid fa-chevron-down text-xs"></i></span>
+        <div class="text-center"><h2 class="text-2xl sm:text-3xl font-bold text-brand-950">সাধারণ কিছু প্রশ্নের উত্তর</h2></div>
+        <div class="mt-8 space-y-3">
+          <div class="faq-item bg-white border border-brand-100 rounded-2xl shadow-sm overflow-hidden">
+            <button class="faq-toggle w-full flex items-center justify-between text-left px-5 py-4 font-bold text-brand-950">
+              <span>কোনো অগ্রিম টাকা দিতে হবে কি?</span>
+              <span class="faq-icon w-8 h-8 rounded-full bg-brand-50 text-brand-700 flex items-center justify-center"><i class="fa-solid fa-chevron-down text-xs"></i></span>
             </button>
-            <div class="faq-answer"><p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">একদমই না! আমরা সম্পূর্ণ ক্যাশ অন ডেলিভারিতে পণ্য সরবরাহ করি।</p></div>
-          </div>
-          <div class="faq-item bg-white border border-brand-100 rounded-2xl shadow-card overflow-hidden">
-            <button class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 font-bold text-brand-950 text-[15px] sm:text-base">
-              <span><i class="fa-solid fa-truck text-brand-600 mr-2"></i> ডেলিভারি কতদিনে পাবো?</span>
-              <span class="faq-icon w-8 h-8 shrink-0 rounded-full bg-brand-50 text-brand-700 flex items-center justify-center"><i class="fa-solid fa-chevron-down text-xs"></i></span>
-            </button>
-            <div class="faq-answer"><p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">ঢাকার ভিতরে ১–২ কর্মদিবসে এবং ঢাকার বাইরে ২–৩ কর্মদিবসে ডেলিভারি পৌঁছে যায়।</p></div>
+            <div class="faq-answer"><p class="px-5 pb-4 text-sm text-slate-600">একদমই না! সম্পূর্ণ ক্যাশ অন ডেলিভারি।</p></div>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer id="contact" class="bg-brand-950 text-brand-100 relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
-      <div class="grid md:grid-cols-3 gap-8">
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-600 to-brand-800 text-gold-400 flex items-center justify-center text-lg"><i class="fa-solid fa-snowflake"></i></span>
-            <span class="text-xl font-bold text-white">FreshPack<span class="text-gold-400">BD</span></span>
-          </div>
-          <p class="mt-3 text-xs sm:text-sm text-brand-200 leading-relaxed">প্রিমিয়াম Aluminum Foil Storage Bag-এর বিশ্বস্ত অনলাইন শপ।</p>
-        </div>
-        <div>
-          <h4 class="text-white font-bold text-sm">যোগাযোগ ও হেল্পলাইন</h4>
-          <ul class="mt-3 space-y-2 text-xs sm:text-sm text-brand-200">
-            <li><i class="fa-solid fa-phone text-gold-400 mr-2"></i> <a href="tel:+8801794821159" class="hover:text-white">01794821159</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="mt-10 pt-5 border-t border-white/10 text-center text-xs text-brand-300">© 2026 FreshPack BD. সর্বস্বত্ব সংরক্ষিত।</div>
-    </div>
-  </footer>
-
   <!-- STICKY BOTTOM BAR -->
-  <div id="stickyBottomBar" class="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-brand-200 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] px-4 py-3 sm:py-3.5">
+  <div id="stickyBottomBar" class="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-brand-200 px-4 py-3 sm:py-3.5 shadow-lg">
     <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
       <div class="leading-tight">
         <span class="text-[11px] sm:text-xs text-slate-500 block font-medium">ক্যাশ অন ডেলিভারি</span>
-        <span class="text-lg sm:text-2xl font-black text-brand-950">৳৩৯০ <span class="text-xs font-normal text-slate-500">থেকে শুরু</span></span>
+        <span id="stickyPriceDisplay" class="text-lg sm:text-2xl font-black text-brand-950">৳৬৫০ <span class="text-xs font-normal text-slate-500">থেকে শুরু</span></span>
       </div>
       <button data-open-order class="btn cta-pulse flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-gradient-to-r from-gold-500 to-gold-400 text-brand-950 font-extrabold text-sm sm:text-base px-6 py-3 rounded-full shadow-soft">
         <i class="fa-solid fa-cart-shopping"></i> অর্ডার করুন
@@ -567,20 +242,18 @@
   </div>
 
   <!-- CHECKOUT MODAL -->
-  <div id="orderModal" class="modal fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-4" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div id="orderModal" class="modal fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div id="modalBackdrop" class="absolute inset-0 bg-brand-950/75 backdrop-blur-sm"></div>
     <div class="modal-card relative w-full sm:max-w-lg bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden max-h-[94vh] flex flex-col">
       <div class="bg-gradient-to-r from-brand-900 to-brand-800 text-white px-6 py-4 flex items-center justify-between shrink-0">
-        <h3 id="modalTitle" class="text-lg font-bold leading-tight">অর্ডার ফর্ম</h3>
-        <button id="modalClose" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white"><i class="fa-solid fa-xmark"></i></button>
+        <h3 class="text-lg font-bold">অর্ডার ফর্ম</h3>
+        <button id="modalClose" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="modal-scroll overflow-y-auto p-6">
         <form id="orderForm" class="space-y-4" novalidate>
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">প্যাকেজ বাছাই করুন</label>
-            <select id="quantity" name="quantity" class="field font-bold text-brand-950 bg-white py-2.5">
-              <!-- Dynamically populated -->
-            </select>
+            <select id="quantity" name="quantity" class="field font-bold text-brand-950 bg-white py-2.5"></select>
           </div>
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">আপনার নাম *</label>
@@ -598,14 +271,14 @@
             <div class="flex justify-between items-center"><span class="font-bold text-brand-950">সর্বমোট প্রদেয়</span><span id="sumTotal" class="text-2xl font-extrabold text-brand-900">৳৭২০</span></div>
           </div>
           <button type="submit" id="submitBtn" class="btn w-full bg-gradient-to-r from-gold-500 to-gold-400 text-brand-950 font-bold text-lg px-6 py-4 rounded-xl shadow-soft">
-            <span class="btn-text">অর্ডার কনফার্ম করুন (ক্যাশ অন ডেলিভারি)</span>
+            অর্ডার কনফার্ম করুন (ক্যাশ অন ডেলিভারি)
           </button>
         </form>
       </div>
     </div>
   </div>
 
-  <!-- CORE JAVASCRIPT & RENDER ENGINE -->
+  <!-- JAVASCRIPT & SMART SYNC ENGINE -->
   <script>
     const CONFIG = {
       WORKER_URL: 'https://steep-rain-e346.azwadahshafhossain.workers.dev',
@@ -613,38 +286,20 @@
       STORE_NAME: 'FreshPack BD'
     };
 
-    const DELIVERY = { inside: { charge: 70 }, outside: { charge: 110 } };
     let DYNAMIC_PACKAGES = {};
 
     const toBn = (n) => String(n).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
     const toEn = (s) => String(s).replace(/[০-৯]/g, d => "০১২৩৪৫৬৭৮৯".indexOf(d));
     const money = (n) => '৳' + toBn(Number(n).toLocaleString('en-US'));
 
-    // Slider Engine
-    (function setupSlider() {
-      const track = document.getElementById('sliderTrack');
-      const dots = document.querySelectorAll('#sliderDots button');
-      const prevBtn = document.getElementById('sliderPrev');
-      const nextBtn = document.getElementById('sliderNext');
-      if(!track) return;
-      let currentIndex = 0;
-      const totalSlides = dots.length || 4;
-      
-      function updateSlider(index) {
-        currentIndex = (index + totalSlides) % totalSlides;
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
-      }
-      if(prevBtn) prevBtn.addEventListener('click', () => updateSlider(currentIndex - 1));
-      if(nextBtn) nextBtn.addEventListener('click', () => updateSlider(currentIndex + 1));
-    })();
-
-    // Faq setup
+    // FAQ Toggle
     document.querySelectorAll('.faq-item').forEach(item => {
       const btn = item.querySelector('.faq-toggle');
       if(btn) btn.addEventListener('click', () => item.classList.toggle('open'));
     });
 
-    function buildDynamicPackagesFromDOM() {
+    // Smart DOM Package & Price Sync Engine
+    function smartSyncPackages() {
       DYNAMIC_PACKAGES = {};
       const cards = document.querySelectorAll('.price-card');
       const select = document.getElementById('quantity');
@@ -670,18 +325,28 @@
           select.appendChild(opt);
         }
       });
+
+      // Update Sticky Bar Price Automatically from 1st Package
+      const firstPkg = Object.values(DYNAMIC_PACKAGES)[0];
+      if (firstPkg) {
+        const stickyDisplay = document.getElementById('stickyPriceDisplay');
+        if (stickyDisplay) {
+          stickyDisplay.innerHTML = `৳${toBn(firstPkg.price)} <span class="text-xs font-normal text-slate-500">থেকে শুরু</span>`;
+        }
+      }
     }
 
     function updateSummary() {
       const qtySelect = document.getElementById('quantity');
       const pkgKey = qtySelect ? qtySelect.value : 'pkg_0';
-      const pkg = DYNAMIC_PACKAGES[pkgKey] || { price: 650 };
+      const pkg = DYNAMIC_PACKAGES[pkgKey] || Object.values(DYNAMIC_PACKAGES)[0] || { price: 650 };
       const sumTotal = document.getElementById('sumTotal');
       if (sumTotal) sumTotal.textContent = money(pkg.price + 70);
     }
 
     const modal = document.getElementById('orderModal');
     function openModal(pkgKey) {
+      smartSyncPackages();
       const qtySelect = document.getElementById('quantity');
       if (pkgKey && DYNAMIC_PACKAGES[pkgKey] && qtySelect) qtySelect.value = pkgKey;
       updateSummary();
@@ -722,15 +387,15 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(order)
         });
-        alert('🎉 অর্ডার সফলভাবে সম্পন্ন হয়েছে!');
+        alert('🎉 অর্ডার সফলভাবে সম্পন্ন হয়েছে!');
         closeModal();
         e.target.reset();
       } catch(err) {
-        alert('সার্ভার সমস্যার কারণে অর্ডার সাবমিট হয়নি। আবার চেষ্টা করুন।');
+        alert('সার্ভার সমস্যার কারণে অর্ডার সাবমিট হয়নি। আবার চেষ্টা করুন।');
       }
     });
 
-    // 🚀 UNIFIED INITIALIZER & LIVE LOADER
+    // 🚀 UNIFIED INITIALIZER & LIVE VISUAL EDITOR
     (async function initLivePage() {
       try {
         const res = await fetch(`${CONFIG.WORKER_URL}/page-content?store=${CONFIG.STORE_CODE}&_t=` + Date.now(), { cache: 'no-store' });
@@ -741,7 +406,7 @@
         }
       } catch(e) {}
 
-      buildDynamicPackagesFromDOM();
+      smartSyncPackages();
       updateSummary();
 
       // Inline Visual Editor Mode if edit=1
@@ -750,10 +415,12 @@
         const style = document.createElement('style');
         style.innerHTML = `[contenteditable="true"]:hover { outline: 2px dashed #10b981 !important; outline-offset: 4px; background: rgba(16,185,129,0.08)!important; }`;
         document.head.appendChild(style);
+        
         document.querySelectorAll('h1, h2, h3, h4, p, span, li, a').forEach(el => {
           el.setAttribute('contenteditable', 'true');
           el.addEventListener('click', (e) => { if (el.tagName === 'A' || el.closest('a')) e.preventDefault(); });
         });
+
         document.querySelectorAll('img').forEach(img => {
           img.addEventListener('click', (e) => {
             e.preventDefault(); e.stopPropagation();
