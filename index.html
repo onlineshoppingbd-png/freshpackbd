@@ -417,25 +417,35 @@
         }
       });
 
-      // Auto-extract delivery charges if edited on page
-      const pageText = document.querySelector('main')?.innerText || '';
-      const insideMatch = pageText.match(/ঢাকার ভিতরে[^\d]*(\d+)/);
+      // 🛠️ Smart Delivery Charge Detector from Main Page Text & Elements
+      const mainText = document.querySelector('main')?.innerText || '';
+      
+      // Khuje ber korbe delivery charge kothay lekha ache
+      const insideRegex = /(?:ঢাকার ভিতরে|ঢাকা সিটি|Inside Dhaka)[^\d]*(\d+)/i;
+      const outsideRegex = /(?:ঢাকার বাইরে|ঢাকার বাহিরে|সারা বাংলাদেশ|Outside Dhaka)[^\d]*(\d+)/i;
+      
+      const insideMatch = mainText.match(insideRegex);
       if (insideMatch && insideMatch[1]) {
         const ch = parseInt(toEn(insideMatch[1]), 10);
         if (!isNaN(ch)) DELIVERY.inside.charge = ch;
       }
-      const outsideMatch = pageText.match(/ঢাকার বাইরে[^\d]*(\d+)/) || pageText.match(/ঢাকার বাহিরে[^\d]*(\d+)/);
+
+      const outsideMatch = mainText.match(outsideRegex);
       if (outsideMatch && outsideMatch[1]) {
         const ch = parseInt(toEn(outsideMatch[1]), 10);
         if (!isNaN(ch)) DELIVERY.outside.charge = ch;
       }
 
-      // Update Delivery Pills in Modal
+      // Update Delivery Pills inside Checkout Modal
       const insidePill = document.getElementById('insidePillText');
-      if (insidePill) insidePill.innerHTML = `<i class="fa-solid fa-city"></i> ঢাকার ভিতরে <strong>(৳${toBn(DELIVERY.inside.charge)})</strong>`;
+      if (insidePill) {
+        insidePill.innerHTML = `<i class="fa-solid fa-city"></i> ঢাকার ভিতরে <strong>(৳${toBn(DELIVERY.inside.charge)})</strong>`;
+      }
       
       const outsidePill = document.getElementById('outsidePillText');
-      if (outsidePill) outsidePill.innerHTML = `<i class="fa-solid fa-map-location-dot"></i> ঢাকার বাইরে <strong>(৳${toBn(DELIVERY.outside.charge)})</strong>`;
+      if (outsidePill) {
+        outsidePill.innerHTML = `<i class="fa-solid fa-map-location-dot"></i> ঢাকার বাইরে <strong>(৳${toBn(DELIVERY.outside.charge)})</strong>`;
+      }
 
       // Update Sticky Bar Price Automatically from 1st Package
       const firstPkg = Object.values(DYNAMIC_PACKAGES)[0];
@@ -447,84 +457,6 @@
       }
       updateSummary();
     }
-
-    function getSelection() {
-      const qtySelect = document.getElementById('quantity');
-      const pkgKey = qtySelect ? qtySelect.value : 'pkg_0';
-      const areaInput = document.querySelector('input[name="deliveryArea"]:checked');
-      const area = areaInput ? areaInput.value : 'inside';
-      
-      const pkg = DYNAMIC_PACKAGES[pkgKey] || Object.values(DYNAMIC_PACKAGES)[0] || { label: 'প্যাকেজ', price: 650 };
-      const del = DELIVERY[area] || DELIVERY.inside;
-      return { pkg, del, total: pkg.price + del.charge };
-    }
-
-    function updateSummary() {
-      const { pkg, del, total } = getSelection();
-      document.getElementById('sumPkg').textContent = pkg.label;
-      document.getElementById('sumPrice').textContent = money(pkg.price);
-      document.getElementById('sumDelivery').textContent = money(del.charge);
-      document.getElementById('sumTotal').textContent = money(total);
-    }
-
-    const modal = document.getElementById('orderModal');
-    function openModal(pkgKey) {
-      smartSyncEngine();
-      const qtySelect = document.getElementById('quantity');
-      if (pkgKey && DYNAMIC_PACKAGES[pkgKey] && qtySelect) qtySelect.value = pkgKey;
-      updateSummary();
-      modal.classList.add('open');
-      document.body.classList.add('no-scroll');
-    }
-    function closeModal() {
-      modal.classList.remove('open');
-      document.body.classList.remove('no-scroll');
-    }
-
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('[data-open-order]');
-      if (btn) { e.preventDefault(); openModal(btn.dataset.package); }
-    });
-
-    document.getElementById('modalClose')?.addEventListener('click', closeModal);
-    document.getElementById('modalBackdrop')?.addEventListener('click', closeModal);
-    document.getElementById('quantity')?.addEventListener('change', updateSummary);
-    document.querySelectorAll('input[name="deliveryArea"]').forEach(input => {
-      input.addEventListener('change', updateSummary);
-    });
-
-    // Form Submission
-    document.getElementById('orderForm')?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const { pkg, del, total } = getSelection();
-      
-      const order = {
-        store_name: CONFIG.STORE_NAME,
-        store_code: CONFIG.STORE_CODE,
-        product: 'Aluminum Foil Storage Bag',
-        quantity: `${pkg.label} (৳${toBn(pkg.price)})`,
-        name: document.getElementById('customerName').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        address: document.getElementById('address').value.trim(),
-        deliveryArea: `${del.label} (৳${toBn(del.charge)})`,
-        payment: 'Cash on Delivery',
-        total: money(total)
-      };
-
-      try {
-        await fetch(`${CONFIG.WORKER_URL}/order`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(order)
-        });
-        alert('🎉 অর্ডার সফলভাবে সম্পন্ন হয়েছে!');
-        closeModal();
-        e.target.reset();
-        updateSummary();
-      } catch(err) {
-        alert('সার্ভার সমস্যার কারণে অর্ডার সাবমিট হয়নি। আবার চেষ্টা করুন।');
-      }
-    });
 
     // 🚀 UNIFIED INITIALIZER & LIVE VISUAL EDITOR
     (async function initLivePage() {
