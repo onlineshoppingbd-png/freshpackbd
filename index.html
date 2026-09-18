@@ -668,6 +668,12 @@
           opt.textContent = `${title} — ৳${toBn(priceNum)}`;
           if (index === 1 || cards.length === 1) opt.selected = true;
           select.appendChild(opt);
+          // 🛠️ এই অংশটি যোগ করুন: এটি প্রথম প্যাকেজের দাম স্টিকি বারে ডাইনামিকভাবে বসিয়ে দেবে
+      const firstPkg = Object.values(DYNAMIC_PACKAGES)[0];
+      if (firstPkg) {
+        const stickyPrice = document.querySelector('#stickyBottomBar .text-lg, #stickyBottomBar .text-2xl');
+        if (stickyPrice) {
+          stickyPrice.innerHTML = `৳${toBn(firstPkg.price)} <span class="text-xs font-normal text-slate-500">থেকে শুরু</span>`;
         }
       });
     }
