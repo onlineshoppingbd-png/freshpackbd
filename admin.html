@@ -1024,48 +1024,45 @@
       }
     }
 
-    // 💾 Save & Publish All Visual Changes Cleanly
-    async function saveVisualEdits() {
-      const btn = document.getElementById('saveVisualBtn');
-      btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ ও পাবলিশ হচ্ছে...`;
+   // 💾 Save & Publish All Visual Changes Cleanly (Updated with GitHub API Sync)
+  async function saveVisualEdits() {
+    const btn = document.getElementById('saveVisualBtn');
+    btn.disabled = true;
+    btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> গিটহাব ও লাইভে সেভ হচ্ছে...`;
 
-      try {
-        const iframe = document.getElementById('liveEditorIframe');
-        const doc = iframe.contentDocument || iframe.contentWindow.document;
-        const mainEl = doc.querySelector('main');
+    try {
+      const iframe = document.getElementById('liveEditorIframe');
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      
+      // পুরো আইফ্রেমের ডকটাইপসহ ফুল HTML কোড ক্যাপচার করা (যাতে মেইন index.html পুরোপুরি আপডেট হয়)
+      const fullHtml = '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
 
-        if (!mainEl) throw new Error("Main element not found");
-
-        // ক্লিন HTML ক্লোন তৈরি
-        const clone = mainEl.cloneNode(true);
-        clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
-        clone.querySelectorAll('[spellcheck]').forEach(el => el.removeAttribute('spellcheck'));
-        // ভিডিও এডিট বাটন মুছে ফেলা
-        clone.querySelectorAll('.video-edit-btn').forEach(el => el.remove());
-
-        const cleanHtml = clone.innerHTML;
-
-        const res = await fetch(`${WORKER_URL}/page-content`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ storeCode: 'FP', mainHtml: cleanHtml })
-        });
-        
-        const data = await res.json();
-        if (data.ok) {
-          showToast("🎉 ওয়েবসাইট সফলভাবে আপডেট ও লাইভ হয়েছে!");
-          closeVisualEditor();
-        } else {
-          alert("❌ সেভ হতে সমস্যা হয়েছে: " + (data.error || 'Server error'));
-        }
-      } catch(err) {
-        alert("সার্ভারে সমস্যা হয়েছে: " + err.message);
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Save & Publish (লাইভ করুন)`;
+      // ব্যাকএন্ড ওয়ার্কারে রিকোয়েস্ট পাঠানো যা একই সাথে KV এবং GitHub index.html আপডেট করবে
+      const res = await fetch(`${WORKER_URL}/update-github-index`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          newContent: fullHtml,
+          storeCode: 'FP',
+          githubOwner: 'onlineshoppingbd-png', // আপনার গিটহাব ইউজারনেম
+          githubRepo: 'freshpackbd'         // আপনার রিপোজিটরি নাম
+        })
+      });
+      
+      const data = await res.json();
+      if (data.ok && data.success) {
+        showToast("🎉 ওয়েবসাইট সফলভাবে গিটহাব এবং লাইভে আপডেট হয়েছে!");
+        closeVisualEditor();
+      } else {
+        alert("❌ সেভ হতে সমস্যা হয়েছে: " + (data.error || 'Server error'));
       }
+    } catch(err) {
+      alert("সার্ভারে সমস্যা হয়েছে: " + err.message);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Save & Publish (লাইভ করুন)`;
     }
+  }
 
     // Settings Modal
     async function openSettingsModal() {
