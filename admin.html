@@ -934,7 +934,7 @@
     }
 
     // ==========================================
-    // 🎨 LIVE VISUAL INLINE EDITOR LOGIC
+    // 🎨 LIVE VISUAL INLINE EDITOR LOGIC (SECURED)
     // ==========================================
     function openVisualEditor() {
       document.getElementById('visualEditorOverlay').classList.remove('hidden');
@@ -944,6 +944,14 @@
       iframe.onload = async function() {
         try {
           const doc = iframe.contentDocument || iframe.contentWindow.document;
+          
+          // সিকিউরিটি চেক: আইফ্রেমের ভেতর থেকে ইউআরএল কনফার্ম করা
+          const iframeParams = new URLSearchParams(iframe.contentWindow.location.search);
+          if (iframeParams.get('edit') !== '1') {
+              console.warn("Unauthorized edit attempt blocked.");
+              return;
+          }
+
           const mainEl = doc.querySelector('main');
           if (!mainEl) return;
 
@@ -956,7 +964,7 @@
             }
           } catch (err) {}
 
-          // ২. এডিটর স্টাইল ইনজেক্ট (সবুজ ড্যাশ বর্ডার)
+          // ২. এডিটর স্টাইল ইনজেক্ট (সবুজ ড্যাশ বর্ডার) - শুধুমাত্র এডমিন এডিটর মোডের জন্য
           const style = doc.createElement('style');
           style.innerHTML = `
             [contenteditable="true"]:hover {
@@ -978,7 +986,7 @@
           `;
           doc.head.appendChild(style);
 
-          // ৩. সব লেখায় এডিটিং সক্রিয় করা
+          // ৩. সব লেখায় এডিটিং সক্রিয় করা (শুধুমাত্র আইফ্রেমের ভেতরের ড্যাশবোর্ড সেশনে)
           doc.querySelectorAll('main h1, main h2, main h3, main h4, main p, main span, main li, main a, main b, main strong').forEach(el => {
             el.setAttribute('contenteditable', 'true');
             el.setAttribute('spellcheck', 'false');
@@ -1003,7 +1011,6 @@
         }
       };
     }
-
     // ❌ এডিটর বন্ধ করার ফাংশন (যা আগের কোডে মিসিং ছিল)
     function closeVisualEditor() {
       document.getElementById('visualEditorOverlay').classList.add('hidden');
