@@ -213,6 +213,15 @@
             <button data-open-order data-package="pkg_2" class="btn mt-6 w-full bg-brand-900 hover:bg-brand-800 text-white font-bold py-3.5 rounded-xl">অর্ডার করুন</button>
           </div>
         </div>
+
+        <!-- Delivery Charge Box on Page -->
+        <div class="mt-9 max-w-2xl mx-auto bg-brand-50/80 border border-brand-200 rounded-2xl p-4 text-center">
+          <p class="text-sm font-semibold text-brand-950">
+            <i class="fa-solid fa-truck text-brand-600 mr-1.5"></i> ডেলিভারি চার্জ: 
+            <span id="deliveryInsideText" class="text-brand-800 font-bold">ঢাকার ভিতরে ৳৭০</span> | 
+            <span id="deliveryOutsideText" class="text-brand-800 font-bold">ঢাকার বাইরে ৳১১০</span> 
+          </p>
+        </div>
       </div>
     </section>
 
@@ -232,6 +241,43 @@
       </div>
     </section>
   </main>
+
+  <!-- RICH FOOTER (Added back) -->
+  <footer id="contact" class="bg-brand-950 text-brand-100 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-600 to-brand-800 text-gold-400 flex items-center justify-center text-lg"><i class="fa-solid fa-snowflake"></i></span>
+            <span class="text-xl font-bold text-white">FreshPack<span class="text-gold-400">BD</span></span>
+          </div>
+          <p class="mt-3 text-xs sm:text-sm text-brand-200 leading-relaxed">
+            প্রিমিয়াম Aluminum Foil Storage Bag-এর বিশ্বস্ত অনলাইন শপ। আপনার রান্নাঘরের খাবার রাখুন টাটকা, গুছানো ও নিরাপদ।
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold text-sm">যোগাযোগ ও হেল্পলাইন</h4>
+          <ul class="mt-3 space-y-2 text-xs sm:text-sm text-brand-200">
+            <li><i class="fa-solid fa-phone text-gold-400 mr-2"></i> <a href="tel:+8801794821159" class="hover:text-white">01794821159</a> (সকাল ৯টা – রাত ১০টা)</li>
+            <li><i class="fa-brands fa-whatsapp text-gold-400 mr-2"></i> <a href="#" data-wa-link class="hover:text-white">01794821159 (WhatsApp)</a></li>
+            <li><i class="fa-solid fa-location-dot text-gold-400 mr-2"></i> ঢাকা, যাত্রাবাড়ী, বাংলাদেশ, ১২০৮</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold text-sm">১০০% ক্যাশ অন ডেলিভারি</h4>
+          <p class="mt-3 text-xs text-brand-200 leading-relaxed">
+            কোনো অগ্রিম পেমেন্টের ঝুঁকি নেই। পার্সেল হাতে পেয়ে নিশ্চিত হয়ে টাকা দিন।
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-10 pt-5 border-t border-white/10 text-center text-xs text-brand-300">
+        © <span id="year">2026</span> FreshPack BD. সর্বস্বত্ব সংরক্ষিত।
+      </div>
+    </div>
+  </footer>
 
   <!-- STICKY BOTTOM BAR -->
   <div id="stickyBottomBar" class="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-brand-200 px-4 py-3 sm:py-3.5 shadow-lg">
@@ -273,17 +319,17 @@
             <textarea id="address" name="address" rows="2" placeholder="বাসা, রোড, থানা, জেলা" class="field resize-none py-2.5" required></textarea>
           </div>
 
-          <!-- Delivery Area Selection -->
+          <!-- Delivery Area Selection (Dynamic Sync) -->
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">ডেলিভারি এলাকা</label>
             <div class="grid grid-cols-2 gap-3">
               <label class="radio-pill relative">
                 <input type="radio" name="deliveryArea" value="inside" checked />
-                <span class="pill text-xs sm:text-sm"><i class="fa-solid fa-city"></i> ঢাকার ভিতরে <strong>(৳৭০)</strong></span>
+                <span id="insidePillText" class="pill text-xs sm:text-sm"><i class="fa-solid fa-city"></i> ঢাকার ভিতরে <strong>(৳৭০)</strong></span>
               </label>
               <label class="radio-pill relative">
                 <input type="radio" name="deliveryArea" value="outside" />
-                <span class="pill text-xs sm:text-sm"><i class="fa-solid fa-map-location-dot"></i> ঢাকার বাইরে <strong>(৳১১০)</strong></span>
+                <span id="outsidePillText" class="pill text-xs sm:text-sm"><i class="fa-solid fa-map-location-dot"></i> ঢাকার বাইরে <strong>(৳১১০)</strong></span>
               </label>
             </div>
           </div>
@@ -324,7 +370,7 @@
       STORE_NAME: 'FreshPack BD'
     };
 
-    const DELIVERY = {
+    let DELIVERY = {
       inside:  { label: 'ঢাকার ভিতরে', charge: 70 },
       outside: { label: 'ঢাকার বাইরে', charge: 110 }
     };
@@ -335,14 +381,16 @@
     const toEn = (s) => String(s).replace(/[০-৯]/g, d => "০১২৩৪৫৬৭৮৯".indexOf(d));
     const money = (n) => '৳' + toBn(Number(n).toLocaleString('en-US'));
 
+    document.getElementById('year').textContent = new Date().getFullYear();
+
     // FAQ Toggle
     document.querySelectorAll('.faq-item').forEach(item => {
       const btn = item.querySelector('.faq-toggle');
       if(btn) btn.addEventListener('click', () => item.classList.toggle('open'));
     });
 
-    // Smart DOM Package & Price Sync Engine
-    function smartSyncPackages() {
+    // Smart DOM Package, Price & Delivery Charge Sync Engine
+    function smartSyncEngine() {
       DYNAMIC_PACKAGES = {};
       const cards = document.querySelectorAll('.price-card');
       const select = document.getElementById('quantity');
@@ -369,6 +417,26 @@
         }
       });
 
+      // Auto-extract delivery charges if edited on page
+      const pageText = document.querySelector('main')?.innerText || '';
+      const insideMatch = pageText.match(/ঢাকার ভিতরে[^\d]*(\d+)/);
+      if (insideMatch && insideMatch[1]) {
+        const ch = parseInt(toEn(insideMatch[1]), 10);
+        if (!isNaN(ch)) DELIVERY.inside.charge = ch;
+      }
+      const outsideMatch = pageText.match(/ঢাকার বাইরে[^\d]*(\d+)/) || pageText.match(/ঢাকার বাহিরে[^\d]*(\d+)/);
+      if (outsideMatch && outsideMatch[1]) {
+        const ch = parseInt(toEn(outsideMatch[1]), 10);
+        if (!isNaN(ch)) DELIVERY.outside.charge = ch;
+      }
+
+      // Update Delivery Pills in Modal
+      const insidePill = document.getElementById('insidePillText');
+      if (insidePill) insidePill.innerHTML = `<i class="fa-solid fa-city"></i> ঢাকার ভিতরে <strong>(৳${toBn(DELIVERY.inside.charge)})</strong>`;
+      
+      const outsidePill = document.getElementById('outsidePillText');
+      if (outsidePill) outsidePill.innerHTML = `<i class="fa-solid fa-map-location-dot"></i> ঢাকার বাইরে <strong>(৳${toBn(DELIVERY.outside.charge)})</strong>`;
+
       // Update Sticky Bar Price Automatically from 1st Package
       const firstPkg = Object.values(DYNAMIC_PACKAGES)[0];
       if (firstPkg) {
@@ -377,6 +445,7 @@
           stickyDisplay.innerHTML = `৳${toBn(firstPkg.price)} <span class="text-xs font-normal text-slate-500">থেকে শুরু</span>`;
         }
       }
+      updateSummary();
     }
 
     function getSelection() {
@@ -400,7 +469,7 @@
 
     const modal = document.getElementById('orderModal');
     function openModal(pkgKey) {
-      smartSyncPackages();
+      smartSyncEngine();
       const qtySelect = document.getElementById('quantity');
       if (pkgKey && DYNAMIC_PACKAGES[pkgKey] && qtySelect) qtySelect.value = pkgKey;
       updateSummary();
@@ -468,8 +537,7 @@
         }
       } catch(e) {}
 
-      smartSyncPackages();
-      updateSummary();
+      smartSyncEngine();
 
       // Inline Visual Editor Mode if edit=1
       const isEditMode = window.location.search.includes('edit=1') || window.self !== window.top;
