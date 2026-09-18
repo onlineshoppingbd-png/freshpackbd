@@ -43,10 +43,10 @@
         <i class="fa-solid fa-shield-halved"></i>
       </div>
       <h2 class="text-2xl font-black text-slate-900 tracking-tight">এডমিন লগইন</h2>
-      <p class="text-xs text-slate-500 mt-1 mb-6">অর্ডার ও সেলস রিপোর্ট দেখতে পাসওয়ার্ড দিন</p>
+      <p class="text-xs text-slate-500 mt-1 mb-6">অর্ডার ও সেলস রিপোর্ট দেখতে পাসওয়ার্ড দিন</p>
       
       <div class="space-y-3">
-        <input type="password" id="adminPass" placeholder="পাসওয়ার্ড লিখুন..." 
+        <input type="password" id="adminPass" placeholder="পাসওয়ার্ড লিখুন..." 
           onkeydown="if(event.key==='Enter') checkAuth()"
           class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-center font-medium text-slate-800 outline-none focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-500/10 transition" />
         <button onclick="checkAuth()" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-bold py-3 rounded-xl shadow-lg shadow-emerald-600/25 transition">
@@ -54,7 +54,7 @@
         </button>
       </div>
       <p id="loginError" class="text-rose-500 text-xs font-semibold mt-3 hidden flex items-center justify-center gap-1">
-        <i class="fa-solid fa-circle-exclamation"></i> ভুল পাসওয়ার্ড!
+        <i class="fa-solid fa-circle-exclamation"></i> ভুল পাসওয়ার্ড!
       </p>
     </div>
   </div>
@@ -104,7 +104,7 @@
           <span class="w-9 h-9 rounded-xl bg-white/10 text-amber-300 flex items-center justify-center text-base"><i class="fa-solid fa-cart-plus"></i></span>
           <div>
             <h3 class="font-bold text-base">ম্যানুয়াল নতুন অর্ডার যোগ করুন</h3>
-            <p class="text-[11px] text-emerald-200">কাস্টমারের তথ্য দিয়ে সরাসরি অর্ডার এন্ট্রি করুন</p>
+            <p class="text-[11px] text-emerald-200">কাস্টমারের তথ্য দিয়ে সরাসরি অর্ডার এন্ট্রি করুন</p>
           </div>
         </div>
         <button onclick="closeNewOrderModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm transition">
@@ -167,7 +167,7 @@
           <span class="w-9 h-9 rounded-xl bg-white/10 text-amber-400 flex items-center justify-center text-base"><i class="fa-solid fa-sliders"></i></span>
           <div>
             <h3 class="font-bold text-base">API & পিক্সেল সেটিংস</h3>
-            <p class="text-[11px] text-slate-400">কুরিয়ার ও ফেসবুক পিক্সেল কনফিগারেশন</p>
+            <p class="text-[11px] text-slate-400">কুরিয়ার ও ফেসবুক পিক্সেল কনফিগারেশন</p>
           </div>
         </div>
         <button onclick="closeSettingsModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm transition">
@@ -256,7 +256,7 @@
         <i class="fa-solid fa-chart-line"></i>
       </div>
       <h4 class="font-bold text-xs text-slate-800">Your Growth Partner</h4>
-      <p class="text-[10px] text-slate-500 mt-1 leading-relaxed">আপনার বিজনেসকে আরও বড় করতে আমরা আছি আপনার সাথে।</p>
+      <p class="text-[10px] text-slate-500 mt-1 leading-relaxed">আপনার বিজনেসকে আরও বড় করতে আমরা আছি আপনার সাথে।</p>
     </div>
   </aside>
 
@@ -306,7 +306,7 @@
         <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-3xl p-5 shadow-lg shadow-emerald-700/10 relative overflow-hidden flex flex-col justify-between">
           <div class="flex justify-between items-start">
             <span class="text-xs font-semibold text-emerald-100 flex items-center gap-1.5" id="salesCardTitle">
-              <i class="fa-solid fa-box-open"></i> মোট সেল (নির্বাচিত সময়)
+              <i class="fa-solid fa-box-open"></i> মোট সেল (নির্বাচিত সময়)
             </span>
             <span class="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-xs text-white">
               <i class="fa-solid fa-arrow-trend-up"></i>
@@ -315,7 +315,7 @@
           <div class="my-3 flex items-baseline gap-2">
             <h3 id="statSelectedSales" class="text-3xl font-black tracking-tight num">৳০</h3>
           </div>
-          <p class="text-[11px] text-emerald-100/90 font-medium">ফিল্টারের সময় অনুযায়ী মোট সেলস</p>
+          <p class="text-[11px] text-emerald-100/90 font-medium">ফিল্টারের সময় অনুযায়ী মোট সেলস</p>
         </div>
 
         <div class="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
@@ -370,14 +370,14 @@
         <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
           <div class="relative flex-1">
             <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400 text-sm"></i>
-            <input type="text" id="searchInput" oninput="filterOrders()" placeholder="নাম, ঠিকানা, অর্ডার আইডি বা মোবাইল নাম্বার দিয়ে খুঁজুন..." 
+            <input type="text" id="searchInput" oninput="filterOrders()" placeholder="নাম, ঠিকানা, অর্ডার আইডি বা মোবাইল নাম্বার দিয়ে খুঁজুন..." 
               class="w-full bg-white border border-slate-200/90 rounded-2xl pl-11 pr-4 py-3 text-xs sm:text-sm outline-none focus:border-emerald-600 shadow-sm transition" />
           </div>
 
           <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
             <div class="relative">
               <select id="dateFilter" onchange="handleDatePresetChange()" class="bg-white border border-slate-200/90 text-xs font-bold text-slate-700 rounded-2xl px-4 py-3 outline-none focus:border-emerald-600 shadow-sm cursor-pointer appearance-none pr-8">
-                <option value="ALL">📅 সব সময়ের অর্ডার (All Time)</option>
+                <option value="ALL">📅 সব সময়ের অর্ডার (All Time)</option>
                 <option value="TODAY">✨ আজকের অর্ডার (Today)</option>
                 <option value="YESTERDAY">গতকালকের অর্ডার (Yesterday)</option>
                 <option value="7DAYS">বিগত ৭ দিন</option>
@@ -436,11 +436,11 @@
           <table class="w-full text-left border-collapse text-xs">
             <thead class="bg-slate-50/70 border-b border-slate-200/80 text-slate-400 uppercase text-[10px] font-extrabold tracking-wider">
               <tr>
-                <th class="p-4">অর্ডার আইডি ও সময়</th>
+                <th class="p-4">অর্ডার আইডি ও সময়</th>
                 <th class="p-4">কাস্টমার, ঠিকানা ও ফোন</th>
                 <th class="p-4">পণ্যের বিবরণ</th>
                 <th class="p-4">মোট মূল্য</th>
-                <th class="p-4 text-center">যোগাযোগ & কুরিয়ার</th>
+                <th class="p-4 text-center">যোগাযোগ & কুরিয়ার</th>
                 <th class="p-4 text-right">অর্ডার স্ট্যাটাস</th>
               </tr>
             </thead>
@@ -498,9 +498,9 @@
         <i class="fa-solid fa-truck-fast"></i>
       </div>
       <h4 class="font-bold text-xs text-slate-900">দ্রুত ডেলিভারি, খুশি গ্রাহক</h4>
-      <p class="text-[10px] text-slate-500 mt-1">আপনার প্রতিটি অর্ডার এখন আরও দ্রুত ও নিরাপদ পৌঁছে যায়।</p>
+      <p class="text-[10px] text-slate-500 mt-1">আপনার প্রতিটি অর্ডার এখন আরও দ্রুত ও নিরাপদ পৌঁছে যায়।</p>
       <a href="https://portal.packzy.com" target="_blank" class="mt-3 inline-flex items-center justify-center gap-1.5 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2 rounded-xl transition shadow-sm">
-        কুরিয়ার ট্র্যাক চেক করুন <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        কুরিয়ার ট্র্যাক চেক করুন <i class="fa-solid fa-arrow-right text-[10px]"></i>
       </a>
     </div>
 
@@ -508,8 +508,8 @@
       <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto text-sm mb-2">
         <i class="fa-solid fa-headset"></i>
       </div>
-      <h4 class="font-bold text-xs text-slate-900">সাহায্য প্রয়োজন?</h4>
-      <p class="text-[10px] text-slate-500 mt-0.5">আমাদের সাপোর্ট টিম সবসময় প্রস্তুত</p>
+      <h4 class="font-bold text-xs text-slate-900">সাহায্য প্রয়োজন?</h4>
+      <p class="text-[10px] text-slate-500 mt-0.5">আমাদের সাপোর্ট টিম সবসময় প্রস্তুত</p>
       <a href="https://wa.me/8801794821159" target="_blank" class="mt-2.5 inline-flex items-center justify-center gap-1.5 w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-2 rounded-xl transition">
         সাপোর্ট যোগাযোগ করুন <i class="fa-solid fa-arrow-right text-[10px]"></i>
       </a>
@@ -519,7 +519,7 @@
   <!-- Toast -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white text-xs font-bold px-4 py-3 rounded-2xl shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2">
     <i class="fa-solid fa-circle-check text-emerald-400"></i>
-    <span id="toastMsg">কপি করা হয়েছে!</span>
+    <span id="toastMsg">কপি করা হয়েছে!</span>
   </div>
 
   <!-- JAVASCRIPT LOGIC -->
@@ -582,7 +582,7 @@
         filterOrders();
         document.getElementById('lastUpdatedTime').innerText = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
       } catch (err) {
-        alert("অর্ডার লোড হতে সমস্যা হয়েছে! Worker চেক করুন।");
+        alert("অর্ডার লোড হতে সমস্যা হয়েছে! Worker চেক করুন।");
       } finally {
         icon.classList.remove('fa-spin');
       }
@@ -735,7 +735,7 @@
           <tr>
             <td colspan="6" class="text-center py-16 text-slate-400">
               <i class="fa-solid fa-box-open text-3xl mb-2 text-slate-300"></i>
-              <p class="font-semibold text-sm">কোনো অর্ডার পাওয়া যায়নি!</p>
+              <p class="font-semibold text-sm">কোনো অর্ডার পাওয়া যায়নি!</p>
             </td>
           </tr>`;
         return;
@@ -801,7 +801,7 @@
               <a href="https://wa.me/88${cleanPhone}?text=${encodeURIComponent('আসসালামু আলাইকুম ' + o.name + ', FreshPack BD থেকে বলছি।')}" target="_blank" class="w-6 h-6 rounded-full bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-600 flex items-center justify-center text-[10px] transition" title="WhatsApp">
                 <i class="fa-brands fa-whatsapp"></i>
               </a>
-              <button onclick="copyToClipboard('${courierText.replace(/'/g, "\\'")}', 'কুরিয়ার টেক্সট কপি হয়েছে!')" class="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-800 hover:text-white text-slate-600 flex items-center justify-center text-[10px] transition" title="কুরিয়ার কপি">
+              <button onclick="copyToClipboard('${courierText.replace(/'/g, "\\'")}', 'কুরিয়ার টেক্সট কপি হয়েছে!')" class="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-800 hover:text-white text-slate-600 flex items-center justify-center text-[10px] transition" title="কুরিয়ার কপি">
                 <i class="fa-solid fa-copy"></i>
               </button>
             </div>
@@ -841,13 +841,13 @@
           body: JSON.stringify({ orderId: orderId, status: newStatus })
         });
         if(res.ok) {
-          showToast("✅ স্ট্যাটাস সংরক্ষিত হয়েছে!");
+          showToast("✅ স্ট্যাটাস সংরক্ষিত হয়েছে!");
           loadOrders();
         } else {
-          alert("আপডেট ব্যর্থ হয়েছে!");
+          alert("আপডেট ব্যর্থ হয়েছে!");
         }
       } catch (err) {
-        alert("সার্ভারে সমস্যা হয়েছে!");
+        alert("সার্ভারে সমস্যা হয়েছে!");
       }
     }
 
@@ -897,7 +897,7 @@
         });
         const data = await res.json();
         if (res.ok && data.ok) {
-          showToast("🎉 নতুন অর্ডার সফলভাবে তৈরি হয়েছে!");
+          showToast("🎉 নতুন অর্ডার সফলভাবে তৈরি হয়েছে!");
           document.getElementById('manualOrderForm').reset();
           closeNewOrderModal();
           loadOrders();
@@ -905,7 +905,7 @@
           alert(`❌ অর্ডার তৈরি ব্যর্থ: ${data.error || 'Server Error'}`);
         }
       } catch (err) {
-        alert("সার্ভার রিকোয়েস্টে সমস্যা হয়েছে!");
+        alert("সার্ভার রিকোয়েস্টে সমস্যা হয়েছে!");
       } finally {
         btn.disabled = false;
         btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> অর্ডার কনফার্ম ও সেভ করুন`;
@@ -913,7 +913,7 @@
     }
 
     async function sendToSteadFast(orderId) {
-      if (!confirm(`আপনি কি অর্ডার #${orderId} SteadFast কুরিয়ারে বুকিং করতে চান?`)) return;
+      if (!confirm(`আপনি কি অর্ডার #${orderId} SteadFast কুরিয়ারে বুকিং করতে চান?`)) return;
       showToast("⏳ SteadFast-এ পাঠানো হচ্ছে...");
       try {
         const res = await fetch(`${WORKER_URL}/send-steadfast`, {
@@ -923,17 +923,19 @@
         });
         const data = await res.json();
         if (res.ok && data.ok) {
-          alert(`🎉 সফলভাবে SteadFast-এ বুকিং হয়েছে!\nConsignment ID: ${data.consignmentId}\nTracking Code: ${data.trackingCode}`);
+          alert(`🎉 সফলভাবে SteadFast-এ বুকিং হয়েছে!\nConsignment ID: ${data.consignmentId}\nTracking Code: ${data.trackingCode}`);
           loadOrders();
         } else {
-          alert(`❌ ব্যর্থ হয়েছে: ${data.error || 'SteadFast API Error'}`);
+          alert(`❌ ব্যর্থ হয়েছে: ${data.error || 'SteadFast API Error'}`);
         }
       } catch (err) {
-        alert("সার্ভার রিকোয়েস্টে সমস্যা হয়েছে!");
+        alert("সার্ভার রিকোয়েস্টে সমস্যা হয়েছে!");
       }
     }
 
-    // 🎨 Open Visual Editor (Always Loads Latest Saved Edits)
+    // ==========================================
+    // 🎨 LIVE VISUAL INLINE EDITOR LOGIC
+    // ==========================================
     function openVisualEditor() {
       document.getElementById('visualEditorOverlay').classList.remove('hidden');
       const iframe = document.getElementById('liveEditorIframe');
@@ -945,7 +947,7 @@
           const mainEl = doc.querySelector('main');
           if (!mainEl) return;
 
-          // ১. ক্লাউডফ্লেয়ার থেকে সেভ করা আগের এডিট টেনে এনে আইফ্রেমে বসানো
+          // ১. ক্লাউডফ্লেয়ার থেকে সেভ করা আগের এডিট থাকলে তা আইফ্রেমে বসানো
           try {
             const res = await fetch(`${WORKER_URL}/page-content?store=FP&_t=` + Date.now(), { cache: 'no-store' });
             const data = await res.json();
@@ -976,7 +978,7 @@
           `;
           doc.head.appendChild(style);
 
-          // ৩. সব লেখায় এডিটিং সক্রিয় করা
+          // ৩. সব লেখায় এডিটিং সক্রিয় করা
           doc.querySelectorAll('main h1, main h2, main h3, main h4, main p, main span, main li, main a, main b, main strong').forEach(el => {
             el.setAttribute('contenteditable', 'true');
             el.setAttribute('spellcheck', 'false');
@@ -1000,6 +1002,26 @@
           console.warn("Iframe load error", e);
         }
       };
+    }
+
+    // ❌ এডিটর বন্ধ করার ফাংশন (যা আগের কোডে মিসিং ছিল)
+    function closeVisualEditor() {
+      document.getElementById('visualEditorOverlay').classList.add('hidden');
+    }
+
+    function setPreviewDevice(dev) {
+      const wrap = document.getElementById('editorFrameWrapper');
+      const bDesk = document.getElementById('btnDesk');
+      const bMob = document.getElementById('btnMob');
+      if (dev === 'mobile') {
+        wrap.style.maxWidth = '390px';
+        bMob.classList.add('bg-emerald-600', 'text-white');
+        bDesk.classList.remove('bg-emerald-600', 'text-white');
+      } else {
+        wrap.style.maxWidth = '100%';
+        bDesk.classList.add('bg-emerald-600', 'text-white');
+        bMob.classList.remove('bg-emerald-600', 'text-white');
+      }
     }
 
     async function saveVisualEdits() {
@@ -1028,13 +1050,13 @@
         
         const data = await res.json();
         if (data.ok) {
-          showToast("🎉 ওয়েবসাইট সফলভাবে আপডেট ও লাইভ হয়েছে!");
-          closeVisualEditor();
+          showToast("🎉 ওয়েবসাইট সফলভাবে আপডেট ও লাইভ হয়েছে!");
+          closeVisualEditor(); // এখন আর কোনো এরর আসবে না
         } else {
-          alert("❌ সেভ হতে সমস্যা হয়েছে: " + (data.error || 'Server error'));
+          alert("❌ সেভ হতে সমস্যা হয়েছে: " + (data.error || 'Server error'));
         }
       } catch(err) {
-        alert("সার্ভারে সমস্যা হয়েছে: " + err.message);
+        alert("সার্ভারে সমস্যা হয়েছে: " + err.message);
       } finally {
         btn.disabled = false;
         btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Save & Publish (লাইভ করুন)`;
@@ -1082,13 +1104,13 @@
         });
         const data = await res.json();
         if(res.ok && data.ok) {
-          showToast("✅ সেটিংস সফলভাবে সংরক্ষিত হয়েছে!");
+          showToast("✅ সেটিংস সফলভাবে সংরক্ষিত হয়েছে!");
           closeSettingsModal();
         } else {
-          alert("❌ সেটিংস সংরক্ষণ ব্যর্থ হয়েছে!");
+          alert("❌ সেটিংস সংরক্ষণ ব্যর্থ হয়েছে!");
         }
       } catch(err) {
-        alert("সার্ভারে সমস্যা হয়েছে!");
+        alert("সার্ভারে সমস্যা হয়েছে!");
       } finally {
         btn.disabled = false;
         btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> সেটিংস সংরক্ষণ করুন`;
