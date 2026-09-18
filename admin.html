@@ -960,19 +960,6 @@
             const res = await fetch('./index.html?_t=' + Date.now(), { cache: 'no-store' });
             const liveHtml = await res.text();
             
-            // লাইভ এইচটিএমএল থেকে শুধু <main> ট্যাগ বা মূল কন্টেন্ট এক্সট্রাক্ট করা
-            const parser = new DOMParser();
-            const docLive = parser.parseFromString(liveHtml, 'text/html');
-            const liveMain = docLive.querySelector('main');
-
-            if (liveMain && liveMain.innerHTML.trim().length > 50) {
-              mainEl.innerHTML = liveMain.innerHTML;
-            }
-          } catch (err) {
-            console.warn("Could not fetch live content, using default iframe content.", err);
-          }
-            
-            // লাইভ এইচটিএমএল থেকে শুধু <main> ট্যাগ বা মূল কন্টেন্ট এক্সট্রাক্ট করা
             const parser = new DOMParser();
             const docLive = parser.parseFromString(liveHtml, 'text/html');
             const liveMain = docLive.querySelector('main');
@@ -984,7 +971,7 @@
             console.warn("Could not fetch live content, using default iframe content.", err);
           }
 
-          // ২. এডিটর স্টাইল ইনজেক্ট (সবুজ ড্যাশ বর্ডার) - শুধুমাত্র এডমিন এডিটর মোডের জন্য
+          // ২. এডিটর স্টাইল ইনজেক্ট (সবুজ ড্যাশ বর্ডার)
           const style = doc.createElement('style');
           style.innerHTML = `
             [contenteditable="true"]:hover {
@@ -999,14 +986,14 @@
               outline-offset: 3px;
               background-color: rgba(16, 185, 129, 0.12) !important;
             }
-            img:hover {
+            img:hover, iframe:hover {
               outline: 3px dashed #3b82f6 !important;
               cursor: pointer !important;
             }
           `;
           doc.head.appendChild(style);
 
-          // ৩. সব লেখায় এডিটিং সক্রিয় করা (শুধুমাত্র আইফ্রেমের ভেতরের ড্যাশবোর্ড সেশনে)
+          // ৩. সব লেখায় এডিটিং সক্রিয় করা
           doc.querySelectorAll('main h1, main h2, main h3, main h4, main p, main span, main li, main a, main b, main strong').forEach(el => {
             el.setAttribute('contenteditable', 'true');
             el.setAttribute('spellcheck', 'false');
@@ -1015,24 +1002,24 @@
             }
           });
 
-          // ৫. ইউটিউব ভিডিওর ওপর এডিটিং ওভারলে ও ক্লিক হ্যান্ডলার যোগ করা
+          // ৪. ছবিতে ক্লিক করলে ছবি বদলানো
+          doc.querySelectorAll('main img').forEach(img => {
+            img.style.cursor = 'pointer';
+            img.title = 'ছবি পরিবর্তন করতে ক্লিক করুন';
+            img.onclick = (e) => {
+              e.preventDefault(); e.stopPropagation();
+              const newUrl = prompt('🖼️ নতুন ছবির লিংক (Image URL) দিন:', img.src);
+              if (newUrl && newUrl.trim()) img.src = newUrl.trim();
+            };
+          });
+
+          // ৫. ইউটিউব ভিডিওতে ক্লিক করলে ভিডিও লিংক বদলানো
           doc.querySelectorAll('main iframe').forEach(iframe => {
             if (iframe.src.includes('youtube.com') || iframe.src.includes('youtu.be')) {
-              // আইফ্রেমের চারপাশে একটি র‍্যাপার বা পজিশন তৈরি করা
-              const wrapper = doc.createElement('div');
-              wrapper.style.position = 'relative';
-              wrapper.style.display = 'inline-block';
-              wrapper.style.width = '100%';
-              wrapper.style.height = '100%';
+              iframe.style.cursor = 'pointer';
+              iframe.title = 'ইউটিউব ভিডিও পরিবর্তন করতে ক্লিক করুন';
               
-              iframe.parentNode.insertBefore(wrapper, iframe);
-              wrapper.appendChild(iframe);
-
-              // এডিটর মোডের জন্য একটি ক্লিক করার উপযোগী ওভারলে বা বাটন
-              const overlay = doc.createElement('div');
-              overlay.innerHTML = `<div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:14px; cursor:pointer; border-radius:12px; border:2px dashed #3b82f6; z-index:20;">🎬 ভিডিও পরিবর্তন করতে এখানে ক্লিক করুন</div>`;
-              
-              overlay.onclick = (e) => {
+              iframe.onclick = (e) => {
                 e.preventDefault(); e.stopPropagation();
                 const newYtUrl = prompt('🎬 নতুন ইউটিউব ভিডিওর এমবেড লিংক (Embed URL) দিন:', iframe.src);
                 if (newYtUrl && newYtUrl.trim()) {
@@ -1046,37 +1033,7 @@
                   showToast("✅ ভিডিও লিংক আপডেট করা হয়েছে! সেভ করতে 'Save & Publish' চাপুন।");
                 }
               };
-              wrapper.appendChild(overlay);
             }
-          });
-          // ৬. এডিটর মোডে স্লাইডার থামিয়ে দেওয়া এবং নেভিগেশন সচল করা
-          try {
-            const iframeWin = iframe.contentWindow;
-            if (iframeWin && iframeWin.document) {
-              // যদি স্লাইডারের কোনো অটো-ইন্টারভাল থাকে তা ক্লিয়ার করা
-              const highestId = iframeWin.setTimeout(() => {}, 0);
-              for (let i = 0; i < highestId; i++) {
-                iframeWin.clearInterval(i);
-              }
-            }
-
-            // স্লাইডারের নেভিগেশন বাটনগুলো এডমিন প্যানেলে ক্লিকযোগ্য করা
-            doc.querySelectorAll('#sliderPrev, #sliderNext, #sliderDots button').forEach(btn => {
-              btn.style.zIndex = '9999';
-              btn.style.cursor = 'pointer';
-            });
-          } catch (err) {
-            console.warn("Slider control fix error", err);
-          }
-          // ৪. ছবিতে ক্লিক করলে ছবি বদলানো
-          doc.querySelectorAll('main img').forEach(img => {
-            img.style.cursor = 'pointer';
-            img.title = 'ছবি পরিবর্তন করতে ক্লিক করুন';
-            img.onclick = (e) => {
-              e.preventDefault(); e.stopPropagation();
-              const newUrl = prompt('🖼️ নতুন ছবির লিংক (Image URL) দিন:', img.src);
-              if (newUrl && newUrl.trim()) img.src = newUrl.trim();
-            };
           });
 
         } catch(e) {
