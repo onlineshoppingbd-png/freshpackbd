@@ -1037,6 +1037,26 @@
               wrapper.appendChild(overlay);
             }
           });
+
+          // ৬. এডিটর মোডে স্লাইডার থামিয়ে দেওয়া এবং নেভিগেশন সচল করা
+          try {
+            const iframeWin = iframe.contentWindow;
+            if (iframeWin && iframeWin.document) {
+              // যদি স্লাইডারের কোনো অটো-ইন্টারভাল থাকে তা ক্লিয়ার করা
+              const highestId = iframeWin.setTimeout(() => {}, 0);
+              for (let i = 0; i < highestId; i++) {
+                iframeWin.clearInterval(i);
+              }
+            }
+
+            // স্লাইডারের নেভিগেশন বাটনগুলো এডমিন প্যানেলে ক্লিকযোগ্য করা
+            doc.querySelectorAll('#sliderPrev, #sliderNext, #sliderDots button').forEach(btn => {
+              btn.style.zIndex = '9999';
+              btn.style.cursor = 'pointer';
+            });
+          } catch (err) {
+            console.warn("Slider control fix error", err);
+          }
           // ৪. ছবিতে ক্লিক করলে ছবি বদলানো
           doc.querySelectorAll('main img').forEach(img => {
             img.style.cursor = 'pointer';
